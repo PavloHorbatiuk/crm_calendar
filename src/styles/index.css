@@ -151,8 +151,14 @@ input{
 label{
   @apply text-md font-normal text-gray max-sm:text-mm;
 }
-button{
-  @apply bg-primary text-md  hover:bg-primaryDark text-white font-bold py-3 px-5 rounded-2xl w-full
+.btn-primary{
+  @apply bg-black text-md  hover:bg-lightBlack text-white font-bold py-3 px-5 rounded-2xl w-full
+}
+.btn-black{
+  @apply  transition duration-150 ease-in-out hover:bg-neutral-700  focus:bg-neutral-700  focus:outline-none focus:ring-0 active:bg-neutral-900  motion-reduce:transition-none dark:shadow-black/30  
+}
+.btn-gray{
+  @apply inline-block text-md rounded-2xl bg-neutral-100 px-6 pb-2 pt-2.5  text-neutral-600 shadow-sm transition duration-150 ease-in-out hover:bg-neutral-200 hover:shadow-gray focus:bg-neutral-200 focus:shadow-lightGray focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-lightGray motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-lightGray dark:focus:shadow-lightGray dark:active:shadow-lightGray
 }
 
 }
