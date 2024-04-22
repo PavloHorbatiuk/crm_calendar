@@ -17,12 +17,22 @@ import { useState } from 'react';
 
 function Calendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [currentWeek, setCurrentWeek] = useState(
-    startOfWeek(new Date(), { weekStartsOn: 1 })
-  );
-  const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
   const dateFormat = 'MMM yyyy';
-  console.log(currentWeek, 'currentWeek');
+
+  const renderDays = () => {
+    const dateFormat = 'EEE dd';
+    const days = [];
+    const startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
+    for (let i = 0; i < 7; i++) {
+      days.push(
+        <div className="text-center" key={i}>
+          <p>{format(addDays(startDate, i), dateFormat)}</p>
+        </div>
+      );
+    }
+    return <div className="grid grid-cols-7 gap-7">{days}</div>;
+  };
   return (
     <div className="flex gap-2  h-full ">
       <div className="max-w-[15.5rem] p-6 w-full gap-4 rounded-3xl bg-blueMoon h-full">
@@ -53,17 +63,7 @@ function Calendar() {
                   <img src={rightIcon} />
                 </button>
               </div>
-              <div className="col-span-7  w-full">
-                <div className="grid grid-cols-7 gap-7">
-                  {WEEKDAYS.map((day: string, index) => {
-                    return (
-                      <div className="text-center" key={index}>
-                        <p>{day}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              <div className="col-span-7  w-full">{renderDays()}</div>
             </div>
           </div>
         </div>
