@@ -4,8 +4,8 @@ import CalendarPage from './pages/Calendar/CalendarPage';
 function App() {
   return (
     <div className="bg-lightBlue h-screen p-5 max-sm:p-1">
-      {/* <LoginPage /> */}
-      <CalendarPage />
+      <LoginPage />
+      {/* <CalendarPage /> */}
     </div>
   );
 }
