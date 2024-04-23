@@ -34,6 +34,9 @@
       "components/*": [
         "src/components/*"
       ],
+      "common/*": [
+        "src/common/*"
+      ],
       "store/*": [
         "src/store/*"
       ],

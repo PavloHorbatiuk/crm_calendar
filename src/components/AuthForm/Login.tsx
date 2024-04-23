@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { validationLoginSchema } from './validationSchema';
-import { useYupValidationResolver } from '../../common/hooks/useYupValidationResolver';
+import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
 
 export interface LoginType {
   email: string;
