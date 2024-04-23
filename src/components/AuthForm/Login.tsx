@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from '@tanstack/react-router';
 import { validationLoginSchema } from './validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
 
@@ -9,6 +10,7 @@ export interface LoginType {
 }
 
 function Login() {
+  const navigate = useNavigate();
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
   const {
     register,
@@ -21,6 +23,7 @@ function Login() {
 
   const onSubmit = (data: LoginType) => {
     console.log(data);
+    navigate({ to: '/calendar' });
   };
 
   return (
