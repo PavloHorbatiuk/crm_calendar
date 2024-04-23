@@ -1,11 +1,10 @@
-import LoginPage from '@/pages/LoginPage/LoginPage';
-import CalendarPage from './pages/Calendar/CalendarPage';
+import { RouterProvider } from '@tanstack/react-router';
+import { router } from './routes/___route.config';
 
 function App() {
   return (
     <div className="bg-lightBlue h-screen p-5 max-sm:p-1">
-      {/* <LoginPage /> */}
-      <CalendarPage />
+      <RouterProvider router={router} />
     </div>
   );
 }

@@ -146,7 +146,7 @@ p {
 }
 
 input{
-  @apply border rounded-[0.875rem] px-3 py-3 border-lightGray appearance-none   w-full  text-gray leading-tight focus:outline-none focus:bg-white focus:border-primary
+  @apply border rounded-[0.875rem] px-3 py-3 border-lightGray appearance-none   w-full  text-gray leading-tight focus:outline-none focus:bg-white focus:border-primary bg-transparent
 } 
 label{
   @apply text-md font-normal text-gray max-sm:text-mm;

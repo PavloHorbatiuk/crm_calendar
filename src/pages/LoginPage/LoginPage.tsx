@@ -1,5 +1,6 @@
 import Logo from '@/assets/white.svg';
 import loginIcon from '@/assets/Illustration.svg';
+import Login from '@/components/AuthForm/Login';
 
 function LoginPage() {
   return (
@@ -19,42 +20,7 @@ function LoginPage() {
         </div>
       </div>
       <div className="bg-white max-lg:px-2 max-sm:w-full rounded-r-3xl flex flex-col pt-[7.188rem]  items-center ">
-        <form className="max-w-[25.188rem] w-full">
-          <h3 className="text-black">Sign In to Woorkroom</h3>
-          <div className="pt-[2.063rem] flex flex-col ">
-            <label className="pl-1.5">Email Address</label>
-            <div className="pt-4">
-              <input />
-            </div>
-          </div>
-          <div className="pt-[2.063rem] flex flex-col ">
-            <label className="pl-1.5">Password</label>
-            <div className="pt-4">
-              <input />
-            </div>
-          </div>
-          <div className="flex items-center pt-8 justify-between">
-            <div className="flex items-center">
-              <input type="checkbox" className="w-5 h-5" />
-              <label className="ms-2  text-gray dark:text-gray">
-                Remember me
-              </label>
-            </div>
-            <a href="#">
-              <p className="text-md max-sm:text-mm">Forgot Password?</p>
-            </a>
-          </div>
-          <div className="text-center w-full mt-10">
-            <button className="w-40 btn-primary">Sign In</button>
-          </div>
-          <div className="mt-10 text-center">
-            <a href="#">
-              <span className="text-primary text-md">
-                Don’t have an account?
-              </span>
-            </a>
-          </div>
-        </form>
+        <Login />
       </div>
     </div>
   );
