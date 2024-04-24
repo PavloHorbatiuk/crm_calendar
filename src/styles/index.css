@@ -59,7 +59,9 @@
     text-decoration: underline;
   }
 
-
+Link{
+  @apply normal-case
+}
   .spinner {
     animation: spin 1s linear infinite;
   }
@@ -115,12 +117,6 @@
   }
 
 @layer base {
-  .catalog-title {
-    @apply mt-24 flex justify-center gap-6 max-md:overflow-auto;
-  }
-  .catalog-title > h2 {
-    @apply flex-shrink-0;
-  }
   html {
     @apply scroll-smooth;
   }

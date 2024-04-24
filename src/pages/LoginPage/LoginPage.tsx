@@ -1,6 +1,6 @@
 import Logo from '@/assets/white.svg';
 import loginIcon from '@/assets/Illustration.svg';
-import Login from '@/components/AuthForm/Login';
+import LoginForm from '@/components/AuthForm/LoginForm';
 
 function LoginPage() {
   return (
@@ -20,7 +20,7 @@ function LoginPage() {
         </div>
       </div>
       <div className="bg-white max-lg:px-2 max-sm:w-full rounded-r-3xl flex flex-col pt-[7.188rem]  items-center ">
-        <Login />
+        <LoginForm />
       </div>
     </div>
   );

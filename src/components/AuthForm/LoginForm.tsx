@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate } from '@tanstack/react-router';
 import { validationLoginSchema } from './validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
+import { USER_LOCAL_STORAGE_KEY } from '@/common/const/localStorage';
+import { useNavigate } from '@tanstack/react-router';
 
 export interface LoginType {
   email: string;
@@ -9,9 +10,9 @@ export interface LoginType {
   isRememberMe?: boolean;
 }
 
-function Login() {
-  const navigate = useNavigate();
+function LoginForm() {
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -23,7 +24,8 @@ function Login() {
 
   const onSubmit = (data: LoginType) => {
     console.log(data);
-    navigate({ to: '/calendar' });
+    localStorage.setItem(USER_LOCAL_STORAGE_KEY, 'true');
+    navigate({ to: '/' });
   };
 
   return (
@@ -71,4 +73,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginForm;

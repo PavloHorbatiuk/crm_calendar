@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { ObjectSchema } from 'yup';
-import { LoginType } from './Login';
+import { LoginType } from './LoginForm';
 
 export const passwordRules = /^(?=.*\d)(?=.*[A-Z]).{5,}$/;
 
