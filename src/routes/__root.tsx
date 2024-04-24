@@ -1,4 +1,4 @@
-import LayOut from '@/LayOut/LayOut';
+import LayOut from '@/layOut/LayOut';
 import { AuthContext } from '@/common/hooks/useAuth';
 import { createRootRouteWithContext } from '@tanstack/react-router';
 
