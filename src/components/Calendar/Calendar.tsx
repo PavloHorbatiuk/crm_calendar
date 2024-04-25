@@ -10,6 +10,7 @@ import {
   getWeek,
   addWeeks,
   subWeeks,
+  startOfDay,
 } from 'date-fns';
 import leftIcon from '@/assets/Left.svg';
 import rightIcon from '@/assets/Arrow--right.svg';
@@ -38,15 +39,37 @@ function Calendar() {
     const dateFormat = 'EEE dd';
     const days = [];
     const startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
+    const today = startOfDay(new Date());
     for (let i = 0; i < 7; i++) {
+      const currentDate = addDays(startDate, i);
+      const isCurrentDay = isSameDay(currentDate, today);
       days.push(
-        <div className="text-center" key={i}>
-          <p>{format(addDays(startDate, i), dateFormat)}</p>
+        <div
+          className={`text-center uppercase	 items-center px-2 py-1  ${isCurrentDay && 'bg-white shadow-sm  rounded-full'}`}
+          key={i}
+        >
+          <span className="text-mm">
+            {format(addDays(startDate, i), dateFormat)}
+          </span>
         </div>
       );
     }
     return <div className="grid grid-cols-7 gap-7">{days}</div>;
   };
+
+  function renderTimeline() {
+    const hours = [];
+    for (let i = 13; i <= 22; i++) {
+      hours.push(
+        <div key={i} className="flex items-end justify-between  min-h-14">
+          <span className="flex items-center w-full">
+            {i}:00 <hr className="w-full text-lightGray ml-2" />
+          </span>
+        </div>
+      );
+    }
+    return <div className="grid grid-cols-1 gap-0">{hours}</div>;
+  }
 
   return (
     <>
@@ -77,8 +100,9 @@ function Calendar() {
                 <img src={rightIcon} />
               </button>
             </div>
-            <div className="col-span-7  w-full">{renderDays()}</div>
+            <div className="col-span-7 w-full">{renderDays()}</div>
           </div>
+          <div className="px-2">{renderTimeline()}</div>
         </div>
       </div>
     </>
