@@ -3,7 +3,7 @@ import { createRouter } from '@tanstack/react-router';
 
 export const router = createRouter({
   routeTree,
-  context: { authentication: undefined! },
+  context: { authentication: undefined!, getTitle: undefined! },
 });
 
 declare module '@tanstack/react-router' {

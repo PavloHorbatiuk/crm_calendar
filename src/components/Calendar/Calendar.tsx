@@ -65,7 +65,7 @@ function Calendar() {
           </div>
         </div>
         <div className="mt-3.5">
-          <div className="bg-blueMoon flex py-2  rounded-lg">
+          <div className="bg-blueMoon shadow-sm  flex py-2  rounded-lg">
             <div className="max-w-[4.5rem] w-full px-2 flex justify-between">
               <button
                 onClick={() => changeWeekHandle('next')}
