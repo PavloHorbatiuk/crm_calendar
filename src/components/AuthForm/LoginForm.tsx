@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { validationLoginSchema } from './validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
-import { USER_LOCAL_STORAGE_KEY } from '@/common/const/localStorage';
 import { useNavigate } from '@tanstack/react-router';
+import { useEffect } from 'react';
+import { useAuthStore } from '@/store/authStore';
 
 export interface LoginType {
   email: string;
@@ -12,6 +13,8 @@ export interface LoginType {
 
 function LoginForm() {
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
+  const user = useAuthStore((store) => store.authData);
+  const login = useAuthStore((store) => store.login);
   const navigate = useNavigate();
   const {
     register,
@@ -23,10 +26,12 @@ function LoginForm() {
   });
 
   const onSubmit = (data: LoginType) => {
-    console.log(data);
-    localStorage.setItem(USER_LOCAL_STORAGE_KEY, 'true');
-    navigate({ to: '/' });
+    login(data);
   };
+
+  useEffect(() => {
+    navigate({ to: '/' });
+  }, [user]);
 
   return (
     <form
