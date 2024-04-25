@@ -49,9 +49,6 @@ function Calendar() {
   };
 
   return (
-    // <div className="flex gap-2  h-full ">
-    //   <SideBar />
-    //   <div className=" flex p-2 flex-col flex-1 rounded-3xl bg-blueMoon">
     <>
       <div className="flex justify-between p-6">
         <h4>Name of routing</h4>
@@ -85,9 +82,6 @@ function Calendar() {
         </div>
       </div>
     </>
-
-    //   </div>
-    // </div>
   );
 }
 
