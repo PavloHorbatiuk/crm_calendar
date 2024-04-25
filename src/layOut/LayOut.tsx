@@ -1,12 +1,24 @@
 import { useAuth } from '@/common/hooks/useAuth';
 import SideBar from '@/components/SideBar/SideBar';
 import LoginPage from '@/pages/LoginPage/LoginPage';
-import { Outlet, useNavigate } from '@tanstack/react-router';
+import { Outlet, useNavigate, useRouter } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import { useEffect } from 'react';
 
 function LayOut() {
   const { isLogged } = useAuth();
   const navigate = useNavigate();
+  const router = useRouter();
+
+  useEffect(() => {
+    const matchWithTitle = [...router.state.matches]
+      .reverse()
+      .find((d) => d.context.getTitle);
+
+    const title = matchWithTitle?.context.getTitle() || 'Work space';
+    document.title = title;
+  }, [router.state.matches]);
+
   if (!isLogged()) {
     navigate({ to: '/login' });
     return (

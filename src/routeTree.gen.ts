@@ -14,17 +14,13 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile.route'
+import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated/calendar.route'
 
 // Create Virtual Routes
 
 const LoginLazyImport = createFileRoute('/login')()
 const IndexLazyImport = createFileRoute('/')()
-const AuthenticatedProfileLazyImport = createFileRoute(
-  '/_authenticated/profile',
-)()
-const AuthenticatedCalendarLazyImport = createFileRoute(
-  '/_authenticated/calendar',
-)()
 
 // Create/Update Routes
 
@@ -43,18 +39,16 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const AuthenticatedProfileLazyRoute = AuthenticatedProfileLazyImport.update({
+const AuthenticatedProfileRouteRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRoute,
-} as any).lazy(() =>
-  import('./routes/_authenticated/profile.lazy').then((d) => d.Route),
-)
+} as any)
 
-const AuthenticatedCalendarLazyRoute = AuthenticatedCalendarLazyImport.update({
-  path: '/calendar',
-  getParentRoute: () => AuthenticatedRoute,
-} as any).lazy(() =>
-  import('./routes/_authenticated/calendar.lazy').then((d) => d.Route),
+const AuthenticatedCalendarRouteRoute = AuthenticatedCalendarRouteImport.update(
+  {
+    path: '/calendar',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any,
 )
 
 // Populate the FileRoutesByPath interface
@@ -74,11 +68,11 @@ declare module '@tanstack/react-router' {
       parentRoute: typeof rootRoute
     }
     '/_authenticated/calendar': {
-      preLoaderRoute: typeof AuthenticatedCalendarLazyImport
+      preLoaderRoute: typeof AuthenticatedCalendarRouteImport
       parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/profile': {
-      preLoaderRoute: typeof AuthenticatedProfileLazyImport
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedImport
     }
   }
@@ -89,8 +83,8 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   AuthenticatedRoute.addChildren([
-    AuthenticatedCalendarLazyRoute,
-    AuthenticatedProfileLazyRoute,
+    AuthenticatedCalendarRouteRoute,
+    AuthenticatedProfileRouteRoute,
   ]),
   LoginLazyRoute,
 ])

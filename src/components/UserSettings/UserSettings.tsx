@@ -14,7 +14,9 @@ function UserSettings({ userName }: UserSettingsType) {
         <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex w-full items-center justify-between rounded-lg  px-4 py-2 text-left text-sm font-mm hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+              <Disclosure.Button
+                className={`${open && 'bg-white shadow-sm '} rounded-t-2xl flex w-full items-center justify-between px-3  py-2 text-left text-sm font-mm  focus:outline-none focus-visible:ring focus-visible:ring-purple`}
+              >
                 <div className="flex items-center gap-2">
                   <img src={Avatar} />
                   <span className="text-sm font-medium ">{userName}</span>
@@ -26,12 +28,12 @@ function UserSettings({ userName }: UserSettingsType) {
                 />
               </Disclosure.Button>
               <Disclosure.Panel
-                className={`${open ? 'bg-white shadow-md rounded-2xl' : ''} px-4 pb-2 pt-4 text-sm space-y-2`}
+                className={`${open ? 'bg-white shadow-sm rounded-b-2xl' : ''} px-3  pb-2 pt-4 text-sm space-y-2`}
               >
                 <button className="flex gap-2 hover:text-primary">
                   <Cog6ToothIcon className="h-5 w-5" /> Settings
                 </button>
-                <hr className="text-gray" />
+                <hr className="text-lightGray" />
                 <button className="flex items-center gap-2 hover:text-primary">
                   <img src={LogOutIcon} /> Log out
                 </button>
