@@ -10,7 +10,7 @@ export const useAuth = () => {
   };
 
   const isLogged = () =>
-    localStorage.getItem(USER_LOCAL_STORAGE_KEY) === 'true';
+    !!JSON.parse(localStorage.getItem(USER_LOCAL_STORAGE_KEY))?.token;
 
   return { signIn, signOut, isLogged };
 };

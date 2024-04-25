@@ -18,7 +18,7 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
         set({ loading: true });
         try {
           const response = await authApi.fetchLogin(userData);
-          if (response.status === 200) {
+          if (response.status === 201) {
             set({ authData: response.data, loading: false });
             localStorage.setItem(
               USER_LOCAL_STORAGE_KEY,
