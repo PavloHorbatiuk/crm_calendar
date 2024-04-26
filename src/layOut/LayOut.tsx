@@ -1,12 +1,13 @@
 import { useAuth } from '@/common/hooks/useAuth';
 import SideBar from '@/components/SideBar/SideBar';
 import LoginPage from '@/pages/LoginPage/LoginPage';
+import RegistrationPage from '@/pages/RegistrationPage/RegistrationPage';
 import { Outlet, useNavigate, useRouter } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import { useEffect } from 'react';
 
 function LayOut() {
-  const { isLogged } = useAuth();
+  const { isLogged, isRegistration } = useAuth();
   const navigate = useNavigate();
   const router = useRouter();
 
@@ -20,13 +21,23 @@ function LayOut() {
   }, [router.state.matches]);
 
   if (!isLogged()) {
-    navigate({ to: '/login' });
-    return (
-      <>
-        <LoginPage />
-        <TanStackRouterDevtools />
-      </>
-    );
+    if (isRegistration()) {
+      navigate({ to: '/registration' });
+      return (
+        <>
+          <RegistrationPage />
+          <TanStackRouterDevtools />
+        </>
+      );
+    } else {
+      navigate({ to: '/login' });
+      return (
+        <>
+          <LoginPage />
+          <TanStackRouterDevtools />
+        </>
+      );
+    }
   }
   return (
     <>

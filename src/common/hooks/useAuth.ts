@@ -1,18 +1,32 @@
-import { USER_LOCAL_STORAGE_KEY } from '../const/localStorage';
+import {
+  USER_LOCAL_STORAGE_REGISTRATION,
+  USER_LOCAL_STORAGE_USER,
+} from '../const/localStorage';
 
 export const useAuth = () => {
+  const registration = (flag: boolean) => {
+    flag
+      ? localStorage.setItem(USER_LOCAL_STORAGE_REGISTRATION, 'true')
+      : localStorage.removeItem(USER_LOCAL_STORAGE_REGISTRATION);
+  };
+
+  const isRegistration = () =>
+    !!localStorage.getItem(USER_LOCAL_STORAGE_REGISTRATION);
+
   const signIn = () => {
-    localStorage.setItem(USER_LOCAL_STORAGE_KEY, 'true');
+    localStorage.setItem(USER_LOCAL_STORAGE_USER, 'true');
   };
 
   const signOut = () => {
-    localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
+    localStorage.removeItem(USER_LOCAL_STORAGE_USER);
   };
 
   const isLogged = () =>
-    !!JSON.parse(localStorage.getItem(USER_LOCAL_STORAGE_KEY))?.token;
+    //eslint-disable-next-line
+    //@ts-ignore
+    !!JSON.parse(localStorage.getItem(USER_LOCAL_STORAGE_USER))?.token;
 
-  return { signIn, signOut, isLogged };
+  return { signIn, signOut, isLogged, registration, isRegistration };
 };
 
 export type AuthContext = ReturnType<typeof useAuth>;

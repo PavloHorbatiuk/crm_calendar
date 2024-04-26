@@ -1,1 +1,2 @@
-export const USER_LOCAL_STORAGE_KEY = 'user';
+export const USER_LOCAL_STORAGE_USER = 'user';
+export const USER_LOCAL_STORAGE_REGISTRATION = 'registration';

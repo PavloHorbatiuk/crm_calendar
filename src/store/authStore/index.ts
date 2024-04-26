@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { AuthAction, AuthSchema } from './types';
 import { devtools } from 'zustand/middleware';
 import { authApi } from '@/api/authApi';
-import { USER_LOCAL_STORAGE_KEY } from '@/common/const/localStorage';
+import { USER_LOCAL_STORAGE_USER } from '@/common/const/localStorage';
 
 const authState: AuthSchema = {
   authData: null,
@@ -21,7 +21,7 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
           if (response.status === 201) {
             set({ authData: response.data, loading: false });
             localStorage.setItem(
-              USER_LOCAL_STORAGE_KEY,
+              USER_LOCAL_STORAGE_USER,
               JSON.stringify(response.data)
             );
           }

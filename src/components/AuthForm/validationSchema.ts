@@ -31,3 +31,12 @@ export const validationLoginSchema: ObjectSchema<
     .required(errorMessages.email.required),
   password: Yup.string().required(errorMessages.password.required),
 });
+
+export const validationRegistrationSchema: ObjectSchema<
+  Omit<LoginType, 'isRememberMe'>
+> = Yup.object().shape({
+  email: Yup.string()
+    .email(errorMessages.email.invalid)
+    .required(errorMessages.email.required),
+  password: Yup.string().required(errorMessages.password.required),
+});
