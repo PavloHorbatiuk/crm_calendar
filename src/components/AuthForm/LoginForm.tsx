@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { validationLoginSchema } from './validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
-import { USER_LOCAL_STORAGE_KEY } from '@/common/const/localStorage';
 import { useNavigate } from '@tanstack/react-router';
+import { useEffect } from 'react';
+import { useAuthStore } from '@/store/authStore';
 
 export interface LoginType {
   email: string;
@@ -11,7 +12,10 @@ export interface LoginType {
 }
 
 function LoginForm() {
+  const changeRegisted = useAuthStore((store) => store.changeRegisted);
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
+  const user = useAuthStore((store) => store.authData);
+  const login = useAuthStore((store) => store.login);
   const navigate = useNavigate();
   const {
     register,
@@ -23,10 +27,15 @@ function LoginForm() {
   });
 
   const onSubmit = (data: LoginType) => {
-    console.log(data);
-    localStorage.setItem(USER_LOCAL_STORAGE_KEY, 'true');
-    navigate({ to: '/' });
+    //token, name
+    //eslint-disable-next-line
+    //@ts-ignore
+    login(data);
   };
+
+  useEffect(() => {
+    navigate({ to: '/' });
+  }, [user, navigate]);
 
   return (
     <form
@@ -66,7 +75,12 @@ function LoginForm() {
       </div>
       <div className="mt-10 text-center">
         <a href="#">
-          <span className="text-primary text-md">Don’t have an account?</span>
+          <span
+            className="text-primary text-md"
+            onClick={() => changeRegisted(true)}
+          >
+            Don’t have an account?
+          </span>
         </a>
       </div>
     </form>

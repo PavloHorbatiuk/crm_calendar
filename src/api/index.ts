@@ -4,7 +4,8 @@ import axios from 'axios';
 const token = '';
 
 export const instance = axios.create({
-  baseURL: process.env.URL,
+  // baseURL: process.env.URL,
+  baseURL: 'http://localhost:3001',
   headers: {
     Authorization: `Bearer ${token}`,
   },

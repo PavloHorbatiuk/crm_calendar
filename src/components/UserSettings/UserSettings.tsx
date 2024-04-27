@@ -1,3 +1,5 @@
+import { useNavigate } from '@tanstack/react-router';
+import { useAuth } from '@/common/hooks/useAuth';
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import { Cog6ToothIcon } from '@heroicons/react/24/outline';
@@ -8,6 +10,14 @@ type UserSettingsType = {
   userName: string;
 };
 function UserSettings({ userName }: UserSettingsType) {
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
+
+  const logOut = () => {
+    signOut();
+    navigate({ to: '/login' });
+  };
+
   return (
     <div className="w-full">
       <div className="mx-auto w-full max-w-md pb-2">
@@ -34,7 +44,10 @@ function UserSettings({ userName }: UserSettingsType) {
                   <Cog6ToothIcon className="h-5 w-5" /> Settings
                 </button>
                 <hr className="text-lightGray" />
-                <button className="flex items-center gap-2 hover:text-primary">
+                <button
+                  className="flex items-center gap-2 hover:text-primary"
+                  onClick={logOut}
+                >
                   <img src={LogOutIcon} /> Log out
                 </button>
               </Disclosure.Panel>
