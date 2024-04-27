@@ -1,8 +1,8 @@
-import { User } from '@/store/authStore/types';
+import { User, newUser } from '@/store/authStore/types';
 import { URL, instance } from '.';
 
 export const authApi = {
-  fetchAuth(userData: Record<string, string>) {
+  fetchAuth(userData: newUser) {
     return instance.post(URL.REGISTRATION, userData);
   },
   fetchLogin(userData: User) {

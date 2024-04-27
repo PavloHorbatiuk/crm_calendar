@@ -4,7 +4,6 @@ import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolve
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore';
-import { useAuth } from '@/common/hooks/useAuth';
 
 export interface LoginType {
   email: string;
@@ -13,10 +12,10 @@ export interface LoginType {
 }
 
 function LoginForm() {
+  const changeRegisted = useAuthStore((store) => store.changeRegisted);
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
   const user = useAuthStore((store) => store.authData);
   const login = useAuthStore((store) => store.login);
-  const { registration } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -37,11 +36,6 @@ function LoginForm() {
   useEffect(() => {
     navigate({ to: '/' });
   }, [user, navigate]);
-
-  const nav = () => {
-    console.log('nav');
-    registration(true);
-  };
 
   return (
     <form
@@ -81,7 +75,10 @@ function LoginForm() {
       </div>
       <div className="mt-10 text-center">
         <a href="#">
-          <span className="text-primary text-md" onClick={nav}>
+          <span
+            className="text-primary text-md"
+            onClick={() => changeRegisted(true)}
+          >
             Don’t have an account?
           </span>
         </a>

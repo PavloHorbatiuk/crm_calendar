@@ -10,7 +10,10 @@ export default defineConfig({
       '@': '/src',
     },
   },
-  define: {
-    'process.env': process.env,
+  // define: {
+  //   'process.env': process.env,
+  // },
+  server: {
+    port: 3000,
   },
 });

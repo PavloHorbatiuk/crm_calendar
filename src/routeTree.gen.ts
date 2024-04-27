@@ -13,27 +13,27 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SuccessRegistrationImport } from './routes/successRegistration'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile.route'
 import { Route as AuthenticatedCalendarRouteImport } from './routes/_authenticated/calendar.route'
 
 // Create Virtual Routes
 
-const RegistrationLazyImport = createFileRoute('/registration')()
 const LoginLazyImport = createFileRoute('/login')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
-const RegistrationLazyRoute = RegistrationLazyImport.update({
-  path: '/registration',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/registration.lazy').then((d) => d.Route))
-
 const LoginLazyRoute = LoginLazyImport.update({
   path: '/login',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
+
+const SuccessRegistrationRoute = SuccessRegistrationImport.update({
+  path: '/successRegistration',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AuthenticatedRoute = AuthenticatedImport.update({
   id: '/_authenticated',
@@ -69,12 +69,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      preLoaderRoute: typeof LoginLazyImport
+    '/successRegistration': {
+      preLoaderRoute: typeof SuccessRegistrationImport
       parentRoute: typeof rootRoute
     }
-    '/registration': {
-      preLoaderRoute: typeof RegistrationLazyImport
+    '/login': {
+      preLoaderRoute: typeof LoginLazyImport
       parentRoute: typeof rootRoute
     }
     '/_authenticated/calendar': {
@@ -96,8 +96,8 @@ export const routeTree = rootRoute.addChildren([
     AuthenticatedCalendarRouteRoute,
     AuthenticatedProfileRouteRoute,
   ]),
+  SuccessRegistrationRoute,
   LoginLazyRoute,
-  RegistrationLazyRoute,
 ])
 
 /* prettier-ignore-end */
