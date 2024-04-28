@@ -3,61 +3,71 @@ import { AuthAction, AuthSchema } from './types';
 import { devtools } from 'zustand/middleware';
 import { authApi } from '@/api/authApi';
 import { USER_LOCAL_STORAGE_USER } from '@/common/const/localStorage';
+import { immer } from 'zustand/middleware/immer';
+import { redirect } from '@tanstack/react-router';
 
 const authState: AuthSchema = {
   authData: null,
   isRegister: false,
   loading: false,
   error: undefined,
+  success: false,
 };
 
 export const useAuthStore = create<AuthSchema & AuthAction>()(
-  devtools(
-    (set) => ({
-      ...authState,
-      login: async (userData) => {
-        set({ loading: true });
-        try {
-          const response = await authApi.fetchLogin(userData);
-          if (response.status === 201) {
-            set({ authData: response.data, loading: false });
-            localStorage.setItem(
-              USER_LOCAL_STORAGE_USER,
-              JSON.stringify(response.data)
-            );
+  immer(
+    devtools(
+      (set) => ({
+        ...authState,
+        login: async (userData) => {
+          set({ loading: true, success: false });
+          try {
+            const response = await authApi.login(userData);
+            if (response.status === 201) {
+              set({ authData: response.data, loading: false, success: true });
+              localStorage.setItem(
+                USER_LOCAL_STORAGE_USER,
+                JSON.stringify(response.data)
+              );
+              redirect({ to: '/dashboard' });
+            }
+          } catch (error: any) {
+            set({ error: error.message });
+            console.error('Error with login', error.message);
+          } finally {
+            set({ loading: false });
           }
-        } catch (error: any) {
-          set({ error: error.message });
-          console.error('Error with login', error.message);
-        } finally {
-          set({ loading: false });
-        }
-      },
-      register: async (userData) => {
-        set({ loading: true });
-        try {
-          const response = await authApi.fetchAuth(userData);
-          console.log(response);
-          if (response.status === 201) {
-            set({ authData: response.data, loading: false });
-            localStorage.setItem(
-              USER_LOCAL_STORAGE_USER,
-              JSON.stringify({ token: 'true' })
-            );
+        },
+        register: async (userData) => {
+          set({ loading: true, success: false });
+          try {
+            const { name, email, password } = userData;
+            const response = await authApi.registration({
+              name,
+              email,
+              password,
+            });
+            if (response.status === 201) {
+              set({ authData: response.data, success: true });
+              localStorage.setItem(
+                USER_LOCAL_STORAGE_USER,
+                JSON.stringify({ token: 'true' })
+              );
+            }
+          } catch (error: any) {
+            set({ error: error.message });
+            console.error('Error with registration', error.message);
+          } finally {
+            set({ loading: false });
           }
-        } catch (error: any) {
-          set({ error: error.message });
-          console.error('Error with login', error.message);
-        } finally {
-          set({ loading: false });
-        }
-      },
-      changeRegister: (registed) => {
-        set({ isRegister: registed });
-      },
-    }),
-    {
-      name: 'auth',
-    }
+        },
+        setIsRegister: (register) => {
+          set({ isRegister: register });
+        },
+      }),
+      {
+        name: 'auth',
+      }
+    )
   )
 );

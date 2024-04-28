@@ -2,19 +2,12 @@ import { useForm } from 'react-hook-form';
 import { validationLoginSchema } from './validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
 import { useNavigate } from '@tanstack/react-router';
-import { useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore';
-
-export interface LoginType {
-  email: string;
-  password: string;
-  isRememberMe?: boolean;
-}
+import { LoginType } from './types';
 
 function LoginForm() {
-  const changeRegisted = useAuthStore((store) => store.changeRegister);
+  const { setIsRegister } = useAuthStore();
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
-  const user = useAuthStore((store) => store.authData);
   const login = useAuthStore((store) => store.login);
   const navigate = useNavigate();
   const {
@@ -26,16 +19,14 @@ function LoginForm() {
     resolver,
   });
 
-  const onSubmit = (data: LoginType) => {
-    //token, name
-    //eslint-disable-next-line
-    //@ts-ignore
-    login(data);
-  };
+  const onSubmit = async (data: LoginType) => {
+    const { success } = useAuthStore.getState();
+    await login(data);
 
-  useEffect(() => {
-    navigate({ to: '/dashboard' });
-  }, [user, navigate]);
+    if (success) {
+      navigate({ to: '/dashboard' });
+    }
+  };
 
   return (
     <form
@@ -77,7 +68,7 @@ function LoginForm() {
         <a href="#">
           <span
             className="text-primary text-md"
-            onClick={() => changeRegisted(true)}
+            onClick={() => setIsRegister(true)}
           >
             Don’t have an account?
           </span>

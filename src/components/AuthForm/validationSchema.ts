@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 import { ObjectSchema } from 'yup';
-import { LoginType } from './LoginForm';
-import { RegistrationType } from './RegistrationForm';
+import { LoginType, RegistrationType } from './types';
 
 const passwordRules = /^(?=.*\d)(?=.*[A-Z]).{5,}$/;
 const nameRules = /^[A-Za-z ]*$/;
@@ -34,21 +33,21 @@ export const validationLoginSchema: ObjectSchema<
   password: Yup.string().required(errorMessages.password.required),
 });
 
-export const validationRegistrationSchema: ObjectSchema<RegistrationType> =
-  Yup.object().shape({
-    email: Yup.string()
-      .email(errorMessages.email.invalid)
-      .required(errorMessages.email.required),
-    name: Yup.string()
-      .required(errorMessages.name.required)
-      .min(3)
-      .max(40)
-      .matches(nameRules, 'Please enter valid name'),
-    password: Yup.string()
-      .required(errorMessages.password.required)
-      .matches(passwordRules, errorMessages.password.weak),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref('password'), undefined],
-      errorMessages.confirmPassword.mismatch
-    ),
-  });
+export const validationRegistrationSchema: ObjectSchema<
+  Omit<RegistrationType, 'isRememberMe'>
+> = Yup.object().shape({
+  email: Yup.string()
+    .email(errorMessages.email.invalid)
+    .required(errorMessages.email.required),
+  name: Yup.string()
+    .required(errorMessages.name.required)
+    .min(3)
+    .max(40)
+    .matches(nameRules, 'Please enter valid name'),
+  password: Yup.string()
+    .required(errorMessages.password.required)
+    .matches(passwordRules, errorMessages.password.weak),
+  confirmPassword: Yup.string()
+    .required(errorMessages.confirmPassword.required)
+    .oneOf([Yup.ref('password')], errorMessages.confirmPassword.mismatch),
+});
