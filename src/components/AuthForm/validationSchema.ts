@@ -48,7 +48,7 @@ export const validationRegistrationSchema: ObjectSchema<RegistrationType> =
       .required(errorMessages.password.required)
       .matches(passwordRules, errorMessages.password.weak),
     confirmPassword: Yup.string().oneOf(
-      [Yup.ref('password'), null],
+      [Yup.ref('password'), undefined],
       errorMessages.confirmPassword.mismatch
     ),
   });
