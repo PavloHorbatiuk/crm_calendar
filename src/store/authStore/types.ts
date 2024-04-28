@@ -2,7 +2,7 @@ export interface AuthSchema {
   authData?: User | null;
   email?: string;
   password?: string;
-  isRegisted: boolean;
+  isRegister: boolean;
   loading?: boolean;
   error?: string;
 }
@@ -24,5 +24,5 @@ export interface newUser {
 export interface AuthAction {
   login: (userData: User) => Promise<void>;
   register: (userData: newUser) => Promise<void>;
-  changeRegisted: (registed: boolean) => void;
+  changeRegister: (register: boolean) => void;
 }

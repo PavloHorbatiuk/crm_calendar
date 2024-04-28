@@ -12,7 +12,7 @@ export interface LoginType {
 }
 
 function LoginForm() {
-  const changeRegisted = useAuthStore((store) => store.changeRegisted);
+  const changeRegisted = useAuthStore((store) => store.changeRegister);
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
   const user = useAuthStore((store) => store.authData);
   const login = useAuthStore((store) => store.login);
@@ -34,7 +34,7 @@ function LoginForm() {
   };
 
   useEffect(() => {
-    navigate({ to: '/' });
+    navigate({ to: '/dashboard' });
   }, [user, navigate]);
 
   return (

@@ -1,13 +1,9 @@
 import AddIcon from '@/assets/add.svg';
 import {
   format,
-  subMonths,
-  addMonths,
   startOfWeek,
   addDays,
   isSameDay,
-  lastDayOfWeek,
-  getWeek,
   addWeeks,
   subWeeks,
   startOfDay,
@@ -20,7 +16,7 @@ type ButtonType = 'prev' | 'next';
 
 function Calendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
+  // const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
 
   const dateFormat = 'EEE dd';
   const timeFormat = 'HH:mm';
@@ -28,11 +24,11 @@ function Calendar() {
   const changeWeekHandle = (btnType: ButtonType) => {
     if (btnType === 'prev') {
       setCurrentMonth(subWeeks(currentMonth, 1));
-      setCurrentWeek(getWeek(subWeeks(currentMonth, 1)));
+      // setCurrentWeek(getWeek(subWeeks(currentMonth, 1)));
     }
     if (btnType === 'next') {
       setCurrentMonth(addWeeks(currentMonth, 1));
-      setCurrentWeek(getWeek(addWeeks(currentMonth, 1)));
+      // setCurrentWeek(getWeek(addWeeks(currentMonth, 1)));
     }
   };
 

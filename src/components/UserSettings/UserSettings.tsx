@@ -15,7 +15,7 @@ function UserSettings({ userName }: UserSettingsType) {
 
   const logOut = () => {
     signOut();
-    navigate({ to: '/login' });
+    navigate({ to: '/auth/login' });
   };
 
   return (

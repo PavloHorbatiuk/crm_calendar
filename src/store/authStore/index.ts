@@ -6,7 +6,7 @@ import { USER_LOCAL_STORAGE_USER } from '@/common/const/localStorage';
 
 const authState: AuthSchema = {
   authData: null,
-  isRegisted: false,
+  isRegister: false,
   loading: false,
   error: undefined,
 };
@@ -52,8 +52,8 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
           set({ loading: false });
         }
       },
-      changeRegisted: (registed) => {
-        set({ isRegisted: registed });
+      changeRegister: (registed) => {
+        set({ isRegister: registed });
       },
     }),
     {
