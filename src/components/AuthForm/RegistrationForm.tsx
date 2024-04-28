@@ -1,21 +1,13 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate } from '@tanstack/react-router';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
 import { validationRegistrationSchema } from './validationSchema';
 import { useAuthStore } from '@/store/authStore';
-import { USER_LOCAL_STORAGE_USER } from '@/common/const/localStorage';
-
-export interface RegistrationType {
-  email: string;
-  name: string;
-  password: string;
-  confirmPassword?: string;
-}
+import { RegistrationType } from './types';
+import { useNavigate } from '@tanstack/react-router';
 
 function RegistrationForm() {
-  const { changeRegister } = useAuthStore();
+  const { register: registerUser, setIsRegister } = useAuthStore();
   const navigate = useNavigate();
-  const registerUser = useAuthStore((store) => store.register);
   const resolver = useYupValidationResolver<RegistrationType>(
     validationRegistrationSchema
   );
@@ -28,20 +20,13 @@ function RegistrationForm() {
     resolver,
   });
 
-  const onSubmit = (data: RegistrationType) => {
-    const { email, name, password } = data;
-    registerUser({
-      email,
-      name,
-      password,
-    });
-  };
-
-  const nav = () => {
-    const token = JSON.stringify({ token: 'true' });
-    localStorage.setItem(USER_LOCAL_STORAGE_USER, token);
-    navigate({ to: '/auth/success' });
-    changeRegister(false);
+  const onSubmit = async (data: RegistrationType) => {
+    await registerUser(data);
+    const { success } = useAuthStore.getState();
+    if (success) {
+      navigate({ to: '/auth/success' });
+      setIsRegister(false);
+    }
   };
 
   return (
@@ -81,7 +66,7 @@ function RegistrationForm() {
         </div>
         <div className="flex items-center pt-8 justify-between"></div>
         <div className="text-center w-full mt-7">
-          <button onClick={nav} className="w-40 btn-primary">
+          <button type="submit" className="w-40 btn-primary">
             Sign Up
           </button>
         </div>

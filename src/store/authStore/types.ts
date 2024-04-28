@@ -1,7 +1,8 @@
+import { LoginType, RegistrationType } from '@/components/AuthForm/types';
+
 export interface AuthSchema {
   authData?: User | null;
-  email?: string;
-  password?: string;
+  success: boolean;
   isRegister: boolean;
   loading?: boolean;
   error?: string;
@@ -14,15 +15,8 @@ export interface User {
   role?: string;
 }
 
-export interface newUser {
-  name: string;
-  email: string;
-  password: string;
-  role?: string;
-}
-
 export interface AuthAction {
-  login: (userData: User) => Promise<void>;
-  register: (userData: newUser) => Promise<void>;
-  changeRegister: (register: boolean) => void;
+  login: (userData: LoginType) => Promise<void>;
+  register: (userData: RegistrationType) => Promise<void>;
+  setIsRegister: (register: boolean) => void;
 }

@@ -1,11 +1,11 @@
-import { User, newUser } from '@/store/authStore/types';
+import { LoginType, RegisterPick } from '@/components/AuthForm/types';
 import { URL, instance } from '.';
 
 export const authApi = {
-  fetchAuth(userData: newUser) {
+  registration(userData: RegisterPick) {
     return instance.post(URL.REGISTRATION, userData);
   },
-  fetchLogin(userData: User) {
+  login(userData: LoginType) {
     return instance.post(URL.LOGIN, userData);
   },
 };
