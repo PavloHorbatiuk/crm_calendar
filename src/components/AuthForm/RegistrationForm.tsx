@@ -13,7 +13,7 @@ export interface RegistrationType {
 }
 
 function RegistrationForm() {
-  const changeRegisted = useAuthStore((store) => store.changeRegisted);
+  const { changeRegister } = useAuthStore();
   const navigate = useNavigate();
   const registerUser = useAuthStore((store) => store.register);
   const resolver = useYupValidationResolver<RegistrationType>(
@@ -40,7 +40,8 @@ function RegistrationForm() {
   const nav = () => {
     const token = JSON.stringify({ token: 'true' });
     localStorage.setItem(USER_LOCAL_STORAGE_USER, token);
-    navigate({ to: '/successRegistration' });
+    navigate({ to: '/auth/success' });
+    changeRegister(false);
   };
 
   return (
@@ -80,11 +81,11 @@ function RegistrationForm() {
         </div>
         <div className="flex items-center pt-8 justify-between"></div>
         <div className="text-center w-full mt-7">
-          <button className="w-40 btn-primary">Sign Up</button>
+          <button onClick={nav} className="w-40 btn-primary">
+            Sign Up
+          </button>
         </div>
       </form>
-      <button onClick={() => changeRegisted(false)}>Login</button>
-      <button onClick={nav}>Go</button>
     </>
   );
 }

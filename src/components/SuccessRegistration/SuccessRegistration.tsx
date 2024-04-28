@@ -6,7 +6,7 @@ function SuccessRegistration() {
   const navigate = useNavigate();
 
   const nav = () => {
-    navigate({ to: '/calendar' });
+    navigate({ to: '/dashboard' });
   };
 
   return (

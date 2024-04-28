@@ -5,7 +5,7 @@ import RegistrationForm from '@/components/AuthForm/RegistrationForm';
 import { useAuthStore } from '@/store/authStore';
 
 function LoginPage() {
-  const isRegisted = useAuthStore((store) => store.isRegisted);
+  const isRegister = useAuthStore((store) => store.isRegister);
 
   return (
     <div className="shadow-md max-w-screen-1xl  max-h-screen-md rounded-3xl max-sm:flex grid grid-cols-2 mx-auto h-full ">
@@ -23,7 +23,7 @@ function LoginPage() {
           <img src={loginIcon} alt="logo" />
         </div>
       </div>
-      {!isRegisted ? (
+      {!isRegister ? (
         <div className="bg-white max-lg:px-2 max-sm:w-full rounded-r-3xl flex flex-col pt-[7.188rem]  items-center ">
           <LoginForm />
         </div>
