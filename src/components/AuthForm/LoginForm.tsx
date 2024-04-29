@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { validationLoginSchema } from './validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
@@ -6,7 +7,7 @@ import { useAuthStore } from '@/store/authStore';
 import { LoginType } from './types';
 
 function LoginForm() {
-  const { setIsRegister } = useAuthStore();
+  const { setIsRegister, error: backendError } = useAuthStore();
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
   const login = useAuthStore((store) => store.login);
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function LoginForm() {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm<LoginType>({
     mode: 'onBlur',
     resolver,
@@ -28,6 +30,15 @@ function LoginForm() {
     }
   };
 
+  useEffect(() => {
+    if (backendError) {
+      setError('email', {
+        type: 'manual',
+        message: backendError,
+      });
+    }
+  }, [backendError, setError]);
+
   return (
     <form
       className="max-w-[25.188rem] w-full"
@@ -37,15 +48,22 @@ function LoginForm() {
       <div className="pt-[2.063rem] flex flex-col ">
         <label className="pl-1.5">Email Address</label>
         <div className="pt-4">
-          <input {...register('email', { required: true })} />
-          <p className="text-red-400">{errors.email?.message}</p>
+          <input
+            {...register('email')}
+            className={errors.email?.message && 'border-red-400'}
+          />
+          <p className="ml-3 text-red-400">{errors.email?.message}</p>
         </div>
       </div>
       <div className="pt-[2.063rem] flex flex-col ">
         <label className="pl-1.5">Password</label>
         <div className="pt-4">
-          <input type="password" {...register('password')} />
-          <p className="text-red-400 ">{errors.password?.message}</p>
+          <input
+            type="password"
+            {...register('password')}
+            className={errors.password?.message && 'border-red-400'}
+          />
+          <p className="ml-3 text-red-400 ">{errors.password?.message}</p>
         </div>
       </div>
       <div className="flex items-center pt-8 justify-between">
