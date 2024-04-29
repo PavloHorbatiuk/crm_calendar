@@ -42,15 +42,15 @@ function Calendar() {
     const hours = [];
     for (let i = 13; i <= 22; i++) {
       hours.push(
-        <div key={i} className="flex items-end justify-center  min-h-14">
-          <span className="flex items-center text-mm text-gray w-24">
-            {i}:00 <hr className="w-full text-lightGray ml-4" />
+        <div key={i} className="flex min-w-14 min-h-14 relative">
+          <span className="flex items-center text-mm text-gray  ">
+            {i}:00{' '}
+            <hr className="text-lightGray  w-4 absolute -right-2 top-[1.85rem]" />
           </span>
         </div>
       );
     }
-    // return <div className="absolute left-6 top-[9px]">{hours}</div>;
-    return <div className="max-w-[4.5rem]">{hours}</div>;
+    return <div className="px-2 pt-2.5 ">{hours}</div>;
   }
 
   const renderDays = () => {
@@ -82,15 +82,13 @@ function Calendar() {
           ':00';
         hours.push(
           <div key={i} className="flex items-end justify-between  min-h-14">
-            <span className="flex items-center w-full">
-              {i}:00 <hr className="w-full text-lightGray ml-2" />
-            </span>
+            <span className="flex items-center w-full">{i}:00</span>
           </div>
         );
         timeCells.push(
           <div
             key={`${format(currentDate, 'yyyy-MM-dd')}-${hour}`}
-            className=" min-h-14 border  border-lightGray"
+            className=" min-h-14 border-b border-r  border-lightGray"
             onClick={() =>
               handleCellClick(currentDate, format(new Date(time), timeFormat))
             }
@@ -104,7 +102,7 @@ function Calendar() {
         </div>
       );
       weekDays.push(
-        <div key={`day-${i}`} className="col-span-7 w-full">
+        <div key={`day-${i}`} className="ml-2 col-span-7 w-full">
           {dayHeader}
         </div>
       );
@@ -112,7 +110,7 @@ function Calendar() {
     return (
       <>
         <div className="bg-blueMoon shadow-sm  flex py-2  rounded-lg">
-          <div className="max-w-[4.5rem] w-full px-2 flex justify-between">
+          <div className="min-w-[4.5rem]  px-2 flex justify-between">
             <button
               onClick={() => changeWeekHandle('next')}
               className="flex items-center"
@@ -125,9 +123,13 @@ function Calendar() {
           </div>
           {weekDays}
         </div>
-        <div className="grid grid-cols-[6.37%,93.63%]">
-          <div>{renderTimeline()}</div>
-          <div className="grid grid-cols-7 ">{days}</div>
+        <div className="flex ">
+          <div className="min-w-[4.5rem] pt-4">{renderTimeline()}</div>
+          <div className="flex-1 ">
+            <div className="grid grid-cols-7 border-l  border-lightGray">
+              {days}
+            </div>
+          </div>
         </div>
       </>
     );
@@ -150,9 +152,7 @@ function Calendar() {
           </div>
         </div>
         <div className="mt-3.5">
-          {/* <div className="py-2"> */}
           <div className="col-span-7 w-full">{renderDays()}</div>
-          {/* </div> */}
         </div>
       </div>
     </>

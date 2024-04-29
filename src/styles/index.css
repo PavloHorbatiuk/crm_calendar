@@ -50,7 +50,9 @@
   .grid-rows-show {
     grid-template-rows: 1fr;
   }
-
+  .grid-cols-\[min-content_1fr\] {
+    grid-template-columns: min-content 4.5rem;
+}
   .grid-rows-hide {
     grid-template-rows: 0;
   }
