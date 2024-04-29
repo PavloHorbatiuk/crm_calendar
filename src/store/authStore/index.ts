@@ -32,8 +32,8 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
               redirect({ to: '/dashboard' });
             }
           } catch (error: any) {
-            set({ error: error.message });
-            console.error('Error with login', error.message);
+            set({ error: error.response.data.message });
+            console.error('Error with login', error.response.data.message);
           } finally {
             set({ loading: false });
           }
@@ -51,12 +51,15 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
               set({ authData: response.data, success: true });
               localStorage.setItem(
                 USER_LOCAL_STORAGE_USER,
-                JSON.stringify({ token: 'true' })
+                JSON.stringify(response.data)
               );
             }
           } catch (error: any) {
-            set({ error: error.message });
-            console.error('Error with registration', error.message);
+            set({ error: error.response.data.message });
+            console.error(
+              'Error with registration',
+              error.response.data.message
+            );
           } finally {
             set({ loading: false });
           }
