@@ -1,9 +1,12 @@
+import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 
 function Dashboard() {
   return (
     <>
-      <div className="p-6">Dashboard</div>
+      <CardTitle>
+        <h4>Dashboard</h4>
+      </CardTitle>
       <CardWrapper>Body</CardWrapper>
     </>
   );
