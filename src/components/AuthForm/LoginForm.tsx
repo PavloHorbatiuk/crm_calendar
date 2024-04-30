@@ -29,7 +29,6 @@ function LoginForm() {
       navigate({ to: '/dashboard' });
     }
   };
-
   return (
     <form
       className="max-w-[25.188rem] w-full"
@@ -44,6 +43,7 @@ function LoginForm() {
         error={errors.email?.message}
       />
       <Input<LoginType>
+        type={InputType.PASSWORD}
         name={'password'}
         register={register}
         required

@@ -22,18 +22,7 @@ function Input<T extends FieldValues>(props: InputProps<T>) {
 
   return (
     <>
-      {type === InputType.TEXT ? (
-        <div className="pt-[2.063rem] flex flex-col ">
-          <label className="pl-1.5 capitalize">{label}</label>
-          <div className="pt-4">
-            <input
-              {...register(name, { required })}
-              className={`${error ? 'border border-rose' : ''}`}
-            />
-            <p className="text-rose">{error}</p>
-          </div>
-        </div>
-      ) : (
+      {type === InputType.CHECKBOX ? (
         <>
           <div className="flex items-center">
             <input
@@ -46,6 +35,18 @@ function Input<T extends FieldValues>(props: InputProps<T>) {
             </label>
           </div>
         </>
+      ) : (
+        <div className="pt-[2.063rem] flex flex-col ">
+          <label className="pl-1.5 capitalize">{label}</label>
+          <div className="pt-4">
+            <input
+              type={type}
+              {...register(name, { required })}
+              className={`${error ? 'border border-rose' : ''}`}
+            />
+            <p className="text-rose">{error}</p>
+          </div>
+        </div>
       )}
     </>
   );
