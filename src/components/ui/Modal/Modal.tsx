@@ -11,11 +11,13 @@ export interface ModalProps {
 
 export default function Modal(props: ModalProps) {
   const { children, isOpen, onClose, title } = props;
-
+  const onCloseModal = () => {
+    onClose && onClose();
+  };
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => onClose}>
+        <Dialog as="div" className="relative z-10" onClose={onCloseModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -39,24 +41,14 @@ export default function Modal(props: ModalProps) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-3xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
-                    as="h3"
+                    as="h4"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
                     {title}
                   </Dialog.Title>
-                  <div className="mt-2">{children}</div>
-
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={onClose}
-                    >
-                      Got it, thanks!
-                    </button>
-                  </div>
+                  <div>{children}</div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

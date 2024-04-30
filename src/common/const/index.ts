@@ -2,7 +2,8 @@ export enum InputType {
   TEXT = 'text',
   CHECKBOX = 'checkbox',
   PASSWORD = 'password',
-  DATE = 'date',
+  DATE = 'datetime-local',
+  NUMBER = 'number',
 }
 
 export const errorMessages = {
@@ -23,10 +24,11 @@ export const errorMessages = {
     mismatch: 'Your passwords do not match',
   },
   dateTime: {
-    required: 'Date and time must be required',
-    invalid: 'Date is incorrect',
+    required: 'Time is required',
   },
   price: {
-    required: 'Prise and time must be required',
+    required: 'Price must be required',
+    isNumber: 'Price must be a number',
+    isBigger: 'Price must be a greater than 100',
   },
 };

@@ -11,9 +11,9 @@ import {
 import leftIcon from '@/assets/Left.svg';
 import rightIcon from '@/assets/Arrow--right.svg';
 import { useState } from 'react';
-import Modal from '../ui/Modal/Modal';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
+import EventModal from '../Modals/EventModal/EventModal';
 
 type ButtonType = 'prev' | 'next';
 
@@ -26,10 +26,7 @@ function Calendar() {
   const timeFormat = 'HH:mm';
 
   const addEvent = () => setIsOpen(!open);
-  const onClose = () => {
-    setIsOpen(false);
-    console.log('false');
-  };
+  const onClose = () => setIsOpen((prev) => !prev);
 
   const changeWeekHandle = (btnType: ButtonType) => {
     if (btnType === 'prev') {
@@ -168,9 +165,7 @@ function Calendar() {
           <div className="col-span-7 w-full">{renderDays()}</div>
         </div>
       </CardWrapper>
-      <Modal title={'Event'} isOpen={open} onClose={onClose}>
-        <h3>Lorem ipsum</h3>
-      </Modal>
+      {open && <EventModal title={'Event'} isOpen={open} onClose={onClose} />}
     </>
   );
 }
