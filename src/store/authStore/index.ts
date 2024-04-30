@@ -4,7 +4,6 @@ import { devtools } from 'zustand/middleware';
 import { authApi } from '@/api/authApi';
 import { USER_LOCAL_STORAGE_USER } from '@/common/const/localStorage';
 import { immer } from 'zustand/middleware/immer';
-import { redirect } from '@tanstack/react-router';
 
 const authState: AuthSchema = {
   authData: null,
@@ -29,7 +28,6 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
                 USER_LOCAL_STORAGE_USER,
                 JSON.stringify(response.data)
               );
-              redirect({ to: '/dashboard' });
             }
           } catch (error: any) {
             set({ error: error.message });

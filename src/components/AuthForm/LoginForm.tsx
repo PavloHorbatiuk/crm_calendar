@@ -4,6 +4,8 @@ import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolve
 import { useNavigate } from '@tanstack/react-router';
 import { useAuthStore } from '@/store/authStore';
 import { LoginType } from './types';
+import Input from '../ui/FormField/FormField';
+import { InputType } from '@/common/const';
 
 function LoginForm() {
   const { setIsRegister } = useAuthStore();
@@ -20,8 +22,8 @@ function LoginForm() {
   });
 
   const onSubmit = async (data: LoginType) => {
-    const { success } = useAuthStore.getState();
     await login(data);
+    const { success } = useAuthStore.getState();
 
     if (success) {
       navigate({ to: '/dashboard' });
@@ -34,29 +36,29 @@ function LoginForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <h3 className="text-black">Sign In to Woorkroom</h3>
-      <div className="pt-[2.063rem] flex flex-col ">
-        <label className="pl-1.5">Email Address</label>
-        <div className="pt-4">
-          <input {...register('email', { required: true })} />
-          <p className="text-red-400">{errors.email?.message}</p>
-        </div>
-      </div>
-      <div className="pt-[2.063rem] flex flex-col ">
-        <label className="pl-1.5">Password</label>
-        <div className="pt-4">
-          <input type="password" {...register('password')} />
-          <p className="text-red-400 ">{errors.password?.message}</p>
-        </div>
-      </div>
+      <Input<LoginType>
+        name={'email'}
+        register={register}
+        required
+        label={'Email'}
+        error={errors.email?.message}
+      />
+      <Input<LoginType>
+        name={'password'}
+        register={register}
+        required
+        label={'Password'}
+        error={errors.password?.message}
+      />
       <div className="flex items-center pt-8 justify-between">
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            className="w-5 h-5"
-            {...register('isRememberMe')}
-          />
-          <label className="ms-2  text-gray dark:text-gray">Remember me</label>
-        </div>
+        <Input<LoginType>
+          name={'isRememberMe'}
+          type={InputType.CHECKBOX}
+          register={register}
+          required
+          label={'Remember me'}
+          error={errors.isRememberMe?.message}
+        />
         <a href="#">
           <p className="text-md max-sm:text-mm">Forgot Password?</p>
         </a>

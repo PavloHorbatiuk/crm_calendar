@@ -11,15 +11,23 @@ import {
 import leftIcon from '@/assets/Left.svg';
 import rightIcon from '@/assets/Arrow--right.svg';
 import { useState } from 'react';
+import Modal from '../ui/Modal/Modal';
 
 type ButtonType = 'prev' | 'next';
 
 function Calendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [open, setIsOpen] = useState<boolean>(false);
   // const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
 
   const dateFormat = 'EEE dd';
   const timeFormat = 'HH:mm';
+
+  const addEvent = () => setIsOpen(!open);
+  const onClose = () => {
+    setIsOpen(false);
+    console.log('false');
+  };
 
   const changeWeekHandle = (btnType: ButtonType) => {
     if (btnType === 'prev') {
@@ -112,12 +120,12 @@ function Calendar() {
         <div className="bg-blueMoon shadow-sm  flex py-2  rounded-lg">
           <div className="min-w-[4.5rem]  px-2 flex justify-between">
             <button
-              onClick={() => changeWeekHandle('next')}
+              onClick={() => changeWeekHandle('prev')}
               className="flex items-center"
             >
               <img className="fill-black" src={leftIcon} />
             </button>
-            <button onClick={() => changeWeekHandle('prev')}>
+            <button onClick={() => changeWeekHandle('next')}>
               <img src={rightIcon} />
             </button>
           </div>
@@ -138,8 +146,11 @@ function Calendar() {
   return (
     <>
       <div className="flex justify-between p-6">
-        <h4>Name of routing</h4>
-        <button className="btn-black bg-black rounded-full w-10 h-10 flex items-center justify-center">
+        <h4>Calendar</h4>
+        <button
+          className="btn-black bg-black rounded-full w-10 h-10 flex items-center justify-center"
+          onClick={addEvent}
+        >
           <img src={AddIcon} />
         </button>
       </div>
@@ -155,6 +166,9 @@ function Calendar() {
           <div className="col-span-7 w-full">{renderDays()}</div>
         </div>
       </div>
+      <Modal title={'Event'} isOpen={open} onClose={onClose}>
+        <h3>Lorem ipsum</h3>
+      </Modal>
     </>
   );
 }
