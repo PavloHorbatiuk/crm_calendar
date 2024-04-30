@@ -10,7 +10,7 @@ type InputProps<T extends FieldValues> = {
   type?: InputType;
 };
 
-function Input<T extends FieldValues>(props: InputProps<T>) {
+function FormField<T extends FieldValues>(props: InputProps<T>) {
   const {
     label,
     register,
@@ -52,4 +52,4 @@ function Input<T extends FieldValues>(props: InputProps<T>) {
   );
 }
 
-export default Input;
+export default FormField;

@@ -12,6 +12,8 @@ import leftIcon from '@/assets/Left.svg';
 import rightIcon from '@/assets/Arrow--right.svg';
 import { useState } from 'react';
 import Modal from '../ui/Modal/Modal';
+import { CardTitle } from '../ui/CardTitle/CardTitle';
+import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 
 type ButtonType = 'prev' | 'next';
 
@@ -145,7 +147,7 @@ function Calendar() {
 
   return (
     <>
-      <div className="flex justify-between p-6">
+      <CardTitle>
         <h4>Calendar</h4>
         <button
           className="btn-black bg-black rounded-full w-10 h-10 flex items-center justify-center"
@@ -153,8 +155,8 @@ function Calendar() {
         >
           <img src={AddIcon} />
         </button>
-      </div>
-      <div className="bg-white p-6 h-full rounded-3xl">
+      </CardTitle>
+      <CardWrapper>
         <div className="flex justify-between items-center">
           <h4>{format(currentMonth, 'MMM yyyy')}</h4>
           <div className="flex gap-2">
@@ -165,7 +167,7 @@ function Calendar() {
         <div className="mt-3.5">
           <div className="col-span-7 w-full">{renderDays()}</div>
         </div>
-      </div>
+      </CardWrapper>
       <Modal title={'Event'} isOpen={open} onClose={onClose}>
         <h3>Lorem ipsum</h3>
       </Modal>

@@ -4,7 +4,7 @@ import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolve
 import { useNavigate } from '@tanstack/react-router';
 import { useAuthStore } from '@/store/authStore';
 import { LoginType } from './types';
-import Input from '../ui/FormField/FormField';
+import FormField from '../ui/FormField/FormField';
 import { InputType } from '@/common/const';
 
 function LoginForm() {
@@ -29,20 +29,21 @@ function LoginForm() {
       navigate({ to: '/dashboard' });
     }
   };
+
   return (
     <form
       className="max-w-[25.188rem] w-full"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h3 className="text-black">Sign In to Woorkroom</h3>
-      <Input<LoginType>
+      <FormField<LoginType>
         name={'email'}
         register={register}
         required
         label={'Email'}
         error={errors.email?.message}
       />
-      <Input<LoginType>
+      <FormField<LoginType>
         type={InputType.PASSWORD}
         name={'password'}
         register={register}
@@ -51,7 +52,7 @@ function LoginForm() {
         error={errors.password?.message}
       />
       <div className="flex items-center pt-8 justify-between">
-        <Input<LoginType>
+        <FormField<LoginType>
           name={'isRememberMe'}
           type={InputType.CHECKBOX}
           register={register}
