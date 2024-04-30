@@ -7,7 +7,7 @@ interface IProps {
 export const Alert: FC<IProps> = ({ text }) => {
   return (
     <div
-      className="flex items-center  mt-4 p-4 mb-4 text-sm text-rose rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+      className="flex items-center  mt-4 p-4 mb-4 text-sm text-rose rounded-[0.875rem] bg-red-50 dark:bg-gray-800 dark:text-red-400"
       role="alert"
     >
       <svg
