@@ -9,7 +9,7 @@ import { Alert } from '../ui/Alert/Alert';
 
 export interface EventFormTypes {
   name: string;
-  dateTime: Date;
+  date: Date;
   price: number;
 }
 
@@ -44,8 +44,8 @@ function EventForm({ onSuccess }: EventFormProps) {
         register={register}
       />
       <FormField
-        name={'dateTime'}
-        error={errors?.dateTime?.message}
+        name={'date'}
+        error={errors?.date?.message}
         type={InputType.DATE}
         label={'Date and time'}
         required

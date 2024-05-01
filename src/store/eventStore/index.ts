@@ -14,20 +14,22 @@ const authState: EventSchema = {
 export const useEventStore = create<EventSchema & EventAction>()(
   immer(
     devtools(
-      (set) => ({
+      (set, get) => ({
         ...authState,
         createEvent: async (event) => {
           set({ loading: true, success: false });
           try {
             const response = await eventApi.addEvent(event);
             if (response.status === 201) {
-              console.log(response.data, 'response data');
-              set({ events: response.data, loading: false, success: true });
+              set({
+                loading: false,
+                success: true,
+                events: get().events.concat(response.data),
+              });
             }
           } catch (error: any) {
             const errorMessage = error.response.statusText;
             set({ error: errorMessage });
-            console.log(error.response.statusText, 'error');
             console.error('Error with create event', error.message);
           } finally {
             set({ loading: false });

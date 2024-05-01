@@ -1,7 +1,16 @@
 // import { USER_LOCAL_STORAGE_KEY } from '@/common/const/localStorage';
+import { User } from '@/store/authStore/types';
 import axios from 'axios';
+import { USER_LOCAL_STORAGE_USER } from '@/common/const/localStorage';
 
-const token = '';
+const authDataString: string | null = localStorage.getItem(
+  USER_LOCAL_STORAGE_USER
+);
+const authData: User | null = authDataString
+  ? JSON.parse(authDataString)
+  : null;
+
+const token = authData ? authData.token : null;
 
 export const instance = axios.create({
   // baseURL: process.env.URL,
@@ -9,6 +18,7 @@ export const instance = axios.create({
   headers: {
     Authorization: `Bearer ${token}`,
   },
+  withCredentials: true,
 });
 
 export enum URL {
