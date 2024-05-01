@@ -8,7 +8,7 @@ import FormField from '../ui/FormField/FormField';
 import { InputType } from '@/common/const';
 
 function LoginForm() {
-  const { setIsRegister } = useAuthStore();
+  const { setIsRegister, error: responseError } = useAuthStore();
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
   const login = useAuthStore((store) => store.login);
   const navigate = useNavigate();
@@ -65,6 +65,7 @@ function LoginForm() {
         </a>
       </div>
       <div className="text-center w-full mt-10">
+        {responseError && <p className="text-rose mb-2">{responseError}</p>}
         <button className="w-40 btn-primary">Sign In</button>
       </div>
       <div className="mt-10 text-center">

@@ -6,7 +6,11 @@ import { RegistrationType } from './types';
 import { useNavigate } from '@tanstack/react-router';
 
 function RegistrationForm() {
-  const { register: registerUser, setIsRegister } = useAuthStore();
+  const {
+    register: registerUser,
+    setIsRegister,
+    error: responseError,
+  } = useAuthStore();
   const navigate = useNavigate();
   const resolver = useYupValidationResolver<RegistrationType>(
     validationRegistrationSchema
@@ -32,7 +36,7 @@ function RegistrationForm() {
   return (
     <>
       <form
-        className="max-w-[25.188rem] w-96"
+        className="max-w-[25.188rem] w-full"
         onSubmit={handleSubmit(onSubmit)}
       >
         <h3 className="text-black">Registration</h3>
@@ -66,6 +70,7 @@ function RegistrationForm() {
         </div>
         <div className="flex items-center pt-8 justify-between"></div>
         <div className="text-center w-full mt-7">
+          {responseError && <p className="text-rose mb-2">{responseError}</p>}
           <button type="submit" className="w-40 btn-primary">
             Sign Up
           </button>

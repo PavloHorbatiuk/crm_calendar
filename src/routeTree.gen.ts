@@ -24,6 +24,7 @@ import { Route as AuthenticatedLayoutCalendarImport } from './routes/_authentica
 
 const IndexLazyImport = createFileRoute('/')()
 const AuthSuccessLazyImport = createFileRoute('/auth/success')()
+const AuthSettingsLazyImport = createFileRoute('/auth/settings')()
 const AuthLoginLazyImport = createFileRoute('/auth/login')()
 
 // Create/Update Routes
@@ -42,6 +43,11 @@ const AuthSuccessLazyRoute = AuthSuccessLazyImport.update({
   path: '/auth/success',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/auth/success.lazy').then((d) => d.Route))
+
+const AuthSettingsLazyRoute = AuthSettingsLazyImport.update({
+  path: '/auth/settings',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/auth/settings.lazy').then((d) => d.Route))
 
 const AuthLoginLazyRoute = AuthLoginLazyImport.update({
   path: '/auth/login',
@@ -101,6 +107,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginLazyImport
       parentRoute: typeof rootRoute
     }
+    '/auth/settings': {
+      preLoaderRoute: typeof AuthSettingsLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/auth/success': {
       preLoaderRoute: typeof AuthSuccessLazyImport
       parentRoute: typeof rootRoute
@@ -133,6 +143,7 @@ export const routeTree = rootRoute.addChildren([
   ]),
   LayoutLayoutaRoute,
   AuthLoginLazyRoute,
+  AuthSettingsLazyRoute,
   AuthSuccessLazyRoute,
 ])
 
