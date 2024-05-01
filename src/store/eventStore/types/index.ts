@@ -1,6 +1,6 @@
 export interface Event {
   name: string;
-  dateTime: Date;
+  date: Date;
   isDone: boolean;
   price: number;
 }

@@ -9,7 +9,7 @@ import { Alert } from '../ui/Alert/Alert';
 
 export interface EventFormTypes {
   name: string;
-  dateTime: Date;
+  date: Date;
   price: number;
 }
 
@@ -28,7 +28,7 @@ function EventForm({ onSuccess }: EventFormProps) {
     resolver,
     defaultValues,
   });
-  const { createEvent, success, error: responseError } = useEventStore();
+  const { createEvent, error: responseError } = useEventStore();
   const onSubmit = (data: EventFormTypes) => {
     console.log(data);
     createEvent({ ...data, isDone: false });
@@ -44,8 +44,8 @@ function EventForm({ onSuccess }: EventFormProps) {
         register={register}
       />
       <FormField
-        name={'dateTime'}
-        error={errors?.dateTime?.message}
+        name={'date'}
+        error={errors?.date?.message}
         type={InputType.DATE}
         label={'Date and time'}
         required
