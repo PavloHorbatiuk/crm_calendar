@@ -28,7 +28,7 @@ function EventForm({ onSuccess }: EventFormProps) {
     resolver,
     defaultValues,
   });
-  const { createEvent, success, error: responseError } = useEventStore();
+  const { createEvent, error: responseError } = useEventStore();
   const onSubmit = (data: EventFormTypes) => {
     console.log(data);
     createEvent({ ...data, isDone: false });
