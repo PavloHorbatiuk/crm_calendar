@@ -1,7 +1,7 @@
-import Calendar from '@/components/Calendar/Calendar';
+import CalendarContainer from '@/components/Calendar/CalendarContainer';
 
 function CalendarPage() {
-  return <Calendar />;
+  return <CalendarContainer />;
 }
 
 export default CalendarPage;
