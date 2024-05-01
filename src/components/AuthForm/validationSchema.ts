@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import { ObjectSchema } from 'yup';
 import { LoginType, RegistrationType } from './types';
 import { errorMessages } from '@/common/const';
+import { ProfileSettings } from '../UserSettings/ProfileSettings';
 
 const passwordRules = /^(?=.*\d)(?=.*[A-Z]).{5,}$/;
 const nameRules = /^[A-Za-z ]*$/;
@@ -33,3 +34,15 @@ export const validationRegistrationSchema: ObjectSchema<
     .required(errorMessages.confirmPassword.required)
     .oneOf([Yup.ref('password')], errorMessages.confirmPassword.mismatch),
 });
+
+export const validationEmailSchema: ObjectSchema<ProfileSettings> =
+  Yup.object().shape({
+    email: Yup.string()
+      .email(errorMessages.email.invalid)
+      .required(errorMessages.email.required),
+    name: Yup.string()
+      .required(errorMessages.name.required)
+      .min(3)
+      .max(40)
+      .matches(nameRules, 'Please enter valid name'),
+  });

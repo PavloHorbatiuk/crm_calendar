@@ -36,6 +36,7 @@ export default {
         lightBlack: '#2b2a2a',
         lightGray: '#EBEBEB',
         lightGray200: '#FAFAFA',
+        lightGray500: '#53575A',
         gainsboro: '#DDDDDD',
         rose: '#E35F5E',
         green: '#5BB984',
