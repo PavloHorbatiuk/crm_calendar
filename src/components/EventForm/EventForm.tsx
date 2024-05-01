@@ -60,7 +60,9 @@ function EventForm({ onSuccess }: EventFormProps) {
         register={register}
       />
 
-      {responseError && <Alert text={responseError} />}
+      {responseError && (
+        <Alert className={'mt-[2.063rem]'} text={responseError} />
+      )}
 
       <div className="mt-8 gap-4 flex justify-end">
         <button type="submit" className="btn-blue">
