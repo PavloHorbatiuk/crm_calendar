@@ -14,14 +14,12 @@ import { useState } from 'react';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import EventModal from '../Modals/EventModal/EventModal';
-import { useEventStore } from '@/store/eventStore';
 
 type ButtonType = 'prev' | 'next';
 
 function Calendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [open, setIsOpen] = useState<boolean>(false);
-  const { events } = useEventStore();
   // const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
 
   const dateFormat = 'EEE dd';
@@ -116,8 +114,6 @@ function Calendar() {
         </div>
       );
     }
-
-    console.log(events, 'events');
     return (
       <>
         <div className="bg-blueMoon shadow-sm  flex py-2  rounded-lg">
