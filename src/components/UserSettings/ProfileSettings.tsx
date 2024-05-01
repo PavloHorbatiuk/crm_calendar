@@ -13,6 +13,7 @@ export interface ProfileSettings {
 
 function ProfileSettings() {
   // const {email, name} = useAuthStore((store) => store.authData);
+  //TODO: change localStorage to authStrorage data;
   const { email, name } = JSON.parse(
     localStorage.getItem(USER_LOCAL_STORAGE_USER)
   );
@@ -28,7 +29,6 @@ function ProfileSettings() {
 
   const onSubmit = () => {
     console.log(inputData);
-    // setInputData({ name: '', email: '' });
   };
 
   return (
@@ -49,28 +49,34 @@ function ProfileSettings() {
               Upload New
               <img className="ml-2" src={UploadArrow} alt="upload" />
             </button>
-            <button className="w-8 p-2 rounded-full bg-[#D5393C] ml-2">
+            <button className="w-8 p-2 rounded-full bg-redSaturated ml-2">
               <img src={TrashCan} alt="upload" />
             </button>
           </div>
         </div>
       </div>
-      <div className="flex justify-between py-4 border-y border-[#EBEBEB] mt-4">
+      <div className="flex justify-between py-4 border-y border-lightGray mt-4">
         <div className="flex flex-col">
           <span className="font-medium">General information</span>
           <span className="text-lightGray500 ">Description</span>
         </div>
         <div className="w-[24.75rem]">
-          <label className="text-lightGray500 text-sm"> Email</label>
+          <label className="text-lightGray500 text-sm ml-[0.75rem]">
+            Email
+          </label>
           <input
+            className="text-black mb-1"
             type="text"
             value={inputData.email}
             onChange={(e) =>
               setInputData({ ...inputData, email: e.target.value })
             }
           />
-          <label className="text-lightGray500 text-sm">Full name</label>
+          <label className="text-lightGray500 text-sm ml-[0.75rem]">
+            Full name
+          </label>
           <input
+            className="text-black"
             type="text"
             value={inputData.name}
             onChange={(e) =>
@@ -82,7 +88,7 @@ function ProfileSettings() {
       <div className="h-24"></div>
       <div className="flex justify-end p-4">
         <div className="flex">
-          <button className="text-black py-[0.375rem] px-3 bg-[#F2F2F2] rounded-[2.5rem]">
+          <button className="text-black py-[0.375rem] px-3 bg-lightGray300 rounded-[2.5rem]">
             Cancel
           </button>
           <button
