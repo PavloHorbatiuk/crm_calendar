@@ -35,6 +35,26 @@ export const useEventStore = create<EventSchema & EventAction>()(
             set({ loading: false });
           }
         },
+        getAllEvents: async () => {
+          set({ loading: true, success: false });
+          try {
+            const response = await eventApi.fetchAllEvents();
+            if (response.status === 200) {
+              set({
+                loading: false,
+                success: true,
+                events: response.data,
+              });
+            }
+          } catch (error: any) {
+            const errorMessage = error.response.statusText;
+            set({ error: errorMessage });
+
+            console.error('Error with create event', error.message);
+          } finally {
+            set({ loading: false });
+          }
+        },
       }),
       {
         name: 'event',

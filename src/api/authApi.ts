@@ -15,4 +15,7 @@ export const eventApi = {
   addEvent(event: Event) {
     return instance.post(URL.CREATE_EVENTS, event);
   },
+  fetchAllEvents() {
+    return instance.get(URL.GET_ALL_EVENTS);
+  },
 };

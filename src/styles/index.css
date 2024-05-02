@@ -58,7 +58,6 @@
   .link-inside-underline a {
     text-decoration: underline;
   }
-
 Link{
   @apply normal-case
 }

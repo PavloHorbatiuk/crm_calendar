@@ -33,6 +33,7 @@ function EventForm({ onSuccess }: EventFormProps) {
     console.log(data);
     createEvent({ ...data, isDone: false });
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormField<EventFormTypes>

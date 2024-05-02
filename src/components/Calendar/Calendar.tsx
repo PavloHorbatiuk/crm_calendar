@@ -10,20 +10,40 @@ import {
 } from 'date-fns';
 import leftIcon from '@/assets/Left.svg';
 import rightIcon from '@/assets/Arrow--right.svg';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import EventModal from '../Modals/EventModal/EventModal';
+import { Event } from '@/store/eventStore/types';
+import EventCard from './EventCard';
 
 type ButtonType = 'prev' | 'next';
 
-function Calendar() {
+interface CalendarProps {
+  events: Event[];
+}
+
+export const Calendar = memo(function Calendar({ events }: CalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [open, setIsOpen] = useState<boolean>(false);
   // const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
 
   const dateFormat = 'EEE dd';
   const timeFormat = 'HH:mm';
+
+  const renderEventInCell = (time: string) => {
+    return events.map((event) => {
+      const eventDate = new Date(event.date);
+      const cellDate = new Date(time);
+      const eventTime = format(new Date(event.date), timeFormat);
+      const cellTIme = format(new Date(time), timeFormat);
+      if (isSameDay(eventDate, cellDate) && eventTime === cellTIme) {
+        return <EventCard key={event.id} event={event} />;
+      } else {
+        return null;
+      }
+    });
+  };
 
   const addEvent = () => setIsOpen(!open);
   const onClose = () => setIsOpen((prev) => !prev);
@@ -65,6 +85,7 @@ function Calendar() {
     const weekDays = [];
     const startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
     const today = startOfDay(new Date());
+
     for (let i = 0; i < 7; i++) {
       const currentDate = addDays(startDate, i);
       const isCurrentDay = isSameDay(currentDate, today);
@@ -99,7 +120,9 @@ function Calendar() {
             onClick={() =>
               handleCellClick(currentDate, format(new Date(time), timeFormat))
             }
-          ></div>
+          >
+            {renderEventInCell(time)}
+          </div>
         );
       }
 
@@ -168,6 +191,6 @@ function Calendar() {
       {open && <EventModal title={'Event'} isOpen={open} onClose={onClose} />}
     </>
   );
-}
+});
 
 export default Calendar;
