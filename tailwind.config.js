@@ -43,8 +43,8 @@ export default {
       },
     },
     fontSize: {
-      mm: ['0.875rem', '1.25rem'], // (size:14px line-height:20px)
-      sm: ['0.9375rem', '1.5rem'], // (size:15px line-height:24px)
+      mm: ['0.75rem', '1rem'], // (size:12px line-height:16px)
+      sm: ['0.875rem', '1.25rem'], // (size:14px line-height:20px)
       ml: ['1rem', '1.5rem'], // (size:16px line-height:24px)
       md: ['1.125rem', '1.6875rem'], // (size:18px line-height:27px)
       xl: ['1.5rem', '2.25rem'], // (size:24px line-height:36px)

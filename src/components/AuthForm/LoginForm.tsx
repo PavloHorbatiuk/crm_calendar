@@ -8,6 +8,9 @@ import FormField from '../ui/FormField/FormField';
 import { InputType } from '@/common/const';
 import { useRef } from 'react';
 import { Alert } from '../ui/Alert/Alert';
+import { notify } from '@/utils/notify';
+
+const notifyText = 'Login success';
 
 function LoginForm() {
   const { setIsRegister, setStatus } = useAuthStore();
@@ -33,6 +36,7 @@ function LoginForm() {
     const { success } = useAuthStore.getState();
 
     if (success) {
+      notify('succeeded', notifyText);
       timeoutRef.current = setTimeout(() => {
         navigate({ to: '/dashboard' });
       }, 1500);

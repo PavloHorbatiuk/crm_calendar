@@ -132,7 +132,7 @@ export const Calendar = memo(function Calendar({ events }: CalendarProps) {
         </div>
       );
       weekDays.push(
-        <div key={`day-${i}`} className="ml-2 col-span-7 w-full">
+        <div key={`day-${i}`} className="col-span-7 w-full">
           {dayHeader}
         </div>
       );
