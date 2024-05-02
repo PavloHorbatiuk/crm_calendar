@@ -9,7 +9,7 @@ function EventCard({ className, event }: IProps) {
   const { name } = event;
   return (
     <div
-      className={`${className} rounded-lg bg-red h-full px-2 text-white py-1`}
+      className={`${className} rounded-lg bg-red300 h-full px-2 text-white py-1`}
     >
       <span>{name}</span>
     </div>

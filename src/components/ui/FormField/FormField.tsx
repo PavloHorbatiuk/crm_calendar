@@ -36,7 +36,7 @@ function FormField<T extends FieldValues>(props: InputProps<T>) {
           </div>
         </>
       ) : (
-        <div className="pt-[2.063rem] flex flex-col ">
+        <div className="mt-[2.063rem] flex flex-col ">
           <label className="pl-1.5 capitalize">{label}</label>
           <div className="pt-4">
             <input
