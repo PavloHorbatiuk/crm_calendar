@@ -1,14 +1,31 @@
+import { RequestStatusType } from '@/store/authStore/types';
 import { FC } from 'react';
 
 interface IProps {
   text: string | undefined;
   className?: string;
+  status?: RequestStatusType;
 }
 
-export const Alert: FC<IProps> = ({ text, className }) => {
+export const Alert: FC<IProps> = ({ text, className, status = 'failed' }) => {
+  const statusColor = (status: RequestStatusType) => {
+    switch (status) {
+      case 'failed':
+        return 'text-rose bg-red-50';
+      case 'succeeded':
+        return 'bg-green-50 text-green-800';
+      case 'idle':
+        return 'text-yellow-800 bg-yellow-50';
+      case 'loading':
+        return 'bg-gray text-black';
+      default:
+        'text-black';
+        break;
+    }
+  };
   return (
     <div
-      className={`${className} flex items-center  mt-4 p-4 mb-4 text-sm text-rose rounded-[0.875rem] bg-red-50 dark:bg-gray-800 dark:text-red`}
+      className={`${className} ${statusColor(status)} flex items-center  mt-4 p-4 mb-4 text-sm  rounded-[0.875rem]  dark:bg-gray-800 dark:text-red`}
       role="alert"
     >
       <svg
