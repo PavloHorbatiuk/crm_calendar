@@ -1,4 +1,5 @@
 export interface Event {
+  id?: number;
   name: string;
   date: Date;
   isDone: boolean;
@@ -14,4 +15,5 @@ export interface EventSchema {
 
 export interface EventAction {
   createEvent: (event: Event) => Promise<void>;
+  getAllEvents: () => Promise<void>;
 }

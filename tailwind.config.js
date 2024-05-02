@@ -38,6 +38,7 @@ export default {
         lightGray200: '#FAFAFA',
         gainsboro: '#DDDDDD',
         rose: '#E35F5E',
+        red300: '#E06C50',
         green: '#5BB984',
         whitePrimary: '#ffffff',
       },
