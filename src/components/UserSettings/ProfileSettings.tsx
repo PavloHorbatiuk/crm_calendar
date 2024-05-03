@@ -20,8 +20,6 @@ export interface ProfileSettingsType {
 
 function ProfileSettings() {
   const { email, name, token } = JSON.parse(
-    //eslint-disable-next-line
-    //@ts-ignore
     localStorage.getItem(USER_LOCAL_STORAGE_USER)
   );
 

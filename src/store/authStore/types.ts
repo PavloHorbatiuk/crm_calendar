@@ -1,11 +1,13 @@
 import { LoginType, RegistrationType } from '@/components/AuthForm/types';
 
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
 export interface AuthSchema {
   authData?: User | null;
   success: boolean;
   isRegister: boolean;
   loading?: boolean;
   error?: string;
+  setStatus: RequestStatusType | undefined;
 }
 
 export interface User {
@@ -20,4 +22,5 @@ export interface AuthAction {
   register: (userData: RegistrationType) => Promise<void>;
   update: (userData: User) => Promise<void>;
   setIsRegister: (register: boolean) => void;
+  logout: () => void;
 }

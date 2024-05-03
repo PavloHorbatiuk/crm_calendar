@@ -1,20 +1,20 @@
 import { useNavigate } from '@tanstack/react-router';
-import { useAuth } from '@/common/hooks/useAuth';
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import { Cog6ToothIcon } from '@heroicons/react/24/outline';
 import LogOutIcon from '@/assets/Logout.svg';
 import Avatar from '@/assets/Avatar.svg';
+import { useAuthStore } from '@/store/authStore';
 
 type UserSettingsType = {
   userName: string;
 };
 function UserSettings({ userName }: UserSettingsType) {
   const navigate = useNavigate();
-  const { signOut } = useAuth();
+  const fetchLogOut = useAuthStore((state) => state.logout);
 
   const logOut = () => {
-    signOut();
+    fetchLogOut();
     navigate({ to: '/auth/login' });
   };
 

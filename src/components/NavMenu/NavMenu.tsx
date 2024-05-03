@@ -11,7 +11,7 @@ function NavMenu() {
             activeProps={{
               className: 'bg-white shadow-sm',
             }}
-            className="font-normal rounded-full text-mm normal-case px-3 py-2.5 hover:text-primary hover:ease-in-out transition duration-150"
+            className="font-normal rounded-full text-sm normal-case px-3 py-2.5 hover:text-primary hover:ease-in-out transition duration-150"
             to={route.path}
           >
             <div className="flex gap-2">

@@ -11,6 +11,7 @@ const authState: AuthSchema = {
   loading: false,
   error: undefined,
   success: false,
+  setStatus: undefined,
 };
 
 export const useAuthStore = create<AuthSchema & AuthAction>()(
@@ -19,11 +20,16 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
       (set) => ({
         ...authState,
         login: async (userData) => {
-          set({ loading: true, success: false });
+          set({ loading: true, success: false, setStatus: 'loading' });
           try {
             const response = await authApi.login(userData);
             if (response.status === 201) {
-              set({ authData: response.data, loading: false, success: true });
+              set({
+                authData: response.data,
+                loading: false,
+                success: true,
+                setStatus: 'succeeded',
+              });
               localStorage.setItem(
                 USER_LOCAL_STORAGE_USER,
                 JSON.stringify(response.data)
@@ -88,6 +94,10 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
         },
         setIsRegister: (register) => {
           set({ isRegister: register });
+        },
+        logout: () => {
+          localStorage.removeItem(USER_LOCAL_STORAGE_USER);
+          set({ setStatus: undefined });
         },
       }),
       {
