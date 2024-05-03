@@ -18,6 +18,10 @@ function UserSettings({ userName }: UserSettingsType) {
     navigate({ to: '/auth/login' });
   };
 
+  const navSettings = () => {
+    navigate({ to: '/settings' });
+  };
+
   return (
     <div className="w-full">
       <div className="mx-auto w-full max-w-md pb-2">
@@ -40,7 +44,10 @@ function UserSettings({ userName }: UserSettingsType) {
               <Disclosure.Panel
                 className={`${open ? 'bg-white shadow-sm rounded-b-2xl' : ''} px-3  pb-2 pt-4 text-sm space-y-2`}
               >
-                <button className="flex gap-2 hover:text-primary">
+                <button
+                  className="flex gap-2 hover:text-primary"
+                  onClick={navSettings}
+                >
                   <Cog6ToothIcon className="h-5 w-5" /> Settings
                 </button>
                 <hr className="text-lightGray" />

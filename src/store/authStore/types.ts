@@ -20,6 +20,7 @@ export interface User {
 export interface AuthAction {
   login: (userData: LoginType) => Promise<void>;
   register: (userData: RegistrationType) => Promise<void>;
+  update: (userData: User) => Promise<void>;
   setIsRegister: (register: boolean) => void;
   logout: () => void;
 }
