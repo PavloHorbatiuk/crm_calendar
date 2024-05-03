@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { ObjectSchema } from 'yup';
 import { LoginType, RegistrationType } from './types';
 import { errorMessages } from '@/common/const';
-import { ProfileSettings } from '../UserSettings/ProfileSettings';
+import { ProfileSettingsType } from '../UserSettings/ProfileSettings';
 
 const passwordRules = /^(?=.*\d)(?=.*[A-Z]).{5,}$/;
 const nameRules = /^[A-Za-z ]*$/;
@@ -35,7 +35,7 @@ export const validationRegistrationSchema: ObjectSchema<
     .oneOf([Yup.ref('password')], errorMessages.confirmPassword.mismatch),
 });
 
-export const validationEmailSchema: ObjectSchema<ProfileSettings> =
+export const validationUserDataSchema: ObjectSchema<ProfileSettingsType> =
   Yup.object().shape({
     email: Yup.string()
       .email(errorMessages.email.invalid)
