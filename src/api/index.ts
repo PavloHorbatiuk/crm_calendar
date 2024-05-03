@@ -25,6 +25,8 @@ export enum URL {
   // auth api
   LOGIN = 'auth/login',
   REGISTRATION = 'auth/register',
+  // users api
+  UPDATE_USER = '/users/update',
   //   events api
   CREATE_EVENTS = 'events/',
   GET_ALL_EVENTS = 'events',

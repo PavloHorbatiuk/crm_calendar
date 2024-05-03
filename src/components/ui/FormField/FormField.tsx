@@ -2,14 +2,14 @@ import { InputType } from '@/common/const';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 type InputProps<T extends FieldValues> = {
-  label: string;
+  label?: string;
   register: UseFormRegister<T>;
   required: boolean;
   error: string | undefined;
   name: Path<T>;
   type?: InputType;
 };
-
+//TODO: add className
 function FormField<T extends FieldValues>(props: InputProps<T>) {
   const {
     label,
