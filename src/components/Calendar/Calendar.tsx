@@ -16,6 +16,7 @@ import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import EventModal from '../Modals/EventModal/EventModal';
 import { Event } from '@/store/eventStore/types';
 import EventCard from './EventCard';
+import { useEventStore } from '@/store/eventStore';
 
 type ButtonType = 'prev' | 'next';
 
@@ -26,6 +27,7 @@ interface CalendarProps {
 export const Calendar = memo(function Calendar({ events }: CalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [open, setIsOpen] = useState<boolean>(false);
+  const { setError } = useEventStore();
   // const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
 
   const dateFormat = 'EEE dd';
@@ -46,7 +48,10 @@ export const Calendar = memo(function Calendar({ events }: CalendarProps) {
   };
 
   const addEvent = () => setIsOpen(!open);
-  const onClose = () => setIsOpen((prev) => !prev);
+  const onClose = () => {
+    setError(undefined);
+    setIsOpen((prev) => !prev);
+  };
 
   const changeWeekHandle = (btnType: ButtonType) => {
     if (btnType === 'prev') {
@@ -164,7 +169,7 @@ export const Calendar = memo(function Calendar({ events }: CalendarProps) {
       </>
     );
   };
-
+  console.log('rerender');
   return (
     <>
       <CardTitle>
