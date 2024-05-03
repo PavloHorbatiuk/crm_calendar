@@ -18,13 +18,13 @@ export interface ProfileSettingsType {
   name: string;
 }
 
-const { email, name, token } = JSON.parse(
-  //eslint-disable-next-line
-    //@ts-ignore
-  localStorage.getItem(USER_LOCAL_STORAGE_USER)
-);
-
 function ProfileSettings() {
+  const { email, name, token } = JSON.parse(
+    //eslint-disable-next-line
+    //@ts-ignore
+    localStorage.getItem(USER_LOCAL_STORAGE_USER)
+  );
+
   //TODO: change to ref()
   const { update } = useAuthStore();
   const [value, setValue] = useState(true);
@@ -42,15 +42,8 @@ function ProfileSettings() {
 
   const onSubmit = (formData: ProfileSettingsType) => {
     update({
-      oldData: {
-        name,
-        email,
-        token,
-      },
-      newData: {
-        email: formData.email,
-        name: formData.name,
-      },
+      token,
+      ...formData,
     });
   };
 
