@@ -21,7 +21,7 @@ export default {
       },
 
       fontFamily: {
-        montserrat: ['Montserrat', 'sans-serif'],
+        montserrat: ['Inter', 'sans-serif'],
         Karla: ['Karla', 'sans-serif'],
       },
       colors: {

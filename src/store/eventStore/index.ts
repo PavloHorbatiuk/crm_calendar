@@ -28,7 +28,8 @@ export const useEventStore = create<EventSchema & EventAction>()(
               });
             }
           } catch (error: any) {
-            const errorMessage = error.response.statusText;
+            console.log(error, 'error');
+            const errorMessage = error.response.data.message;
             set({ error: errorMessage });
             console.error('Error with create event', error.message);
           } finally {
@@ -55,6 +56,7 @@ export const useEventStore = create<EventSchema & EventAction>()(
             set({ loading: false });
           }
         },
+        setError: (error) => set({ error: error }),
       }),
       {
         name: 'event',

@@ -65,6 +65,9 @@ function EventForm({ onSuccess }: EventFormProps) {
                 placeholderText="Select date"
                 calendarClassName="custom-calendar"
                 selected={value}
+                minTime={new Date(new Date().setHours(13, 0, 0))}
+                maxTime={new Date(new Date().setHours(22, 0, 0))}
+                timeFormat="HH:mm"
               />
             );
           }}
