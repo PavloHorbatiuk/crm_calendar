@@ -12,6 +12,7 @@ import { PencilIcon } from '@heroicons/react/20/solid';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import FormField from '../ui/FormField/FormField';
+import { notify } from '@/utils/notify';
 
 export interface ProfileSettingsType {
   email: string;
@@ -38,11 +39,15 @@ function ProfileSettings() {
     resolver,
   });
 
-  const onSubmit = (formData: ProfileSettingsType) => {
-    update({
+  const onSubmit = async (formData: ProfileSettingsType) => {
+    await update({
       token,
       ...formData,
     });
+    const { success } = useAuthStore.getState();
+    if (success) {
+      notify('succeeded', 'Change profile success');
+    }
   };
 
   return (
