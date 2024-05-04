@@ -96,7 +96,7 @@ export const Calendar = memo(function Calendar({ events }: CalendarProps) {
       const isCurrentDay = isSameDay(currentDate, today);
       const dayHeader = (
         <div
-          className={`text-center uppercase items-center px-2 py-1 ${isCurrentDay && 'bg-white shadow-sm  rounded-full'}`}
+          className={`text-center uppercase items-center px-2 py-1 ${isCurrentDay && 'bg-white shadow  rounded-full'}`}
           key={`header-${i}`}
         >
           <span className="text-mm">

@@ -1,5 +1,13 @@
+import { CardTitle } from '../ui/CardTitle/CardTitle';
+import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
+
 function Profile() {
-  return <div>Profile</div>;
+  return (
+    <>
+      <CardTitle>Profile</CardTitle>
+      <CardWrapper>profile settings</CardWrapper>
+    </>
+  );
 }
 
 export default Profile;

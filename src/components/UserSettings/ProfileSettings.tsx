@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { Alert } from '../ui/Alert/Alert';
 import { useLocalStorage } from '@/common/hooks/useLocalStorage';
+import { notify } from '@/utils/notify';
 
 export interface ProfileSettingsType {
   email: string;
@@ -34,12 +35,16 @@ function ProfileSettings() {
     mode: 'onBlur',
     resolver,
   });
-
-  const onSubmit = (formData: ProfileSettingsType) => {
-    updateUser({
+ 
+  const onSubmit = async (formData: ProfileSettingsType) => {
+    await  updateUser({
       token,
       ...formData,
     });
+    const { success } = useAuthStore.getState();
+    if (success) {
+      notify('succeeded', 'Change profile success');
+    }
   };
 
   return (

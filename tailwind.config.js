@@ -25,7 +25,9 @@ export default {
         Karla: ['Karla', 'sans-serif'],
       },
       colors: {
-        primary: '#3F8CFF',
+        primary: '#5E85EA',
+        primary500: '#5477d2',
+        perfume: '#EBABF5',
         lightBlue: '#C9D6FF',
         blueMoon: '#EBF1FC',
         primaryDark: '#6450E0',

@@ -9,7 +9,7 @@ function NavMenu() {
           <Link
             key={index}
             activeProps={{
-              className: 'bg-white shadow-sm',
+              className: 'bg-white shadow',
             }}
             className="font-normal rounded-full text-sm normal-case px-3 py-2.5 hover:text-primary hover:ease-in-out transition duration-150"
             to={route.path}
