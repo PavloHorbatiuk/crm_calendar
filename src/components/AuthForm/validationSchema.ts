@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { ObjectSchema } from 'yup';
 import { LoginType, RegistrationType } from './types';
 import { errorMessages } from '@/common/const';
-import { ProfileSettingsType } from '../UserSettings/ProfileSettings';
+import { ProfileSettingsType } from '../UserSettings/UserSettings';
 
 const passwordRules = /^(?=.*\d)(?=.*[A-Z]).{5,}$/;
 const nameRules = /^[A-Za-z ]*$/;

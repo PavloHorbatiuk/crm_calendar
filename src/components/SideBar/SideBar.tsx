@@ -1,5 +1,5 @@
 import NavMenu from '../NavMenu/NavMenu';
-import UserSettings from '../UserSettings/UserSettings';
+import UserSettings from './SidePopUp';
 
 function SideBar() {
   return (
