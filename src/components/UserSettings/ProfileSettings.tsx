@@ -24,7 +24,7 @@ function ProfileSettings() {
   );
 
   //TODO: change to ref()
-  const { update } = useAuthStore();
+  const { updateUser: update } = useAuthStore();
   const [value, setValue] = useState(true);
   const resolver = useYupValidationResolver<ProfileSettingsType>(
     validationUserDataSchema
