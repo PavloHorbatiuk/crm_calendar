@@ -3,7 +3,6 @@ import UploadArrow from '@/assets/UploadArrow.svg';
 import Avatar from '@/assets/Avatar.svg';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
-import { USER_LOCAL_STORAGE_USER } from '@/common/const/localStorage';
 import { useAuthStore } from '@/store/authStore';
 import { validationUserDataSchema } from '../AuthForm/validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
@@ -11,7 +10,8 @@ import { PencilIcon } from '@heroicons/react/20/solid';
 // CheckIcon
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import FormField from '../ui/FormField/FormField';
+import { Alert } from '../ui/Alert/Alert';
+import { useLocalStorage } from '@/common/hooks/useLocalStorage';
 import { notify } from '@/utils/notify';
 
 export interface ProfileSettingsType {
@@ -20,13 +20,9 @@ export interface ProfileSettingsType {
 }
 
 function ProfileSettings() {
-  const { email, name, token } = JSON.parse(
-    localStorage.getItem(USER_LOCAL_STORAGE_USER)
-  );
-
-  //TODO: change to ref()
-  const { update } = useAuthStore();
-  const [value, setValue] = useState(true);
+  const { email, token, name } = useLocalStorage();
+  const [isOpenedChanges, setIsOpenedChanges] = useState(true);
+  const { updateUser, error: responseError, setStatus } = useAuthStore();
   const resolver = useYupValidationResolver<ProfileSettingsType>(
     validationUserDataSchema
   );
@@ -35,12 +31,13 @@ function ProfileSettings() {
     formState: { errors },
     handleSubmit,
   } = useForm<ProfileSettingsType>({
+    defaultValues: { name, email },
     mode: 'onBlur',
     resolver,
   });
-
+ 
   const onSubmit = async (formData: ProfileSettingsType) => {
-    await update({
+    await  updateUser({
       token,
       ...formData,
     });
@@ -82,56 +79,57 @@ function ProfileSettings() {
           <div className="flex flex-col w-44">
             <div className="flex justify-between">
               <span className="font-medium">General information</span>
-              <button onClick={() => setValue(!value)}>
+              <button onClick={() => setIsOpenedChanges((state) => !state)}>
                 <PencilIcon className="h-4 w-4" />
               </button>
             </div>
             <span className="text-lightGray500 ">Description</span>
           </div>
-          {value ? (
+          {isOpenedChanges ? (
             <div className="w-[24.75rem] bg-green">
               <label className="text-lightGray500 text-[0.75rem] ml-1">
                 Email
               </label>
-              <p>{email}</p>
+              <p className="text-ml p-1">{email}</p>
               <label className="text-lightGray500 text-[0.75rem] ml-1">
                 Full name
               </label>
-              <p>{name}</p>
+              <p className="text-ml p-1">{name}</p>
             </div>
           ) : (
             <form className="w-[24.75rem] bg-green">
               <label className="text-lightGray500 text-[0.75rem] ml-1">
                 Email
               </label>
-              <FormField<ProfileSettingsType>
-                name={'email'}
-                register={register}
-                required
-                // label={'Email'}
-                error={errors.email?.message}
+              <input
+                className={`${errors.email?.message ? 'border-x-0 border-b-1 border-b-rose rounded-none focus:border-none p-1' : 'border-none p-1 text-black'}`}
+                {...register('email')}
               />
+              <p className="text-rose mt-1">{errors.email?.message}</p>
               <label className="text-lightGray500 text-[0.75rem] ml-1">
                 Full name
               </label>
-              <FormField<ProfileSettingsType>
-                name={'name'}
-                register={register}
-                required
-                // label={'Full name'}
-                error={errors.name?.message}
+              <input
+                className={`${errors.name?.message ? 'border-x-0 border-b-1 border-b-rose rounded-none focus:border-none p-1' : 'border-none p-1 text-black'}`}
+                {...register('name')}
               />
+              <p className="text-rose mt-1">{errors.name?.message}</p>
             </form>
           )}
         </div>
-        <div className="flex justify-end p-4 mt-20">
+        <div className="flex justify-end p-4 mt-4">
           <div className="flex">
+            {setStatus === 'succeeded' && (
+              <Alert status={'succeeded'} text={'Your data have changed'} />
+            )}
+            {responseError && <p className="text-rose mr-3">{responseError}</p>}
             <button className="text-black py-[0.375rem] px-3 bg-lightGray300 rounded-[2.5rem]">
               Cancel
             </button>
             <button
               type="submit"
-              className="flex items-center rounded-[2.5rem] bg-black text-mm font-normal text-whitePrimary py-[0.375rem] px-3 ml-2"
+              disabled={isOpenedChanges}
+              className="flex items-center rounded-[2.5rem] bg-black text-mm font-normal text-whitePrimary py-[0.375rem] px-3 ml-2 "
               onClick={handleSubmit(onSubmit)}
             >
               Save changes

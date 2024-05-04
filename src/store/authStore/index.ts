@@ -68,7 +68,7 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
             set({ loading: false });
           }
         },
-        update: async (userData) => {
+        updateUser: async (userData) => {
           set({ loading: true, success: false });
           try {
             const response = await authApi.update(userData);
@@ -85,7 +85,7 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
           } catch (error: any) {
             set({ error: error.response.data.message });
             console.error(
-              'Error with registration',
+              'Error with update user',
               error.response.data.message
             );
           } finally {
