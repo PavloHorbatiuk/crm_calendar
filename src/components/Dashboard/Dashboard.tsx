@@ -1,6 +1,5 @@
 import { useEventStore } from '@/store/eventStore';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
-import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import { useShallow } from 'zustand/react/shallow';
 import EventChart from '../EventsChart/EventsChart';
 
