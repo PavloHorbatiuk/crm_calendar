@@ -5,5 +5,5 @@ interface IProps {
 }
 
 export const CardTitle: FC<IProps> = ({ children }) => {
-  return <div className="flex justify-between p-6">{children}</div>;
+  return <div className="flex justify-between p-4">{children}</div>;
 };
