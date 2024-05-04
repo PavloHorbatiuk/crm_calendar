@@ -29,7 +29,7 @@ function UserSettings({ userName }: UserSettingsType) {
           {({ open }) => (
             <>
               <Disclosure.Button
-                className={`${open && 'bg-white shadow-sm '} rounded-t-2xl flex w-full items-center justify-between px-3  py-2 text-left text-sm font-mm  focus:outline-none focus-visible:ring focus-visible:ring-purple`}
+                className={`${open && 'bg-white shadow '} rounded-t-2xl flex w-full items-center justify-between px-3  py-2 text-left text-sm font-mm  focus:outline-none focus-visible:ring focus-visible:ring-purple`}
               >
                 <div className="flex items-center gap-2">
                   <img src={Avatar} />

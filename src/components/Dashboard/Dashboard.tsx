@@ -11,10 +11,12 @@ function Dashboard() {
       <CardTitle>
         <h4>Dashboard</h4>
       </CardTitle>
-      <CardWrapper>
-        <div className="h-1/2 flex">
-          <div className="max-w-[18rem] w-full p-4">To day</div>
-          <div className="h-full flex-1">
+      <CardWrapper className={'bg-transparent shadow-none'}>
+        <div className="h-1/2 flex-auto flex gap-1">
+          <div className="max-w-[18rem] shadow min-w-44 w-full p-4 bg-white rounded-3xl">
+            To day
+          </div>
+          <div className="h-full w-full p-4 bg-white rounded-3xl shadow">
             <EventChart events={events} />
           </div>
         </div>

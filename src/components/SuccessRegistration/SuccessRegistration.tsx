@@ -10,8 +10,8 @@ function SuccessRegistration() {
   };
 
   return (
-    <div className="bg-whitePrimary rounded-2xl shadow-md">
-      <div className="flex flex-col items-center pt-[6.25rem] pb-[5.625rem]">
+    <div className="bg-whitePrimary rounded-2xl shadow h-full flex items-center justify-center">
+      <div className="flex flex-col items-center">
         <div>
           <img src={loginIcon} alt="logo" />
         </div>

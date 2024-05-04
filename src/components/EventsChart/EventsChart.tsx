@@ -105,12 +105,14 @@ const EventChart: React.FC<{ events: Event[] }> = ({ events }) => {
               },
             },
           },
+          responsive: true,
+          maintainAspectRatio: false,
         },
       });
     }
   }, [monthlyData]);
 
-  return <canvas id="eventChart" width="400" height="200"></canvas>;
+  return <canvas id="eventChart" className="w-full h-auto"></canvas>;
 };
 
 export default EventChart;
