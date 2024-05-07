@@ -18,12 +18,13 @@
 
 @layer utilities {
   .section {
-    @apply max-w-[160rem] px-[13.28rem] max-3xl:px-[3.93rem]  max-xl:px-[4%];
+    @apply max-w-[160rem] px-[13.28rem] max-3xl:px-[3.93rem] max-xl:px-[4%];
   }
 
   .catalog-title {
-    @apply mb-6 flex max-w-[1920px] flex-row  justify-evenly gap-4 overflow-x-auto text-sm font-normal text-gray;
+    @apply mb-6 flex max-w-[1920px] flex-row justify-evenly gap-4 overflow-x-auto text-sm font-normal text-gray;
   }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -58,15 +59,19 @@
   .link-inside-underline a {
     text-decoration: underline;
   }
+
   .custom-calendar .react-datepicker__header {
-  @apply bg-blueMoon  shadow
-}
-.custom-calendar .react-datepicker__day--selected{
-  @apply bg-lightBlue text-black
-}
-Link{
-  @apply normal-case
-}
+    @apply bg-blueMoon shadow
+  }
+
+  .custom-calendar .react-datepicker__day--selected {
+    @apply bg-lightBlue text-black
+  }
+
+  Link {
+    @apply normal-case
+  }
+
   .spinner {
     animation: spin 1s linear infinite;
   }
@@ -81,6 +86,7 @@ Link{
     from {
       transform: translateX(calc(-100% - 20px));
     }
+
     to {
       transform: translateX(0);
     }
@@ -90,6 +96,7 @@ Link{
     from {
       transform: translateX(0);
     }
+
     to {
       transform: translateX(calc(-100% - 20px));
     }
@@ -117,55 +124,68 @@ Link{
   [type="radio"]:checked,
   [type="radio"]:checked:hover,
   [type="radio"]:checked:focus {
-     @apply cursor-pointer appearance-none border border-lightGray  rounded-md mr-2 hover:border-primary hover:bg-indigo-100 checked:bg-no-repeat checked:bg-center checked:border-indigo-500 checked:bg-transparent
-
+    @apply cursor-pointer appearance-none border border-lightGray rounded-md mr-2 hover:border-primary hover:bg-indigo-100 checked:bg-no-repeat checked:bg-center checked:border-indigo-500 checked:bg-transparent
   }
 
-@layer base {
-  html {
-    @apply scroll-smooth;
+  @layer base {
+    html {
+      @apply scroll-smooth;
+    }
   }
-}
 
-.btn-blue {
-  @apply rounded-[100px]  border-2 border-primary bg-primary px-[30px] py-[14px] font-montserrat text-white transition-all duration-300 ease-in-out hover:bg-primaryDark;
-}
-h2 {
-  @apply font-montserrat text-1xl font-medium text-gray max-xl:text-2xl max-sm:text-3xl;
-}
-h3 {
-  @apply font-montserrat  text-5xl font-semibold max-md:text-3xl max-sm:text-6xl;
-}
-h4 {
-  @apply font-montserrat text-xl font-medium text-black;
-}
-h5 {
-  @apply font-montserrat text-4xl font-medium text-black;
-}
-p {
-  @apply text-sm font-normal text-gray;
-}
+  .btn-blue {
+    @apply rounded-[100px] border-2 border-primary bg-primary px-[30px] py-[14px] font-montserrat text-white transition-all duration-300 ease-in-out hover:bg-primaryDark;
+  }
 
-input{
-  @apply border rounded-[0.875rem] px-3 py-3 border-lightGray appearance-none   w-full  text-gray leading-tight focus:outline-none focus:bg-white focus:border-primary bg-transparent
-} 
+  h2 {
+    @apply font-montserrat text-1xl font-medium text-gray max-xl:text-2xl max-sm:text-3xl;
+  }
 
-label{
-  @apply text-md font-normal text-gray max-sm:text-mm;
-}
-.btn-primary{
-  @apply bg-black text-md  hover:bg-lightBlack text-white font-bold py-3 px-5 rounded-2xl w-full
-}
-.btn-black{
-  @apply  transition duration-150 ease-in-out hover:bg-neutral-700  focus:bg-neutral-700  focus:outline-none focus:ring-0 active:bg-neutral-900  motion-reduce:transition-none dark:shadow-black/30  
-}
-.btn-gray{
-  @apply inline-block text-sm rounded-2xl bg-neutral-100 px-6 pb-2 pt-2.5  text-neutral-600 shadow-sm transition duration-150 ease-in-out hover:bg-neutral-200 hover:shadow-gray focus:bg-neutral-200 focus:shadow-lightGray focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-lightGray motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-lightGray dark:focus:shadow-lightGray dark:active:shadow-lightGray
-}
-.btn-blue{
-  @apply inline-flex justify-center rounded-md border border-transparent bg-lightBlue px-4 py-2 text-sm font-medium text-black hover:bg-blueMoon focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
-}
-.btn-blue-outline{
-  @apply inline-flex justify-center rounded-md border border-lightBlue bg-transparent  px-4 py-2 text-sm font-medium text-black hover:bg-blueMoon focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
-}
+  h3 {
+    @apply font-montserrat text-5xl font-semibold max-md:text-3xl max-sm:text-6xl;
+  }
+
+  h4 {
+    @apply font-montserrat text-xl font-medium text-black;
+  }
+
+  h5 {
+    @apply font-montserrat text-4xl font-medium text-black;
+  }
+
+  p {
+    @apply text-sm font-normal text-gray;
+  }
+
+  input {
+    @apply border rounded-[0.875rem] px-3 py-3 border-lightGray appearance-none w-full text-gray leading-tight focus:outline-none focus:bg-white focus:border-primary bg-transparent
+  }
+
+  label {
+    @apply text-md font-normal text-gray max-sm:text-mm;
+  }
+
+  .btn-primary {
+    @apply bg-black text-md hover:bg-lightBlack text-white font-bold py-3 px-5 rounded-2xl w-full
+  }
+
+  .btn-black {
+    @apply transition duration-150 ease-in-out hover:bg-neutral-700 focus:bg-neutral-700 focus:outline-none focus:ring-0 active:bg-neutral-900 motion-reduce:transition-none dark:shadow-black/30
+  }
+
+  .btn-gray {
+    @apply inline-block text-sm rounded-2xl bg-neutral-100 px-6 pb-2 pt-2.5 text-neutral-600 shadow-sm transition duration-150 ease-in-out hover:bg-neutral-200 hover:shadow-gray focus:bg-neutral-200 focus:shadow-lightGray focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-lightGray motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-lightGray dark:focus:shadow-lightGray dark:active:shadow-lightGray
+  }
+
+  .btn-blue {
+    @apply inline-flex justify-center rounded-md border border-transparent bg-lightBlue px-4 py-2 text-sm font-medium text-black hover:bg-blueMoon focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
+  }
+
+  .btn-red {
+    @apply inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-black hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2
+  }
+
+  .btn-blue-outline {
+    @apply inline-flex justify-center rounded-md border border-lightBlue bg-transparent px-4 py-2 text-sm font-medium text-black hover:bg-blueMoon focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
+  }
 }

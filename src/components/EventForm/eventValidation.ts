@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { ObjectSchema } from 'yup';
 import { errorMessages } from '@/common/const';
-import { EventFormTypes } from './EventForm';
+import { EventFormTypes } from './CreateCard/EventForm';
 
 export const eventValidSchema: ObjectSchema<EventFormTypes> =
   Yup.object().shape({

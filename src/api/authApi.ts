@@ -22,4 +22,7 @@ export const eventApi = {
   fetchAllEvents() {
     return instance.get(URL.GET_ALL_EVENTS);
   },
+  deleteEvent(id: number) {
+    return instance.delete(`${URL.DELETE_EVENT}/${id}`);
+  },
 };

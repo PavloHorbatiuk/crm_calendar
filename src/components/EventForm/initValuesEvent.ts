@@ -1,4 +1,4 @@
-import { EventFormTypes } from './EventForm';
+import { EventFormTypes } from './CreateCard/EventForm';
 
 export const defaultValues: EventFormTypes = {
   date: new Date(),
