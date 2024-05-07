@@ -20,9 +20,10 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
       (set) => ({
         ...authState,
         login: async (userData) => {
+          const { email, password } = userData;
           set({ loading: true, success: false, setStatus: 'loading' });
           try {
-            const response = await authApi.login(userData);
+            const response = await authApi.login({ email, password });
             if (response.status === 201) {
               set({
                 authData: response.data,
