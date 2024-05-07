@@ -98,11 +98,7 @@ function EventForm({ onSuccess }: EventFormProps) {
         <button type="submit" className="btn-blue">
           Save
         </button>
-        <button
-          type="button"
-          className="btn-blue-outline"
-          onClick={() => onSuccess}
-        >
+        <button type="button" className="btn-blue-outline" onClick={onSuccess}>
           Cancel
         </button>
       </div>
