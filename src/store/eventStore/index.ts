@@ -75,7 +75,7 @@ export const useEventStore = create<EventSchema & EventAction>()(
             const errorMessage = error.response.statusText;
             set({ error: errorMessage });
 
-            console.error('Error with create event', error.message);
+            console.error('Error with delete event', error.message);
           } finally {
             set({ loading: false });
           }

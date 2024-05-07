@@ -1,5 +1,6 @@
 import { useEventStore } from '@/store/eventStore';
 import { Event } from '@/store/eventStore/types';
+import { notify } from '@/utils/notify';
 import { format } from 'date-fns';
 
 interface IProps {
@@ -7,13 +8,17 @@ interface IProps {
   className?: string;
 }
 
+const notifyEvent = 'Event deleted successfully';
 function EventCard({ className, event }: IProps) {
   const { name, date, id } = event;
   const { deleteEvent } = useEventStore((store) => store);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     //TODO: why might the id be undefined?
-    if (id) deleteEvent(id);
+    if (id) await deleteEvent(id);
+
+    const { success } = useEventStore.getState();
+    if (success) notify('succeeded', notifyEvent);
   };
 
   return (
