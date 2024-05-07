@@ -1,4 +1,4 @@
-import AddIcon from '@/assets/add.svg';
+import { memo, useState } from 'react';
 import {
   format,
   startOfWeek,
@@ -8,15 +8,16 @@ import {
   subWeeks,
   startOfDay,
 } from 'date-fns';
-import leftIcon from '@/assets/Left.svg';
-import rightIcon from '@/assets/Arrow--right.svg';
-import { memo, useState } from 'react';
-import { CardTitle } from '../ui/CardTitle/CardTitle';
-import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
+import EventCard from './EventCard';
 import EventModal from '../Modals/EventModal/EventModal';
 import { Event } from '@/store/eventStore/types';
-import EventCard from './EventCard';
+import { CardTitle } from '../ui/CardTitle/CardTitle';
+import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import { useEventStore } from '@/store/eventStore';
+
+import leftIcon from '@/assets/Left.svg';
+import addIcon from '@/assets/add.svg';
+import rightIcon from '@/assets/Arrow--right.svg';
 
 type ButtonType = 'prev' | 'next';
 
@@ -178,7 +179,7 @@ export const Calendar = memo(function Calendar({ events }: CalendarProps) {
           className="btn-black bg-black rounded-full w-10 h-10 flex items-center justify-center"
           onClick={addEvent}
         >
-          <img src={AddIcon} />
+          <img src={addIcon} />
         </button>
       </CardTitle>
       <CardWrapper>

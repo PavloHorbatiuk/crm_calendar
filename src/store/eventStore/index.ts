@@ -56,6 +56,30 @@ export const useEventStore = create<EventSchema & EventAction>()(
             set({ loading: false });
           }
         },
+        deleteEvent: async (id) => {
+          set({ loading: true, success: false });
+          try {
+            const response = await eventApi.deleteEvent(id);
+            const filteredEvents = get().events.filter(
+              (event) => event.id !== response.data.id
+            );
+
+            if (response.status === 200) {
+              set({
+                loading: false,
+                success: true,
+                events: filteredEvents,
+              });
+            }
+          } catch (error: any) {
+            const errorMessage = error.response.statusText;
+            set({ error: errorMessage });
+
+            console.error('Error with create event', error.message);
+          } finally {
+            set({ loading: false });
+          }
+        },
         setError: (error) => set({ error: error }),
       }),
       {

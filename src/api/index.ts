@@ -29,4 +29,5 @@ export enum URL {
   //   events api
   CREATE_EVENTS = 'events/',
   GET_ALL_EVENTS = 'events',
+  DELETE_EVENT = 'events/delete',
 }

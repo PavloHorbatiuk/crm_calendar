@@ -1,6 +1,6 @@
+import { useShallow } from 'zustand/react/shallow';
 import { useEventStore } from '@/store/eventStore';
 import Calendar from './Calendar';
-import { useShallow } from 'zustand/react/shallow';
 
 function CalendarContainer() {
   const { events } = useEventStore(useShallow((state) => state));
