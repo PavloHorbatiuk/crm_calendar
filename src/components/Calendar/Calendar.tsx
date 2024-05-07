@@ -8,7 +8,7 @@ import {
   subWeeks,
   startOfDay,
 } from 'date-fns';
-import EventCard from './EventCard';
+import EventCard from '../EventForm/EventCard';
 import EventModal from '../Modals/EventModal/EventModal';
 import { Event } from '@/store/eventStore/types';
 import { CardTitle } from '../ui/CardTitle/CardTitle';

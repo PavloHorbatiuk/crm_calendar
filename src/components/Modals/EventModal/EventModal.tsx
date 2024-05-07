@@ -1,4 +1,4 @@
-import { EventsFormAsync } from '@/components/EventForm/EventFormAsync';
+import { EventsFormAsync } from '@/components/EventForm/CreateCard/EventFormAsync';
 import Modal from '@/components/ui/Modal/Modal';
 import Spinner from '@/components/ui/Spinner/Spinner';
 import { Suspense, memo } from 'react';

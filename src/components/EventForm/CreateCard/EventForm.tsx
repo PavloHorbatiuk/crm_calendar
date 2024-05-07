@@ -1,11 +1,11 @@
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
-import { eventValidSchema } from './eventValidation';
+import { eventValidSchema } from '../eventValidation';
 import { Controller, useForm } from 'react-hook-form';
-import FormField from '../ui/FormField/FormField';
+import FormField from '../../ui/FormField/FormField';
 import { InputType } from '@/common/const';
-import { defaultValues } from './initValuesEvent';
+import { defaultValues } from '../initValuesEvent';
 import { useEventStore } from '@/store/eventStore';
-import { Alert } from '../ui/Alert/Alert';
+import { Alert } from '../../ui/Alert/Alert';
 import { notify } from '@/utils/notify';
 import ReactDatePicker from 'react-datepicker';
 
