@@ -38,9 +38,14 @@ function DeleteCardModal({ onSuccess, event }: DeleteCardProps) {
           <h5>Price: {price}</h5>
         </div>
         <div className="flex justify-end">
-          {responseError && (
-            <Alert className={'mt-[2.063rem]'} text={responseError} />
-          )}
+          <div className="flex justify-center">
+            {responseError && (
+              <Alert
+                className="mb-0 mt-0 pt-1 pb-1 mr-6"
+                text={responseError}
+              />
+            )}
+          </div>
           <button type="submit" className="btn-red" onClick={handleDeleteEvent}>
             Delate
           </button>

@@ -1,18 +1,22 @@
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { notify } from '@/utils/notify';
+import { useAuthStore } from '@/store/authStore';
+import { useLocalStorage } from '@/common/hooks/useLocalStorage';
+import { validationUserDataSchema } from '../AuthForm/validationSchema';
+import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
+
+import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
+import { Alert } from '../ui/Alert/Alert';
+import { CardTitle } from '../ui/CardTitle/CardTitle';
+import UserSettingsForm from './UserSettingsForm';
+import UserInformation from './UserInformation';
+
+import { PencilIcon } from '@heroicons/react/20/solid';
+import { CheckIcon } from '@heroicons/react/20/solid';
 import TrashCan from '@/assets/Trash-can.svg';
 import UploadArrow from '@/assets/UploadArrow.svg';
 import Avatar from '@/assets/Avatar.svg';
-import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
-import { CardTitle } from '../ui/CardTitle/CardTitle';
-import { useAuthStore } from '@/store/authStore';
-import { validationUserDataSchema } from '../AuthForm/validationSchema';
-import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
-import { PencilIcon } from '@heroicons/react/20/solid';
-// CheckIcon
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { Alert } from '../ui/Alert/Alert';
-import { useLocalStorage } from '@/common/hooks/useLocalStorage';
-import { notify } from '@/utils/notify';
 
 export interface ProfileSettingsType {
   email: string;
@@ -80,37 +84,25 @@ function ProfileSettings() {
             <div className="flex justify-between">
               <span className="font-medium">General information</span>
               <button onClick={() => setIsOpenedChanges((state) => !state)}>
-                <PencilIcon className="h-4 w-4" />
+                {isOpenedChanges ? (
+                  <PencilIcon className="h-4 w-4" />
+                ) : (
+                  <CheckIcon className="h-6 w-6" />
+                )}
               </button>
             </div>
             <span className="text-lightGray500 ">Description</span>
           </div>
           {isOpenedChanges ? (
-            <div className="w-[24.75rem] bg-green">
-              <label className="text-lightGray500 text-mm ml-1">Email</label>
-              <p className="text-ml p-1">{email}</p>
-              <label className="text-lightGray500 text-mm ml-1">
-                Full name
-              </label>
-              <p className="text-ml p-1">{name}</p>
-            </div>
+            <UserInformation name={name} email={email} />
           ) : (
-            <form className="w-[24.75rem] bg-green">
-              <label className="text-lightGray500 text-mm ml-1">Email</label>
-              <input
-                className={`${errors.email?.message ? 'border-x-0 border-b-1 border-b-rose rounded-none focus:border-none p-1' : 'border-none p-1 text-black'}`}
-                {...register('email')}
-              />
-              <p className="text-rose mt-1">{errors.email?.message}</p>
-              <label className="text-lightGray500 text-mm ml-1">
-                Full name
-              </label>
-              <input
-                className={`${errors.name?.message ? 'border-x-0 border-b-1 border-b-rose rounded-none focus:border-none p-1' : 'border-none p-1 text-black'}`}
-                {...register('name')}
-              />
-              <p className="text-rose mt-1">{errors.name?.message}</p>
-            </form>
+            <UserSettingsForm<ProfileSettingsType>
+              name="name"
+              email="email"
+              register={register}
+              nameError={errors.name?.message}
+              emailError={errors.email?.message}
+            />
           )}
         </div>
         <div className="flex justify-end p-4 mt-4">
@@ -119,13 +111,13 @@ function ProfileSettings() {
               <Alert status={'succeeded'} text={'Your data have changed'} />
             )}
             {responseError && <p className="text-rose mr-3">{responseError}</p>}
-            <button className="text-black py-[0.375rem] px-3 bg-lightGray300 rounded-[2.5rem]">
+            <button className="text-black py-[0.375rem] px-3 bg-lightGray300 rounded-[2.5rem] mr-2">
               Cancel
             </button>
             <button
               type="submit"
               disabled={isOpenedChanges}
-              className="flex items-center rounded-[2.5rem] bg-black text-mm font-normal text-whitePrimary py-[0.375rem] px-3 ml-2 "
+              className={`${isOpenedChanges ? 'text-black py-[0.375rem] px-3 bg-lightGray300 rounded-[2.5rem] text-mm border-black border' : 'btn-settings'}`}
               onClick={handleSubmit(onSubmit)}
             >
               Save changes
