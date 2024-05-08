@@ -18,7 +18,7 @@ function Dashboard() {
               <span className="text-sm">Angelina 13-00</span>
               <div className="flex items-center">
                 <input type="checkbox" className="w-5 h-5 bg-white shadow" />
-                <label className="ms-2 text-sm  text-black dark:text-gray capitalize">
+                <label className="ms-1 text-sm  text-black dark:text-gray capitalize">
                   Done
                 </label>
               </div>
