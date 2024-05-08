@@ -10,7 +10,7 @@ export interface DeleteCardProps {
 
 const notifyEvent = 'Event deleted successfully';
 
-function DeleteCardModal({ onSuccess, event }: DeleteCardProps) {
+function DeleteEventModal({ onSuccess, event }: DeleteCardProps) {
   const { date, price, name, id } = event;
   const { deleteEvent, error: responseError } = useEventStore((store) => store);
 
@@ -51,4 +51,4 @@ function DeleteCardModal({ onSuccess, event }: DeleteCardProps) {
   );
 }
 
-export default DeleteCardModal;
+export default DeleteEventModal;
