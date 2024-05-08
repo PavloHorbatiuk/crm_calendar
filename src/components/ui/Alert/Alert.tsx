@@ -25,7 +25,7 @@ export const Alert: FC<IProps> = ({ text, className, status = 'failed' }) => {
   };
   return (
     <div
-      className={`${className} ${statusColor(status)} shadow  flex items-center  mt-4 p-4 mb-4 text-sm  rounded-[0.875rem]  dark:bg-gray-800 dark:text-red`}
+      className={`${className} ${statusColor(status)} shadow  flex items-center mt-2 p-2 text-sm  rounded-[0.875rem]  dark:bg-gray-800 dark:text-red`}
       role="alert"
     >
       <svg

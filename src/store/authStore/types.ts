@@ -1,6 +1,7 @@
 import { LoginType, RegistrationType } from '@/components/AuthForm/types';
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
+
 export interface AuthSchema {
   authData?: User | null;
   success: boolean;

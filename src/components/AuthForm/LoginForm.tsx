@@ -1,14 +1,16 @@
+import { useRef } from 'react';
+import { LoginType } from './types';
 import { useForm } from 'react-hook-form';
-import { validationLoginSchema } from './validationSchema';
-import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
 import { useNavigate } from '@tanstack/react-router';
 import { useAuthStore } from '@/store/authStore';
-import { LoginType } from './types';
-import FormField from '../ui/FormField/FormField';
-import { InputType } from '@/common/const';
-import { useRef } from 'react';
-import { Alert } from '../ui/Alert/Alert';
 import { notify } from '@/utils/notify';
+
+import { validationLoginSchema } from './validationSchema';
+import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
+
+import { InputType } from '@/common/const';
+import { Alert } from '../ui/Alert/Alert';
+import FormField from '../ui/FormField/FormField';
 
 const notifyText = 'Login success';
 

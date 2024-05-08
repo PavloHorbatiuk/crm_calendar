@@ -12,8 +12,7 @@ const authData: User | null = authDataString
 const token = authData ? authData.token : null;
 
 export const instance = axios.create({
-  // baseURL: process.env.URL,
-  baseURL: 'http://localhost:3001',
+  baseURL: process.env.URL,
   headers: {
     Authorization: `Bearer ${token}`,
   },
@@ -21,11 +20,8 @@ export const instance = axios.create({
 });
 
 export enum URL {
-  // auth api
   LOGIN = 'auth/login',
   REGISTRATION = 'auth/register',
-  // users api
   UPDATE_USER = '/users/update',
-  //   events api
   EVENTS = 'events',
 }

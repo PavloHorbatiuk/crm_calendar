@@ -1,7 +1,8 @@
-import { EventsFormAsync } from '@/components/Event/EventForm/CreateEvent/EventFormAsync';
+import { Suspense, memo } from 'react';
+
 import Modal from '@/components/ui/Modal/Modal';
 import Spinner from '@/components/ui/Spinner/Spinner';
-import { Suspense, memo } from 'react';
+import { EventsFormAsync } from '@/components/Event/EventForm/CreateEvent/EventFormAsync';
 
 interface IProps {
   isOpen: boolean;

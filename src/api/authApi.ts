@@ -1,7 +1,7 @@
-import { LoginType, RegisterPick } from '@/components/AuthForm/types';
 import { URL, instance } from '.';
 import { Event } from '@/store/eventStore/types';
 import { User } from '@/store/authStore/types';
+import { LoginType, RegisterPick } from '@/components/AuthForm/types';
 
 export const authApi = {
   registration(userData: RegisterPick) {
@@ -10,7 +10,7 @@ export const authApi = {
   login(userData: LoginType) {
     return instance.post(URL.LOGIN, userData);
   },
-  update(userData: User) {
+  updateUser(userData: User) {
     return instance.patch(URL.UPDATE_USER, userData);
   },
 };

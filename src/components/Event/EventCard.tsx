@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Event } from '@/store/eventStore/types';
+
 import DeleteEventModal from '../Modals/EventModal/DeleteEventModal';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 

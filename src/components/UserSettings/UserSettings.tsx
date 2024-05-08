@@ -105,11 +105,13 @@ function ProfileSettings() {
             />
           )}
         </div>
+        <div className="flex justify-center">
+          {setStatus === 'succeeded' && (
+            <Alert status={'succeeded'} text={'Your data have changed'} />
+          )}
+        </div>
         <div className="flex justify-end p-4 mt-4">
           <div className="flex">
-            {setStatus === 'succeeded' && (
-              <Alert status={'succeeded'} text={'Your data have changed'} />
-            )}
             {responseError && <p className="text-rose mr-3">{responseError}</p>}
             <button className="text-black py-[0.375rem] px-3 bg-lightGray300 rounded-[2.5rem] mr-2">
               Cancel

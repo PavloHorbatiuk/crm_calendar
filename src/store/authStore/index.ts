@@ -72,7 +72,7 @@ export const useAuthStore = create<AuthSchema & AuthAction>()(
         updateUser: async (userData) => {
           set({ loading: true, success: false });
           try {
-            const response = await authApi.update(userData);
+            const response = await authApi.updateUser(userData);
             if (response.status === 200) {
               set({
                 authData: response.data,

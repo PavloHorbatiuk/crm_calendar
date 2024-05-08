@@ -1,7 +1,8 @@
-import SideBar from '@/components/SideBar/SideBar';
+import { useEffect } from 'react';
 import { Outlet, useRouter } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
-import { useEffect } from 'react';
+
+import SideBar from '@/components/SideBar/SideBar';
 
 function LayOut() {
   const router = useRouter();

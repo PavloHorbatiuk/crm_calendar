@@ -1,6 +1,7 @@
 import { notify } from '@/utils/notify';
 import { useEventStore } from '@/store/eventStore';
 import { Event } from '@/store/eventStore/types';
+
 import { Alert } from '../../ui/Alert/Alert';
 
 export interface DeleteCardProps {
@@ -17,9 +18,6 @@ function DeleteEventModal({ onSuccess, event }: DeleteCardProps) {
   const convertedDate = date.toString().slice(0, 10);
 
   const handleDeleteEvent = async () => {
-    //TODO: why are we doing this?
-    // setError(undefined);
-
     if (id) await deleteEvent(id);
     const { success } = useEventStore.getState();
 
@@ -37,15 +35,12 @@ function DeleteEventModal({ onSuccess, event }: DeleteCardProps) {
           <h5>Name: {name}</h5>
           <h5>Price: {price}</h5>
         </div>
+        <div className="flex justify-center">
+          {responseError && (
+            <Alert className="mb-0 mt-0 pt-1 pb-1 mr-6" text={responseError} />
+          )}
+        </div>
         <div className="flex justify-end">
-          <div className="flex justify-center">
-            {responseError && (
-              <Alert
-                className="mb-0 mt-0 pt-1 pb-1 mr-6"
-                text={responseError}
-              />
-            )}
-          </div>
           <button type="submit" className="btn-red" onClick={handleDeleteEvent}>
             Delate
           </button>

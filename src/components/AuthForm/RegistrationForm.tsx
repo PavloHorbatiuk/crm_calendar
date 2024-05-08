@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
-import { validationRegistrationSchema } from './validationSchema';
+import { useNavigate } from '@tanstack/react-router';
 import { useAuthStore } from '@/store/authStore';
 import { RegistrationType } from './types';
-import { useNavigate } from '@tanstack/react-router';
+
+import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
+import { validationRegistrationSchema } from './validationSchema';
 
 function RegistrationForm() {
   const {

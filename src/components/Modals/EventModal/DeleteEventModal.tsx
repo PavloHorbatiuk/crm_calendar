@@ -1,7 +1,8 @@
 import { Suspense, memo } from 'react';
+import { Event } from '@/store/eventStore/types';
+
 import Modal from '@/components/ui/Modal/Modal';
 import Spinner from '@/components/ui/Spinner/Spinner';
-import { Event } from '@/store/eventStore/types';
 import { DeleteEventAsync } from '../../Event/DeleteEvent/DeleteEventAsync';
 
 interface IProps {
