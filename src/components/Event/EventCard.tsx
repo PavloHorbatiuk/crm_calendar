@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Event } from '@/store/eventStore/types';
-import DeleteEventModal from '../Modals/EventModal/DeleteModal';
+import DeleteEventModal from '../Modals/EventModal/DeleteEventModal';
+import { XCircleIcon } from '@heroicons/react/24/outline';
 
 interface IProps {
   event: Event;
@@ -18,11 +19,15 @@ function EventCard({ className, event }: IProps) {
 
   return (
     <div
-      className={`${className} rounded-lg bg-red300 h-full px-2 text-white py-1`}
+      className={`${className} rounded-lg bg-red300 flex justify-between h-full px-2 text-white py-1`}
     >
-      <span>{name}</span>
-      <p className="text-white">{format(new Date(date), 'HH:mm')}</p>
-      <button onClick={() => setIsOpen(!open)}>delete</button>
+      <div>
+        <span>{name}</span>
+        <p className="text-white">{format(new Date(date), 'HH:mm')}</p>
+      </div>
+      <button className="" onClick={() => setIsOpen(!open)}>
+        <XCircleIcon className="h-6 w-6 drop-shadow" />
+      </button>
       {open && (
         <DeleteEventModal
           event={event}

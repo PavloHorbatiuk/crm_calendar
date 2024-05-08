@@ -2,7 +2,7 @@ import { Suspense, memo } from 'react';
 import Modal from '@/components/ui/Modal/Modal';
 import Spinner from '@/components/ui/Spinner/Spinner';
 import { Event } from '@/store/eventStore/types';
-import { DeleteCardAsync } from '@/components/EventForm/DeleteCard/DeleteCardAsync';
+import { DeleteEventAsync } from '../../Event/DeleteEvent/DeleteEventAsync';
 
 interface IProps {
   event: Event;
@@ -16,7 +16,7 @@ const DeleteEventModal = memo(function EventsModal(props: IProps) {
   return (
     <Modal title={title} isOpen={isOpen} onClose={onClose}>
       <Suspense fallback={<Spinner />}>
-        <DeleteCardAsync onSuccess={onClose} event={event} />
+        <DeleteEventAsync onSuccess={onClose} event={event} />
       </Suspense>
     </Modal>
   );
