@@ -17,12 +17,12 @@ export const authApi = {
 
 export const eventApi = {
   addEvent(event: Event) {
-    return instance.post(URL.CREATE_EVENTS, event);
+    return instance.post(URL.EVENTS, event);
   },
   fetchAllEvents() {
-    return instance.get(URL.GET_ALL_EVENTS);
+    return instance.get(URL.EVENTS);
   },
   deleteEvent(id: number) {
-    return instance.delete(`${URL.DELETE_EVENT}/${id}`);
+    return instance.delete(`${URL.EVENTS}/${id}`);
   },
 };
