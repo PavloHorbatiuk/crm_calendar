@@ -14,7 +14,7 @@ function Dashboard() {
         <div className="h-1/2 flex-auto flex gap-1 ">
           <div className="max-w-[18rem] shadow min-w-44 w-full p-4 bg-white rounded-3xl">
             <div className="flex justify-between items-center p-2 bg-lightGray shadow rounded-3xl">
-              <div className="inline-block  min-h-[1em] w-2 self-stretch bg-red300"></div>
+              <div className="inline-block rounded min-h-[1em] w-2 self-stretch bg-red300"></div>
               <span className="text-sm">Angelina 13-00</span>
               <div className="flex items-center">
                 <input type="checkbox" className="w-5 h-5 bg-white shadow" />
