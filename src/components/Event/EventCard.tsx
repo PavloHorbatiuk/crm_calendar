@@ -12,7 +12,7 @@ interface IProps {
 
 function EventCard({ className, event }: IProps) {
   const [open, setIsOpen] = useState<boolean>(false);
-  const { name, date } = event;
+  const { name, date, isDone } = event;
 
   const onClose = () => {
     setIsOpen((prev) => !prev);
@@ -20,7 +20,7 @@ function EventCard({ className, event }: IProps) {
 
   return (
     <div
-      className={`${className} rounded-lg bg-red300 flex justify-between h-full px-2 text-white py-1`}
+      className={`${className} rounded-lg ${isDone ? 'bg-lime-400' : 'bg-red300'} flex justify-between h-full px-2 text-white py-1`}
     >
       <div>
         <span>{name}</span>

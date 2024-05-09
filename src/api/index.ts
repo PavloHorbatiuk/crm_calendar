@@ -1,18 +1,13 @@
 import axios from 'axios';
-import { User } from '@/store/authStore/types';
-import { USER_LOCAL_STORAGE_USER } from '@/common/const/localStorage';
+import { useLocalStorage } from '@/common/hooks/useLocalStorage';
 
-const authDataString: string | null = localStorage.getItem(
-  USER_LOCAL_STORAGE_USER
-);
-const authData: User | null = authDataString
-  ? JSON.parse(authDataString)
-  : null;
-
-const token = authData ? authData.token : null;
+//TODO: change function name, without use
+//eslint-disable-next-line
+const { token } = useLocalStorage();
 
 export const instance = axios.create({
-  baseURL: process.env.URL,
+  // baseURL: process.env.URL,
+  baseURL: 'http://localhost:3001',
   headers: {
     Authorization: `Bearer ${token}`,
   },
