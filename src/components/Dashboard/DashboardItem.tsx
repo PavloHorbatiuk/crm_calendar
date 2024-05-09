@@ -1,28 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useEventStore } from '@/store/eventStore';
 import { Event } from '@/store/eventStore/types';
 // import { getFullDay } from '@/utils/getFullDay';
+// const day = getFullDay(new Date(date).getDay());
 
 interface DashboardItemProps {
   event: Event;
 }
 
 function DashboardItem({ event }: DashboardItemProps) {
-  const { name, date, isDone, id } = event;
+  const { name, date, isDone } = event;
   const [isCheck, setIsCheck] = useState<boolean>(isDone);
   const { updateEvent } = useEventStore((store) => store);
 
   const hours = new Date(date).getHours();
-  // const day = getFullDay(new Date(date).getDay());
+
+  useEffect(() => {
+    (async () => {
+      await updateEvent({ ...event, isDone: isCheck });
+    })();
+    //eslint-disable-next-line
+  }, [isCheck]);
 
   const onChange = () => {
-    setIsCheck((prev) => !prev);
-    if (id) updateEvent(id, event);
+    setIsCheck(!isCheck);
   };
 
   return (
     <div className="flex justify-between items-center p-2 bg-blueMoon shadow rounded-3xl mt-4">
-      <div className="inline-block rounded min-h-[1em] w-2 self-stretch bg-red300"></div>
+      <div
+        className={`${isCheck ? 'bg-lime-400' : 'bg-red300'}
+          inline-block rounded min-h-[1em] w-2 self-stretch `}
+      ></div>
       <span className="text-sm">
         {name} {hours}-00
       </span>

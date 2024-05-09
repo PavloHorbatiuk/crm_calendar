@@ -6,7 +6,7 @@ import EventChart from '../EventsChart/EventsChart';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 
 function Dashboard() {
-  const events = useEventStore(useShallow((state) => state.events));
+  // const events = useEventStore(useShallow((state) => state.events));
 
   return (
     <>
@@ -19,7 +19,7 @@ function Dashboard() {
             <DashboardList />
           </div>
           <div className="h-full w-full p-4 bg-white rounded-3xl shadow">
-            <EventChart events={events} />
+            {/* <EventChart events={events} /> */}
           </div>
         </div>
       </div>

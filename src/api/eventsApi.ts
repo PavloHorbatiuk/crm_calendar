@@ -11,7 +11,10 @@ export const eventApi = {
   deleteEvent(id: number) {
     return instance.delete(`${URL.EVENTS}/${id}`);
   },
-  updateEvent(id: number, eventData: Event) {
-    return instance.patch(`${URL.EVENTS}/${id}`, eventData);
+  // updateEvent(id: number, eventData: Event) {
+  //   return instance.patch(`${URL.EVENTS}/${id}`, eventData);
+  // },
+  updateEvent(eventData: Event) {
+    return instance.patch(URL.EVENTS, eventData);
   },
 };

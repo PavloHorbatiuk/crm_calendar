@@ -81,27 +81,27 @@ export const useEventStore = create<EventSchema & EventAction>()(
             set({ loading: false });
           }
         },
-        updateEvent: async (id, event) => {
+        updateEvent: async (event) => {
           set({ loading: true, success: false });
           try {
-            const response = await eventApi.updateEvent(id, event);
-            console.log('updateEvent: ~ response:', response);
-            // const filteredEvents = get().events.filter(
-            //   (event) => event.id !== response.data.id
-            // );
+            const response = await eventApi.updateEvent(event);
+            const filteredEvents = get().events.filter(
+              (event) => event.id !== response.data.id
+            );
 
-            if (response.status === 999) {
+            if (response.status === 200) {
               set({
                 loading: false,
                 success: true,
-                events: filteredEvents,
+                events: [...filteredEvents, response.data],
               });
             }
           } catch (error: any) {
+            console.log('catch');
             const errorMessage = error.response.statusText;
             set({ error: errorMessage });
 
-            console.error('Error with delete event', error.message);
+            console.error('Error with update event', error.message);
           } finally {
             set({ loading: false });
           }
