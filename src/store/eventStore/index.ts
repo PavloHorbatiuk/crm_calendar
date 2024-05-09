@@ -81,15 +81,16 @@ export const useEventStore = create<EventSchema & EventAction>()(
             set({ loading: false });
           }
         },
-        updateEvent: async (id) => {
+        updateEvent: async (id, event) => {
           set({ loading: true, success: false });
           try {
-            const response = await eventApi.deleteEvent(id);
-            const filteredEvents = get().events.filter(
-              (event) => event.id !== response.data.id
-            );
+            const response = await eventApi.updateEvent(id, event);
+            console.log('updateEvent: ~ response:', response);
+            // const filteredEvents = get().events.filter(
+            //   (event) => event.id !== response.data.id
+            // );
 
-            if (response.status === 200) {
+            if (response.status === 999) {
               set({
                 loading: false,
                 success: true,

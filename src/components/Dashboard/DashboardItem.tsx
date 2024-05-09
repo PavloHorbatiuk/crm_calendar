@@ -10,14 +10,14 @@ interface DashboardItemProps {
 function DashboardItem({ event }: DashboardItemProps) {
   const { name, date, isDone, id } = event;
   const [isCheck, setIsCheck] = useState<boolean>(isDone);
-  // const updateEvent = useEventStore(store => store.)
+  const { updateEvent } = useEventStore((store) => store);
 
   const hours = new Date(date).getHours();
   // const day = getFullDay(new Date(date).getDay());
 
   const onChange = () => {
     setIsCheck((prev) => !prev);
-    console.log(id);
+    if (id) updateEvent(id, event);
   };
 
   return (

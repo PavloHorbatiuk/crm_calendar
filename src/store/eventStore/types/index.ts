@@ -16,7 +16,7 @@ export interface EventSchema {
 export interface EventAction {
   getAllEvents: () => Promise<void>;
   createEvent: (event: Event) => Promise<void>;
-  updateEvent: (id: number) => Promise<void>;
+  updateEvent: (id: number, event: Event) => Promise<void>;
   deleteEvent: (id: number) => Promise<void>;
   setError: (error: string | undefined) => void;
 }

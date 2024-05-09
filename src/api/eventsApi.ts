@@ -2,8 +2,8 @@ import { URL, instance } from '.';
 import { Event } from '@/store/eventStore/types';
 
 export const eventApi = {
-  addEvent(event: Event) {
-    return instance.post(URL.EVENTS, event);
+  addEvent(eventData: Event) {
+    return instance.post(URL.EVENTS, eventData);
   },
   fetchAllEvents() {
     return instance.get(URL.EVENTS);
@@ -11,7 +11,7 @@ export const eventApi = {
   deleteEvent(id: number) {
     return instance.delete(`${URL.EVENTS}/${id}`);
   },
-  updateEvent(id: number) {
-    return instance.patch(`${URL.EVENTS}/${id}`);
+  updateEvent(id: number, eventData: Event) {
+    return instance.patch(`${URL.EVENTS}/${id}`, eventData);
   },
 };
