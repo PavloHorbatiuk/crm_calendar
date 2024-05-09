@@ -1,13 +1,12 @@
-// import { useEventStore } from '@/store/eventStore';
-// import { useShallow } from 'zustand/react/shallow';
+import { useShallow } from 'zustand/react/shallow';
+import { useEventStore } from '@/store/eventStore';
 
 import DashboardList from './DashboardList';
-// import EventChart from '../EventsChart/EventsChart';
+import EventChart from '../EventsChart/EventsChart';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 
 function Dashboard() {
-  // const events = useEventStore(useShallow((state) => state.events));
-  // console.log('Dashboard ~ events:', events);
+  const events = useEventStore(useShallow((state) => state.events));
 
   return (
     <>
@@ -20,7 +19,7 @@ function Dashboard() {
             <DashboardList />
           </div>
           <div className="h-full w-full p-4 bg-white rounded-3xl shadow">
-            {/* <EventChart events={events} /> */}
+            <EventChart events={events} />
           </div>
         </div>
       </div>

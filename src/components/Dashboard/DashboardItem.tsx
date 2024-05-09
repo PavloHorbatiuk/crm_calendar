@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useEventStore } from '@/store/eventStore';
 import { Event } from '@/store/eventStore/types';
-// import { getFullDay } from '@/utils/getFullDay';
-// const day = getFullDay(new Date(date).getDay());
 
 interface DashboardItemProps {
   event: Event;

@@ -15,6 +15,7 @@ const EventChart: React.FC<{ events: Event[] }> = ({ events }) => {
     const data: MonthlyEventData[] = [];
 
     events.forEach((event) => {
+      console.log('yo');
       const eventDate = new Date(event.date);
       const eventMonth = eventDate.getMonth();
       const existingMonthData = data.find((item) => item.month === eventMonth);
