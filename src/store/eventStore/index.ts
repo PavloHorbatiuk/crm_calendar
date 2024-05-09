@@ -85,19 +85,27 @@ export const useEventStore = create<EventSchema & EventAction>()(
           set({ loading: true, success: false });
           try {
             const response = await eventApi.updateEvent(event);
+
             const filteredEvents = get().events.filter(
               (event) => event.id !== response.data.id
+            );
+
+            const sortedByDate = [...filteredEvents, response.data].sort(
+              (a, b) => {
+                const _a = new Date(a.date).getHours();
+                const _b = new Date(b.date).getHours();
+                return _a - _b;
+              }
             );
 
             if (response.status === 200) {
               set({
                 loading: false,
                 success: true,
-                events: [...filteredEvents, response.data],
+                events: sortedByDate,
               });
             }
           } catch (error: any) {
-            console.log('catch');
             const errorMessage = error.response.statusText;
             set({ error: errorMessage });
 
