@@ -67,8 +67,8 @@ export const Calendar = memo(function Calendar({ events }: CalendarProps) {
 
   const handleCellClick = (date: Date, time: string) => {
     // Handle click on cell with the selected date and time
-    console.log('Selected date:', date);
-    console.log('Selected time:', time);
+    // console.log('Selected date:', date);
+    // console.log('Selected time:', time);
   };
 
   function renderTimeline() {
@@ -170,7 +170,7 @@ export const Calendar = memo(function Calendar({ events }: CalendarProps) {
       </>
     );
   };
-  console.log('rerender');
+  // console.log('rerender');
   return (
     <>
       <CardTitle>
