@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useEventStore } from '@/store/eventStore';
+import { useState } from 'react';
 import { Event } from '@/store/eventStore/types';
 
 interface DashboardItemProps {
   event: Event;
+  setValue: (data: Event) => Event;
 }
 
-function DashboardItem({ event }: DashboardItemProps) {
+function DashboardItem({ event, setValue }: DashboardItemProps) {
   const { name, date, isDone } = event;
   const [isCheck, setIsCheck] = useState<boolean>(isDone);
-  const { updateEvent } = useEventStore((store) => store);
-
   const hours = new Date(date).getHours();
-
-  useEffect(() => {
-    (async () => {
-      await updateEvent({ ...event, isDone: isCheck });
-    })();
-    //eslint-disable-next-line
-  }, [isCheck]);
 
   const onChange = () => {
     setIsCheck(!isCheck);
+    setValue({ ...event, isDone: !isCheck });
   };
 
   return (
