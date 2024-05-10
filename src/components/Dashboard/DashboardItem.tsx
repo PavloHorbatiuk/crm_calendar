@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Event } from '@/store/eventStore/types';
+import { type Event } from '@/store/eventStore/types';
 
 interface DashboardItemProps {
   event: Event;
-  setValue: (data: Event) => Event;
+  setValue: (data: Event | undefined) => Event | void;
 }
 
 function DashboardItem({ event, setValue }: DashboardItemProps) {
@@ -11,7 +11,7 @@ function DashboardItem({ event, setValue }: DashboardItemProps) {
   const [isCheck, setIsCheck] = useState<boolean>(isDone);
   const hours = new Date(date).getHours();
 
-  const onChange = () => {
+  const handleCheck = () => {
     setIsCheck(!isCheck);
     setValue({ ...event, isDone: !isCheck });
   };
@@ -29,7 +29,7 @@ function DashboardItem({ event, setValue }: DashboardItemProps) {
         <input
           type="checkbox"
           checked={isCheck}
-          onChange={onChange}
+          onChange={handleCheck}
           className="w-5 h-5 bg-white shadow"
         />
         <label className="ms-1 text-sm  text-black dark:text-gray capitalize">

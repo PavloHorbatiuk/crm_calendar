@@ -1,24 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useEventStore } from '@/store/eventStore';
+import { sorteByTime } from '@/utils/sortByTime';
+import { type Event } from '@/store/eventStore/types';
 
 import EventChart from '../EventsChart/EventsChart';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import DashboardItem from './DashboardItem';
-import { sorteByTime } from '@/utils/sortByTime';
-
-type BlockUseEffect = 'block';
 
 function Dashboard() {
   const { events, updateEvent } = useEventStore(useShallow((state) => state));
-  const [value, setValue] = useState<Event | BlockUseEffect>('block');
+  const [value, setValue] = useState<Event>();
   const sortedByTime = sorteByTime(events);
 
   useEffect(() => {
-    if (value !== 'block') {
-      (async () => {
-        await updateEvent(value);
-      })();
+    if (value !== undefined) {
+      (async () => await updateEvent(value))();
     }
     // eslint-disable-next-line
   }, [value]);
