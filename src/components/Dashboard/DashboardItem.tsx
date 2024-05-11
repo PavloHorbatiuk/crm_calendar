@@ -1,29 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useEventStore } from '@/store/eventStore';
-import { Event } from '@/store/eventStore/types';
-// import { getFullDay } from '@/utils/getFullDay';
-// const day = getFullDay(new Date(date).getDay());
+import { useState } from 'react';
+import { type Event } from '@/store/eventStore/types';
 
 interface DashboardItemProps {
   event: Event;
+  success: boolean;
+  onUpdate: (data: Event) => Promise<void>;
 }
 
-function DashboardItem({ event }: DashboardItemProps) {
+function DashboardItem({ event, onUpdate, success }: DashboardItemProps) {
   const { name, date, isDone } = event;
   const [isCheck, setIsCheck] = useState<boolean>(isDone);
-  const { updateEvent } = useEventStore((store) => store);
-
   const hours = new Date(date).getHours();
 
-  useEffect(() => {
-    (async () => {
-      await updateEvent({ ...event, isDone: isCheck });
-    })();
-    //eslint-disable-next-line
-  }, [isCheck]);
-
-  const onChange = () => {
-    setIsCheck(!isCheck);
+  const handleCheck = () => {
+    onUpdate({ ...event, isDone: !isCheck });
+    if (success) setIsCheck(!isCheck);
   };
 
   return (
@@ -39,7 +30,7 @@ function DashboardItem({ event }: DashboardItemProps) {
         <input
           type="checkbox"
           checked={isCheck}
-          onChange={onChange}
+          onChange={handleCheck}
           className="w-5 h-5 bg-white shadow"
         />
         <label className="ms-1 text-sm  text-black dark:text-gray capitalize">

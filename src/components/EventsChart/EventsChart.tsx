@@ -55,6 +55,13 @@ const EventChart: React.FC<{ events: Event[] }> = ({ events }) => {
       const eventCounts = monthlyData.map((data) => data.eventCount);
 
       const ctx = document.getElementById('eventChart') as HTMLCanvasElement;
+
+      const existingChart = Chart.getChart(ctx);
+
+      if (existingChart) {
+        existingChart.destroy();
+      }
+
       new Chart(ctx, {
         type: 'bar',
         data: {

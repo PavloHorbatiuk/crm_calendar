@@ -85,19 +85,24 @@ export const useEventStore = create<EventSchema & EventAction>()(
           set({ loading: true, success: false });
           try {
             const response = await eventApi.updateEvent(event);
-            const filteredEvents = get().events.filter(
-              (event) => event.id !== response.data.id
+
+            const foundEventIndex = get().events.findIndex(
+              (event) => event.id === response.data.id
             );
+
+            const changedEvents = get().events.map((event, i) => {
+              if (i === foundEventIndex) return (event = response.data);
+              return event;
+            });
 
             if (response.status === 200) {
               set({
                 loading: false,
                 success: true,
-                events: [...filteredEvents, response.data],
+                events: changedEvents,
               });
             }
           } catch (error: any) {
-            console.log('catch');
             const errorMessage = error.response.statusText;
             set({ error: errorMessage });
 
