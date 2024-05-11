@@ -1,24 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useEventStore } from '@/store/eventStore';
 import { sorteByTime } from '@/utils/sortByTime';
 import { type Event } from '@/store/eventStore/types';
 
-import EventChart from '../EventsChart/EventsChart';
+import { Alert } from '../ui/Alert/Alert';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
+import EventChart from '../EventsChart/EventsChart';
 import DashboardItem from './DashboardItem';
 
 function Dashboard() {
-  const { events, updateEvent } = useEventStore(useShallow((state) => state));
-  const [value, setValue] = useState<Event>();
+  const {
+    events,
+    updateEvent,
+    success,
+    error: responseError,
+  } = useEventStore(useShallow((state) => state));
   const sortedByTime = sorteByTime(events);
 
-  useEffect(() => {
-    if (value !== undefined) {
-      (async () => await updateEvent(value))();
-    }
-    // eslint-disable-next-line
-  }, [value]);
+  const onUpdate = useCallback(
+    async (event: Event) => {
+      await updateEvent(event);
+    },
+    [updateEvent]
+  );
 
   return (
     <>
@@ -28,8 +33,14 @@ function Dashboard() {
       <div className="h-full">
         <div className="h-1/2 flex-auto flex gap-1 ">
           <div className="max-w-[18rem] shadow min-w-44 w-full p-4 bg-white rounded-3xl">
+            {responseError && <Alert status={'failed'} text={responseError} />}
             {sortedByTime.map((event) => (
-              <DashboardItem key={event.id} event={event} setValue={setValue} />
+              <DashboardItem
+                key={event.id}
+                event={event}
+                onUpdate={onUpdate}
+                success={success}
+              />
             ))}
           </div>
           <div className="h-full w-full p-4 bg-white rounded-3xl shadow">

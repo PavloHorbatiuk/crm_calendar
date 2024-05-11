@@ -3,17 +3,18 @@ import { type Event } from '@/store/eventStore/types';
 
 interface DashboardItemProps {
   event: Event;
-  setValue: (data: Event | undefined) => Event | void;
+  success: boolean;
+  onUpdate: (data: Event) => Promise<void>;
 }
 
-function DashboardItem({ event, setValue }: DashboardItemProps) {
+function DashboardItem({ event, onUpdate, success }: DashboardItemProps) {
   const { name, date, isDone } = event;
   const [isCheck, setIsCheck] = useState<boolean>(isDone);
   const hours = new Date(date).getHours();
 
   const handleCheck = () => {
-    setIsCheck(!isCheck);
-    setValue({ ...event, isDone: !isCheck });
+    onUpdate({ ...event, isDone: !isCheck });
+    if (success) setIsCheck(!isCheck);
   };
 
   return (
