@@ -6,8 +6,8 @@ import { type Event } from '@/store/eventStore/types';
 
 import { Alert } from '../ui/Alert/Alert';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
-import EventChart from '../EventsChart/EventsChart';
 import DashboardItem from './DashboardItem';
+import SelectContainer from './Chart/SelectContainer';
 
 function Dashboard() {
   const {
@@ -44,7 +44,7 @@ function Dashboard() {
             ))}
           </div>
           <div className="h-full w-full p-4 bg-white rounded-3xl shadow">
-            <EventChart events={events} />
+            <SelectContainer events={events} />
           </div>
         </div>
       </div>

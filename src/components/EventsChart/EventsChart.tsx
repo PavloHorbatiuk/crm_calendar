@@ -9,7 +9,12 @@ export interface MonthlyEventData {
   eventCount: number;
 }
 
-const EventChart: FC<{ events: Event[] }> = ({ events }) => {
+type POP = {
+  events: Event[];
+  coc: number;
+};
+
+const EventChart: FC<POP> = ({ events }) => {
   const [monthlyData, setMonthlyData] = useState<MonthlyEventData[]>([]);
 
   useEffect(() => {
@@ -35,6 +40,7 @@ const EventChart: FC<{ events: Event[] }> = ({ events }) => {
       }
     });
 
+    data.sort((a, b) => a.month - b.month);
     setMonthlyData(data);
   }, [events]);
 
