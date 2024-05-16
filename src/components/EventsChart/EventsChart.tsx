@@ -1,33 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
-import { Event } from '@/store/eventStore/types';
+import { type Event } from '@/store/eventStore/types';
+import { getEventChartData } from '@/utils/getEventChartData';
 
-interface MonthlyEventData {
+export interface MonthlyEventData {
   month: number;
   totalPrice: number;
   eventCount: number;
 }
 
-const EventChart: React.FC<{ events: Event[] }> = ({ events }) => {
+const EventChart: FC<{ events: Event[] }> = ({ events }) => {
   const [monthlyData, setMonthlyData] = useState<MonthlyEventData[]>([]);
 
   useEffect(() => {
     const data: MonthlyEventData[] = [];
 
     events.forEach((event) => {
-      const eventDate = new Date(event.date);
-      const eventMonth = eventDate.getMonth();
-      const existingMonthData = data.find((item) => item.month === eventMonth);
+      if (event.isDone) {
+        const eventMonth = new Date(event.date).getMonth();
+        const existingMonthData = data.find(
+          (item) => item.month === eventMonth
+        );
 
-      if (existingMonthData) {
-        existingMonthData.totalPrice += event.price;
-        existingMonthData.eventCount += 1;
-      } else {
-        data.push({
-          month: eventMonth,
-          totalPrice: event.price,
-          eventCount: 1,
-        });
+        if (existingMonthData) {
+          existingMonthData.totalPrice += event.price;
+          existingMonthData.eventCount += 1;
+        } else {
+          data.push({
+            month: eventMonth,
+            totalPrice: event.price,
+            eventCount: 1,
+          });
+        }
       }
     });
 
@@ -36,23 +40,8 @@ const EventChart: React.FC<{ events: Event[] }> = ({ events }) => {
 
   useEffect(() => {
     if (monthlyData.length > 0) {
-      const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      const labels = monthlyData.map((data) => monthNames[data.month]);
-      const totalPrices = monthlyData.map((data) => data.totalPrice);
-      const eventCounts = monthlyData.map((data) => data.eventCount);
+      const { totalPrices, eventCounts, labels } =
+        getEventChartData(monthlyData);
 
       const ctx = document.getElementById('eventChart') as HTMLCanvasElement;
 
