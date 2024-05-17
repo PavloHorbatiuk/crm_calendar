@@ -1,16 +1,12 @@
-import { Periods } from '@/common/const/periods';
+type Periods = 'Two weeks' | 'One month' | 'Six months' | 'Year';
 
-export const getChartPeriod = (periods: string[], value: string) => {
-  const period = periods.find((index) => index === value);
+export const getChartPeriod = (period: Periods) => {
+  const periods = {
+    'Two weeks': 0,
+    'One month': 1,
+    'Six months': 6,
+    Year: 12,
+  };
 
-  switch (period) {
-    case Periods.TWO_WEEKS:
-      return 0;
-    case Periods.ONE_MONTH:
-      return 1;
-    case Periods.SIX_MONTHS:
-      return 6;
-    case Periods.YEAR:
-      return 12;
-  }
+  return periods[period];
 };

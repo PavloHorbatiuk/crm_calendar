@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { type Event } from '@/store/eventStore/types';
 import { getEventChartData } from '@/utils/Date/getEventChartData';
-import { periods } from '@/common/const/periods';
 import { getChartPeriod } from '@/utils/Date/getChartPeriod';
 import { getLastDay } from '@/utils/Date/getLastDay';
 
@@ -54,7 +53,7 @@ const EventChart: FC<EventChartProps> = ({ events, period }) => {
       });
 
       data.sort((a, b) => a.month - b.month);
-      const chartPeriod = getChartPeriod(periods, period);
+      const chartPeriod = getChartPeriod(period);
       const sortedByPeriod = chartPeriod
         ? data.slice(0, chartPeriod)
         : data.slice(0, getTwoWeeksPeriodValue(data[0]));
