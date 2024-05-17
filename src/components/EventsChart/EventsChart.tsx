@@ -28,10 +28,10 @@ const EventChart: FC<EventChartProps> = ({ events, period }) => {
   const [monthlyData, setMonthlyData] = useState<MonthlyEventData[]>([]);
 
   useEffect(() => {
-    const data: MonthlyEventData[] = [];
+    if (events.length > 0) {
+      const data: MonthlyEventData[] = [];
 
-    events.forEach((event) => {
-      if (event.isDone) {
+      events.forEach((event) => {
         const eventMonth = new Date(event.date).getMonth();
         const eventDay = new Date(event.date).getDate();
         const lastDayOfMonth = getLastDay(event.date);
@@ -51,16 +51,16 @@ const EventChart: FC<EventChartProps> = ({ events, period }) => {
             eventCount: 1,
           });
         }
-      }
-    });
+      });
 
-    data.sort((a, b) => a.month - b.month);
-    const chartPeriod = getChartPeriod(periods, period);
-    const sortedByPeriod = chartPeriod
-      ? data.slice(0, chartPeriod)
-      : data.slice(0, getTwoWeeksPeriodValue(data[0]));
+      data.sort((a, b) => a.month - b.month);
+      const chartPeriod = getChartPeriod(periods, period);
+      const sortedByPeriod = chartPeriod
+        ? data.slice(0, chartPeriod)
+        : data.slice(0, getTwoWeeksPeriodValue(data[0]));
 
-    setMonthlyData(sortedByPeriod);
+      setMonthlyData(sortedByPeriod);
+    }
   }, [events, period]);
 
   useEffect(() => {
