@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto';
 import { type Event } from '@/store/eventStore/types';
 import { getEventChartData } from '@/utils/Date/getEventChartData';
 import { periods } from '@/common/const/periods';
-import { getChartPeriod } from '@/utils/Date/getPeriod';
+import { getChartPeriod } from '@/utils/Date/getChartPeriod';
 import { getLastDay } from '@/utils/Date/getLastDay';
 
 export interface MonthlyEventData {
@@ -55,10 +55,9 @@ const EventChart: FC<EventChartProps> = ({ events, period }) => {
     });
 
     data.sort((a, b) => a.month - b.month);
-
-    const receivedPeriod = getChartPeriod(periods, period);
-    const sortedByPeriod = receivedPeriod
-      ? data.slice(0, receivedPeriod)
+    const chartPeriod = getChartPeriod(periods, period);
+    const sortedByPeriod = chartPeriod
+      ? data.slice(0, chartPeriod)
       : data.slice(0, getTwoWeeksPeriodValue(data[0]));
 
     setMonthlyData(sortedByPeriod);
