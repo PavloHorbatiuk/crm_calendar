@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useEventStore } from '@/store/eventStore';
-import { sorteByTime } from '@/utils/sortByTime';
+import { sorteByTime } from '@/utils/Date/sortByTime';
 import { type Event } from '@/store/eventStore/types';
 
 import { Alert } from '../ui/Alert/Alert';

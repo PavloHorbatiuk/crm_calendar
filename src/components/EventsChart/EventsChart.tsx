@@ -1,20 +1,30 @@
 import { FC, useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { type Event } from '@/store/eventStore/types';
-import { getEventChartData } from '@/utils/getEventChartData';
+import { getEventChartData } from '@/utils/Date/getEventChartData';
+import { periods } from '@/common/const/periods';
+import { getPeriod } from '@/utils/Date/getPeriod';
+import { getLastDay } from '@/utils/Date/getLastDay';
 
 export interface MonthlyEventData {
   month: number;
+  day: number;
+  lastDay: number;
   totalPrice: number;
   eventCount: number;
 }
 
-type POP = {
+type EventChartProps = {
   events: Event[];
-  coc: number;
+  period: string;
 };
 
-const EventChart: FC<POP> = ({ events }) => {
+function getTwoWeeksPeriodValue(event: MonthlyEventData) {
+  const TWO_WEEKS_PERIOD = 14;
+  return event.day + TWO_WEEKS_PERIOD > event.lastDay ? 2 : 1;
+}
+
+const EventChart: FC<EventChartProps> = ({ events, period }) => {
   const [monthlyData, setMonthlyData] = useState<MonthlyEventData[]>([]);
 
   useEffect(() => {
@@ -23,6 +33,8 @@ const EventChart: FC<POP> = ({ events }) => {
     events.forEach((event) => {
       if (event.isDone) {
         const eventMonth = new Date(event.date).getMonth();
+        const eventDay = new Date(event.date).getDate();
+        const lastDayOfMonth = getLastDay(event.date);
         const existingMonthData = data.find(
           (item) => item.month === eventMonth
         );
@@ -33,6 +45,8 @@ const EventChart: FC<POP> = ({ events }) => {
         } else {
           data.push({
             month: eventMonth,
+            day: eventDay,
+            lastDay: lastDayOfMonth,
             totalPrice: event.price,
             eventCount: 1,
           });
@@ -41,8 +55,14 @@ const EventChart: FC<POP> = ({ events }) => {
     });
 
     data.sort((a, b) => a.month - b.month);
-    setMonthlyData(data);
-  }, [events]);
+
+    const receivedPeriod = getPeriod(periods, period);
+    const sortedByPeriod = receivedPeriod
+      ? data.slice(0, receivedPeriod)
+      : data.slice(0, getTwoWeeksPeriodValue(data[0]));
+
+    setMonthlyData(sortedByPeriod);
+  }, [events, period]);
 
   useEffect(() => {
     if (monthlyData.length > 0) {

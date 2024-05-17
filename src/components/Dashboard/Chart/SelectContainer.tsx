@@ -1,13 +1,16 @@
-import { type Event } from '@/store/eventStore/types';
+import { useState } from 'react';
 import DashboardSelect from './Select';
+import { type Event } from '@/store/eventStore/types';
 import EventChart from '@/components/EventsChart/EventsChart';
 
 const SelectContainer: React.FC<{ events: Event[] }> = ({ events }) => {
   // const isDoneSorted = [];
+  const [period, setPeriod] = useState('Two weeks');
+
   return (
     <div className="h-[15.625rem]">
-      <DashboardSelect />
-      <EventChart events={events} coc={1} />
+      <DashboardSelect setPeriod={setPeriod} />
+      <EventChart events={events} period={period} />
     </div>
   );
 };
