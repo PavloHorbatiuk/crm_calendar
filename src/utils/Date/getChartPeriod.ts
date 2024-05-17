@@ -1,6 +1,6 @@
 import { Periods } from '@/common/const/periods';
 
-export const getPeriod = (periods: string[], value: string) => {
+export const getChartPeriod = (periods: string[], value: string) => {
   const period = periods.find((index) => index === value);
 
   switch (period) {
