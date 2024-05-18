@@ -1,13 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useEventStore } from '@/store/eventStore';
 import { type Event } from '@/store/eventStore/types';
-import { getFullDay, sortByHours, sortByToday } from '@/utils/Date';
+import { Periods, getFullDay, sortByHours, sortByToday } from '@/utils/Date';
 
 import { Alert } from '../ui/Alert/Alert';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import DashboardItem from './DashboardItem';
-import SelectContainer from './Chart/SelectContainer';
+import EventChart from '../EventsChart/EventsChart';
+import DashboardSelect from './Chart/Select';
 
 function Dashboard() {
   const {
@@ -16,6 +17,9 @@ function Dashboard() {
     success,
     error: responseError,
   } = useEventStore(useShallow((state) => state));
+  const [period, setPeriod] = useState<Periods>('Two weeks');
+
+  const completedEvents = events.filter((event) => event.isDone === true);
 
   const sortedByHours = sortByHours(events);
   const sortedByToday = sortByToday(sortedByHours);
@@ -32,11 +36,12 @@ function Dashboard() {
     <>
       <CardTitle>
         <h4>Dashboard</h4>
+        <DashboardSelect setPeriod={setPeriod} />
       </CardTitle>
       <div className="h-full">
         <div className="h-1/2 flex-auto flex gap-1 ">
           <div
-            className={`${sortedByToday.length > 4 && 'overflow-scroll overflow-x-hidden'} max-w-[18rem] shadow min-w-44 w-full p-4 bg-white rounded-3xl`}
+            className={`${sortedByToday.length > 4 && `overflow-scroll overflow-x-hidden`} max-w-[18rem] shadow min-w-44 w-full p-4 bg-white rounded-3xl`}
           >
             <div className="flex justify-center">
               <span className="text-[1.125rem]">{today}</span>
@@ -52,7 +57,7 @@ function Dashboard() {
             ))}
           </div>
           <div className="h-full w-full p-4 bg-white rounded-3xl shadow">
-            <SelectContainer events={events} />
+            <EventChart events={completedEvents} period={period} />
           </div>
         </div>
       </div>
