@@ -1,14 +1,17 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { periods } from '@/common/const/periods';
+import { type Periods } from '@/utils/Date/getChartPeriod';
+
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
+const periods = ['Two weeks', 'One month', 'Six months', 'Year'];
+
 type DashboardSelectProps = {
-  setPeriod: (period: string) => void;
+  setPeriod: (period: Periods) => void;
 };
 
 function DashboardSelect({ setPeriod }: DashboardSelectProps) {
-  const [selected, setSelected] = useState(periods[0]);
+  const [selected, setSelected] = useState<Periods>('Two weeks');
 
   useEffect(() => {
     setPeriod(selected);

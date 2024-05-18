@@ -1,4 +1,4 @@
-type Periods = 'Two weeks' | 'One month' | 'Six months' | 'Year';
+export type Periods = 'Two weeks' | 'One month' | 'Six months' | 'Year';
 
 export const getChartPeriod = (period: Periods) => {
   const periods = {

@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { type Event } from '@/store/eventStore/types';
+import { type Periods, getChartPeriod } from '@/utils/Date/getChartPeriod';
 import { getEventChartData } from '@/utils/Date/getEventChartData';
-import { getChartPeriod } from '@/utils/Date/getChartPeriod';
 import { getLastDay } from '@/utils/Date/getLastDay';
 
 export interface MonthlyEventData {
@@ -15,7 +15,7 @@ export interface MonthlyEventData {
 
 type EventChartProps = {
   events: Event[];
-  period: string;
+  period: Periods;
 };
 
 function getTwoWeeksPeriodValue(event: MonthlyEventData) {
