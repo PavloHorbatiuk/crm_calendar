@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useEventStore } from '@/store/eventStore';
-import { sorteByTime } from '@/utils/Date/sortByTime';
 import { type Event } from '@/store/eventStore/types';
+import { sortByHours, sortByToday } from '@/utils/Date';
 
 import { Alert } from '../ui/Alert/Alert';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
@@ -16,7 +16,9 @@ function Dashboard() {
     success,
     error: responseError,
   } = useEventStore(useShallow((state) => state));
-  const sortedByTime = sorteByTime(events);
+
+  const sortedByHours = sortByHours(events);
+  const sortedByToday = sortByToday(sortedByHours);
 
   const onUpdate = useCallback(
     async (event: Event) => {
@@ -34,7 +36,7 @@ function Dashboard() {
         <div className="h-1/2 flex-auto flex gap-1 ">
           <div className="max-w-[18rem] shadow min-w-44 w-full p-4 bg-white rounded-3xl">
             {responseError && <Alert status={'failed'} text={responseError} />}
-            {sortedByTime.map((event) => (
+            {sortedByToday.map((event) => (
               <DashboardItem
                 key={event.id}
                 event={event}
