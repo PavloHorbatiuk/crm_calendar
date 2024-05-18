@@ -10,7 +10,7 @@ const SelectContainer: React.FC<{ events: Event[] }> = ({ events }) => {
   const [period, setPeriod] = useState<Periods>('Two weeks');
 
   return (
-    <div className="h-[15.625rem]">
+    <div className="h-48">
       <DashboardSelect setPeriod={setPeriod} />
       <EventChart events={completedEvents} period={period} />
     </div>
