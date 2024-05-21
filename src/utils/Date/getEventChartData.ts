@@ -1,3 +1,4 @@
+import { monthNames } from '@/common/const/fullDateNames';
 import { type MonthlyEventData } from '@/components/EventsChart/EventsChart';
 
 type ChartDate = {
@@ -7,21 +8,6 @@ type ChartDate = {
 };
 
 export function getEventChartData(monthlyData: MonthlyEventData[]) {
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
   const chartDate: ChartDate = {
     labels: [],
     totalPrices: [],
