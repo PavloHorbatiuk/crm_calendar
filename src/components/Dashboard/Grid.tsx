@@ -1,7 +1,12 @@
 import { daysNames, monthNames } from '@/common/const/fullDateNames';
 import { getLastDay } from '@/utils/Date';
+import { type Event } from '@/store/eventStore/types';
 
-function Grid() {
+type GridProps = {
+  monthEvents: Event[];
+};
+
+function Grid({ monthEvents }: GridProps) {
   const month = monthNames[new Date().getMonth()];
   const amountOfDays = getLastDay(new Date());
   const days = [...Array(amountOfDays).keys()];
@@ -18,7 +23,7 @@ function Grid() {
       </div>
       <div className="h-48 bg-slate-400 grid grid-cols-7 p-2 gap-1">
         {days.map((day) => (
-          <div key={day} className="flex justify-center bg-white"></div>
+          <div key={day} className="flex justify-center bg-white text-sm"></div>
         ))}
       </div>
     </div>
@@ -26,3 +31,8 @@ function Grid() {
 }
 
 export default Grid;
+
+// const checkDay = (day: number) => {
+//   const dayNumber = new Date(monthEvents[day]?.date).getDay();
+//   if (dayNumber || dayNumber === 0) dayNumber ? dayNumber : dayNumber + 1;
+// };
