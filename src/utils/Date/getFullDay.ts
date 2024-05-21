@@ -8,5 +8,5 @@ export const getFullDay = (day: number) => {
     'Friday',
     'Saturday',
   ];
-  return daysOfWeek[day - 1] || '';
+  return daysOfWeek[day] || 'unknown day';
 };

@@ -1,6 +1,6 @@
 import { URL, instance } from '.';
-import { User } from '@/store/authStore/types';
-import { LoginType, RegisterPick } from '@/components/AuthForm/types';
+import { type User } from '@/store/authStore/types';
+import { type LoginType, type RegisterPick } from '@/components/AuthForm/types';
 
 export const authApi = {
   registration(userData: RegisterPick) {

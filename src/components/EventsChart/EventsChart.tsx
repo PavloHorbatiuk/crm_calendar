@@ -1,58 +1,71 @@
-import React, { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
-import { Event } from '@/store/eventStore/types';
+import { type Event } from '@/store/eventStore/types';
+import { type Periods, getChartPeriod } from '@/utils/Date/getChartPeriod';
+import { getEventChartData } from '@/utils/Date/getEventChartData';
+import { getLastDay } from '@/utils/Date/getLastDay';
 
-interface MonthlyEventData {
+export interface MonthlyEventData {
   month: number;
+  day: number;
+  lastDay: number;
   totalPrice: number;
   eventCount: number;
 }
 
-const EventChart: React.FC<{ events: Event[] }> = ({ events }) => {
+type EventChartProps = {
+  events: Event[];
+  period: Periods;
+};
+
+function getTwoWeeksPeriodValue(event: MonthlyEventData) {
+  const TWO_WEEKS_PERIOD = 14;
+  return event.day + TWO_WEEKS_PERIOD > event.lastDay ? 2 : 1;
+}
+
+const EventChart: FC<EventChartProps> = ({ events, period }) => {
   const [monthlyData, setMonthlyData] = useState<MonthlyEventData[]>([]);
 
   useEffect(() => {
-    const data: MonthlyEventData[] = [];
+    if (events.length > 0) {
+      const data: MonthlyEventData[] = [];
 
-    events.forEach((event) => {
-      const eventDate = new Date(event.date);
-      const eventMonth = eventDate.getMonth();
-      const existingMonthData = data.find((item) => item.month === eventMonth);
+      events.forEach((event) => {
+        const eventMonth = new Date(event.date).getMonth();
+        const eventDay = new Date(event.date).getDate();
+        const lastDayOfMonth = getLastDay(event.date);
+        const existingMonthData = data.find(
+          (item) => item.month === eventMonth
+        );
 
-      if (existingMonthData) {
-        existingMonthData.totalPrice += event.price;
-        existingMonthData.eventCount += 1;
-      } else {
-        data.push({
-          month: eventMonth,
-          totalPrice: event.price,
-          eventCount: 1,
-        });
-      }
-    });
+        if (existingMonthData) {
+          existingMonthData.totalPrice += event.price;
+          existingMonthData.eventCount += 1;
+        } else {
+          data.push({
+            month: eventMonth,
+            day: eventDay,
+            lastDay: lastDayOfMonth,
+            totalPrice: event.price,
+            eventCount: 1,
+          });
+        }
+      });
 
-    setMonthlyData(data);
-  }, [events]);
+      data.sort((a, b) => a.month - b.month);
+      const chartPeriod = getChartPeriod(period);
+      const sortedByPeriod = chartPeriod
+        ? data.slice(0, chartPeriod)
+        : data.slice(0, getTwoWeeksPeriodValue(data[0]));
+
+      setMonthlyData(sortedByPeriod);
+    }
+  }, [events, period]);
 
   useEffect(() => {
     if (monthlyData.length > 0) {
-      const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      const labels = monthlyData.map((data) => monthNames[data.month]);
-      const totalPrices = monthlyData.map((data) => data.totalPrice);
-      const eventCounts = monthlyData.map((data) => data.eventCount);
+      const { totalPrices, eventCounts, labels } =
+        getEventChartData(monthlyData);
 
       const ctx = document.getElementById('eventChart') as HTMLCanvasElement;
 

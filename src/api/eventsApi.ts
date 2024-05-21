@@ -1,5 +1,5 @@
 import { URL, instance } from '.';
-import { Event } from '@/store/eventStore/types';
+import { type Event } from '@/store/eventStore/types';
 
 export const eventApi = {
   addEvent(eventData: Event) {
@@ -11,9 +11,6 @@ export const eventApi = {
   deleteEvent(id: number) {
     return instance.delete(`${URL.EVENTS}/${id}`);
   },
-  // updateEvent(id: number, eventData: Event) {
-  //   return instance.patch(`${URL.EVENTS}/${id}`, eventData);
-  // },
   updateEvent(eventData: Event) {
     return instance.patch(URL.EVENTS, eventData);
   },
