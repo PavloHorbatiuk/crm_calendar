@@ -3,7 +3,7 @@ import { getLastDay } from '@/utils/date';
 import { getArrayOfDays } from '@/utils/getArrayOfDays';
 import { type Event } from '@/store/eventStore/types';
 
-import GridItem from './GridItem';
+import PaymentMonthEvent from './Item';
 
 interface GridProps {
   success: boolean;
@@ -13,7 +13,7 @@ interface GridProps {
 
 const gray = 'bg-gray';
 
-function Grid({ monthEvents, onUpdate, success }: GridProps) {
+function PaymentMonth({ monthEvents, onUpdate, success }: GridProps) {
   const daysOfMonth = getArrayOfDays(getLastDay(new Date()));
   const daysOfWeek = getWeekStartingMonday();
   const daysWithEvents = getDaysWithEvents(monthEvents);
@@ -37,7 +37,7 @@ function Grid({ monthEvents, onUpdate, success }: GridProps) {
           >
             {daysWithEvents[day] &&
               daysWithEvents[day].map((event) => (
-                <GridItem
+                <PaymentMonthEvent
                   key={event.id}
                   event={event}
                   onUpdate={onUpdate}
@@ -51,7 +51,7 @@ function Grid({ monthEvents, onUpdate, success }: GridProps) {
   );
 }
 
-export default Grid;
+export default PaymentMonth;
 
 function getWeekStartingMonday() {
   const days = [...daysNames];

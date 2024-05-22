@@ -14,7 +14,7 @@ import { CardTitle } from '../ui/CardTitle/CardTitle';
 import DashboardItem from './DashboardItem';
 import EventChart from '../EventsChart/EventsChart';
 import DashboardSelect from './Chart/Select';
-import Grid from './Grid';
+import PaymentMont from './PaymentMonth';
 
 function Dashboard() {
   const {
@@ -66,7 +66,11 @@ function Dashboard() {
             <EventChart events={completedEvents} period={period} />
           </div>
         </div>
-        <Grid monthEvents={monthEvents} onUpdate={onUpdate} success={success} />
+        <PaymentMont
+          monthEvents={monthEvents}
+          onUpdate={onUpdate}
+          success={success}
+        />
       </div>
     </>
   );
