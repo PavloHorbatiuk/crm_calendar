@@ -5,7 +5,7 @@ import { type Event } from '@/store/eventStore/types';
 
 import PaymentMonthEvent from './Item';
 
-interface GridProps {
+interface PaymentMonthProps {
   success: boolean;
   monthEvents: Event[];
   onUpdate: (data: Event) => Promise<void>;
@@ -13,7 +13,7 @@ interface GridProps {
 
 const gray = 'bg-gray';
 
-function PaymentMonth({ monthEvents, onUpdate, success }: GridProps) {
+function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
   const daysOfMonth = getArrayOfDays(getLastDay(new Date()));
   const daysOfWeek = getWeekStartingMonday();
   const daysWithEvents = getDaysWithEvents(monthEvents);
@@ -29,11 +29,13 @@ function PaymentMonth({ monthEvents, onUpdate, success }: GridProps) {
           <div key={dayIndex}>{day.slice(0, 3)}</div>
         ))}
       </div>
-      <div className="h-full bg-slate-400 grid grid-cols-7 p-2 gap-1">
+      <div className="bg-slate-400 grid grid-cols-7 p-2 gap-1 auto-rows-[3.75rem] rounded-md">
         {daysOfMonth.map((day, dayIndex) => (
           <div
             key={dayIndex}
-            className={`${gray} ${day && 'flex-col justify-center bg-white text-sm p-1 min-h-8 overflow-y-visible'} `}
+            className={`${gray} 
+              ${day && 'flex-col justify-center bg-white text-sm p-1'}
+              ${daysWithEvents[day]?.length > 2 && 'overflow-y-scroll'}`}
           >
             {daysWithEvents[day] &&
               daysWithEvents[day].map((event) => (

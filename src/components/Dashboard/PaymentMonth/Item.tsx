@@ -1,13 +1,13 @@
 import { Event } from '@/store/eventStore/types';
 import { useState } from 'react';
 
-interface GridItemProps {
+interface PaymentMonthItemProps {
   success: boolean;
   event: Event;
   onUpdate: (data: Event) => Promise<void>;
 }
 
-function GridItem({ event, onUpdate, success }: GridItemProps) {
+function PaymentMonthItem({ event, onUpdate, success }: PaymentMonthItemProps) {
   const [isCheck, setIsCheck] = useState<boolean>(event.isDone);
 
   const handleCheck = () => {
@@ -16,16 +16,19 @@ function GridItem({ event, onUpdate, success }: GridItemProps) {
   };
 
   return (
-    <div className="flex justify-between px-2 bg-rose" key={event.id}>
+    <div
+      className="flex justify-between bg-blueMoon rounded  li leading-6 mb-1 px-2"
+      key={event.id}
+    >
       <span>{event.name}</span>
       <input
         type="checkbox"
         checked={isCheck}
         onChange={handleCheck}
-        className="w-5 h-5 bg-white shadow"
+        className="w-1 h-1 bg-white shadow mr-0"
       />
     </div>
   );
 }
 
-export default GridItem;
+export default PaymentMonthItem;
