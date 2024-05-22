@@ -7,7 +7,7 @@ import {
   getCurrentMonthEvents,
   getFullDay,
   sortByToday,
-} from '@/utils/Date';
+} from '@/utils/date';
 
 import { Alert } from '../ui/Alert/Alert';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
@@ -66,7 +66,7 @@ function Dashboard() {
             <EventChart events={completedEvents} period={period} />
           </div>
         </div>
-        <Grid monthEvents={monthEvents} />
+        <Grid monthEvents={monthEvents} onUpdate={onUpdate} success={success} />
       </div>
     </>
   );

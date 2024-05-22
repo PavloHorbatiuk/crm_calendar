@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { type Periods } from '@/utils/Date/getChartPeriod';
+import { type Periods } from '@/utils/date';
 
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
