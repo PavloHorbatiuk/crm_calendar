@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { useEventStore } from '@/store/eventStore';
 import { type Event } from '@/store/eventStore/types';
 import {
-  Periods,
+  type Periods,
   getCurrentMonthEvents,
   getFullDay,
   sortByToday,

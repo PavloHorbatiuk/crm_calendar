@@ -1,6 +1,8 @@
 import { daysNames, monthNames } from '@/common/const/fullDateNames';
 import { getLastDay } from '@/utils/date';
+import { getArrayOfDays } from '@/utils/getArrayOfDays';
 import { type Event } from '@/store/eventStore/types';
+
 import GridItem from './GridItem';
 
 interface GridProps {
@@ -57,18 +59,6 @@ function getWeekStartingMonday() {
   days.shift();
 
   return days;
-}
-
-function getArrayOfDays(amountOfDays: number) {
-  const year = new Date().getFullYear();
-  const month = new Date().getMonth();
-  const dayOfWeek = new Date(year, month, 1).getDay() - 2;
-
-  const lastDaysOfMonth = new Array(dayOfWeek).fill(0);
-  const currentDaysOfMonth = [...Array(amountOfDays).keys()];
-  currentDaysOfMonth.push(amountOfDays);
-
-  return [...lastDaysOfMonth, ...currentDaysOfMonth];
 }
 
 function getDaysWithEvents(events: Event[]) {
