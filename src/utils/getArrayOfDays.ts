@@ -1,17 +1,19 @@
 import { getDaysInMonth } from 'date-fns';
 
-export function getArrayOfDays(_month: Date) {
-  const amountOfDays = getDaysInMonth(_month);
-  const year = new Date(_month).getFullYear();
-  const month = new Date(_month).getMonth();
+export function getArrayOfDays(m: Date) {
+  const daysInMonth = getDaysInMonth(m);
+
+  const year = new Date(m).getFullYear();
+  const month = new Date(m).getMonth();
   const dayOfWeek = new Date(year, month, 1).getDay();
 
-  const lastDaysOfMonth = new Array(dayOfWeek).fill(0);
-  const currentDaysOfMonth = [...Array(amountOfDays).keys()];
-  currentDaysOfMonth.shift();
-  currentDaysOfMonth.push(amountOfDays);
-  const arr = [...lastDaysOfMonth, ...currentDaysOfMonth];
-  arr.shift();
+  const lastMonthDays = new Array(dayOfWeek).fill(0);
+  const currentMonthDays = [...Array(daysInMonth).keys()];
+  currentMonthDays.shift();
+  currentMonthDays.push(daysInMonth);
 
-  return arr;
+  const arrayOfDays = [...lastMonthDays, ...currentMonthDays];
+  arrayOfDays.shift();
+
+  return arrayOfDays;
 }

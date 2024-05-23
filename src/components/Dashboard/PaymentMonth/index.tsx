@@ -17,12 +17,13 @@ const getNextMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth() + 1);
 
 function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
   const [month, setMonth] = useState(new Date());
-
+  console.log('render');
   const daysOfMonth = getArrayOfDays(month);
   const daysOfWeek = getWeekStartingMonday();
   const daysWithEvents = getDaysWithEvents(monthEvents);
 
-  const onClick = (event: any) => {
+  //TODO: type event
+  const handeClick = (event: any) => {
     const prev = event.target.dataset['prev'];
     prev ? setMonth(getPrevMonth(month)) : setMonth(getNextMonth(month));
   };
@@ -34,14 +35,14 @@ function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
           <button
             className="mr-2 bg-slate-400"
             data-prev="prev"
-            onClick={onClick}
+            onClick={handeClick}
           >
             left
           </button>
           <button
             className="ml-2 bg-slate-400"
             data-next="next"
-            onClick={onClick}
+            onClick={handeClick}
           >
             right
           </button>
