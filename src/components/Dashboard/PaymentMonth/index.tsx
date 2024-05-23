@@ -5,6 +5,8 @@ import { getArrayOfDays } from '@/utils/getArrayOfDays';
 import { type Event } from '@/store/eventStore/types';
 
 import PaymentMonthEvent from './Item';
+import leftArrow from '@/assets/Left.svg';
+import rightArrow from '@/assets/Arrow--right.svg';
 
 interface PaymentMonthProps {
   success: boolean;
@@ -30,19 +32,11 @@ function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
     <div className="h-1/2 mt-1 w-full p-4 bg-white rounded-3xl shadow">
       <div className="flex justify-center items-center text-md mb-1">
         <div className="flex w-40">
-          <button
-            className="mr-2 bg-slate-400"
-            data-prev="prev"
-            onClick={handeClick}
-          >
-            left
+          <button className="mr-2" data-prev="prev" onClick={handeClick}>
+            <img src={leftArrow} alt="leftArrow" />
           </button>
-          <button
-            className="ml-2 bg-slate-400"
-            data-next="next"
-            onClick={handeClick}
-          >
-            right
+          <button className="ml-2" data-next="next" onClick={handeClick}>
+            <img src={rightArrow} alt="rightArrow" />
           </button>
           <div>
             <div className="w-22 ml-4">{monthNames[month.getMonth()]}</div>
