@@ -5,3 +5,5 @@ export * from './getFullDay';
 export * from './getChartPeriod';
 export * from './getEventChartData';
 export * from './getCurrentMonthEvents';
+export * from './getPrevMonth';
+export * from './getNextMonth';

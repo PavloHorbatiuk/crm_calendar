@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { daysNames, monthNames } from '@/common/const/fullDateNames';
+import { getPrevMonth, getNextMonth } from '@/utils/date';
 import { getArrayOfDays } from '@/utils/getArrayOfDays';
 import { type Event } from '@/store/eventStore/types';
 
@@ -12,22 +13,19 @@ interface PaymentMonthProps {
 }
 
 const gray = 'bg-gray';
-const getPrevMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth() - 1);
-const getNextMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth() + 1);
 
 function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
   const [month, setMonth] = useState(new Date());
-  console.log('render');
+
   const daysOfMonth = getArrayOfDays(month);
   const daysOfWeek = getWeekStartingMonday();
-  const daysWithEvents = getDaysWithEvents(monthEvents);
 
-  //TODO: type event
-  const handeClick = (event: any) => {
-    const prev = event.target.dataset['prev'];
+  const handeClick = (event: MouseEvent<HTMLElement>) => {
+    const prev = event.currentTarget.dataset['prev'];
     prev ? setMonth(getPrevMonth(month)) : setMonth(getNextMonth(month));
   };
 
+  console.log('render');
   return (
     <div className="h-1/2 mt-1 w-full p-4 bg-white rounded-3xl shadow">
       <div className="flex justify-center items-center text-md mb-1">
@@ -61,16 +59,16 @@ function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
           <div
             key={dayIndex}
             className={`${gray} 
-              ${day && 'flex-col justify-center bg-white text-sm p-1'}
-              ${daysWithEvents[day]?.length > 2 && 'overflow-y-scroll'}`}
+              ${day && 'flex-col justify-center bg-white text-sm p-1'} `}
           >
-            {daysWithEvents[day] &&
-              daysWithEvents[day].map((event) => (
+            {day !== 0 &&
+              monthEvents.map((event) => (
                 <PaymentMonthEvent
                   key={event.id}
+                  dayOfMonth={day}
                   event={event}
-                  onUpdate={onUpdate}
                   success={success}
+                  onUpdate={onUpdate}
                 />
               ))}
           </div>
@@ -89,14 +87,4 @@ function getWeekStartingMonday() {
 
   return days;
 }
-
-function getDaysWithEvents(events: Event[]) {
-  const dayEvents: Record<number, Event[]> = {};
-
-  events.forEach((event) => {
-    const day = new Date(event.date).getDate();
-    dayEvents[day] ? dayEvents[day].push(event) : (dayEvents[day] = [event]);
-  });
-
-  return dayEvents;
-}
+// ${daysWithEvents[day]?.length > 2 && 'overflow-y-scroll'}
