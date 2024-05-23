@@ -1,5 +1,5 @@
 import { daysNames, monthNames } from '@/common/const/fullDateNames';
-import { getLastDay } from '@/utils/date';
+import { getDaysInMonth } from 'date-fns';
 import { getArrayOfDays } from '@/utils/getArrayOfDays';
 import { type Event } from '@/store/eventStore/types';
 
@@ -14,7 +14,7 @@ interface PaymentMonthProps {
 const gray = 'bg-gray';
 
 function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
-  const daysOfMonth = getArrayOfDays(getLastDay(new Date()));
+  const daysOfMonth = getArrayOfDays(getDaysInMonth(new Date()));
   const daysOfWeek = getWeekStartingMonday();
   const daysWithEvents = getDaysWithEvents(monthEvents);
   const month = monthNames[new Date().getMonth()];
@@ -22,7 +22,9 @@ function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
   return (
     <div className="h-1/2 mt-1 w-full p-4 bg-white rounded-3xl shadow">
       <div className="flex justify-center items-center text-md mb-1">
+        <button className="mr-2 bg-slate-400">left</button>
         {month}
+        <button className="ml-2 bg-slate-400">right</button>
       </div>
       <div className="flex gap-28 px-20">
         {daysOfWeek.map((day, dayIndex) => (

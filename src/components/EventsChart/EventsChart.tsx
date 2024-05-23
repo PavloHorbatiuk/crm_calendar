@@ -1,12 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
+import { getDaysInMonth } from 'date-fns';
 import { type Event } from '@/store/eventStore/types';
-import {
-  type Periods,
-  getChartPeriod,
-  getEventChartData,
-  getLastDay,
-} from '@/utils/date';
+import { type Periods, getChartPeriod, getEventChartData } from '@/utils/date';
 
 export interface MonthlyEventData {
   month: number;
@@ -36,7 +32,7 @@ const EventChart: FC<EventChartProps> = ({ events, period }) => {
       events.forEach((event) => {
         const eventMonth = new Date(event.date).getMonth();
         const eventDay = new Date(event.date).getDate();
-        const lastDayOfMonth = getLastDay(event.date);
+        const lastDayOfMonth = getDaysInMonth(event.date);
         const existingMonthData = data.find(
           (item) => item.month === eventMonth
         );
