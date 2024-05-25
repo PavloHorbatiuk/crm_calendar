@@ -18,6 +18,7 @@ import { Route as LayoutLayoutaImport } from './routes/layout/layouta'
 import { Route as AuthenticatedLayoutImport } from './routes/_authenticated/_layout'
 import { Route as AuthenticatedLayoutSettingsImport } from './routes/_authenticated/_layout.settings'
 import { Route as AuthenticatedLayoutProfileImport } from './routes/_authenticated/_layout.profile'
+import { Route as AuthenticatedLayoutPaymentImport } from './routes/_authenticated/_layout.payment'
 import { Route as AuthenticatedLayoutDashboardImport } from './routes/_authenticated/_layout.dashboard'
 import { Route as AuthenticatedLayoutCalendarImport } from './routes/_authenticated/_layout.calendar'
 
@@ -78,6 +79,13 @@ const AuthenticatedLayoutProfileRoute = AuthenticatedLayoutProfileImport.update(
   } as any,
 )
 
+const AuthenticatedLayoutPaymentRoute = AuthenticatedLayoutPaymentImport.update(
+  {
+    path: '/payment',
+    getParentRoute: () => AuthenticatedLayoutRoute,
+  } as any,
+)
+
 const AuthenticatedLayoutDashboardRoute =
   AuthenticatedLayoutDashboardImport.update({
     path: '/dashboard',
@@ -130,6 +138,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLayoutDashboardImport
       parentRoute: typeof AuthenticatedLayoutImport
     }
+    '/_authenticated/_layout/payment': {
+      preLoaderRoute: typeof AuthenticatedLayoutPaymentImport
+      parentRoute: typeof AuthenticatedLayoutImport
+    }
     '/_authenticated/_layout/profile': {
       preLoaderRoute: typeof AuthenticatedLayoutProfileImport
       parentRoute: typeof AuthenticatedLayoutImport
@@ -149,6 +161,7 @@ export const routeTree = rootRoute.addChildren([
     AuthenticatedLayoutRoute.addChildren([
       AuthenticatedLayoutCalendarRoute,
       AuthenticatedLayoutDashboardRoute,
+      AuthenticatedLayoutPaymentRoute,
       AuthenticatedLayoutProfileRoute,
       AuthenticatedLayoutSettingsRoute,
     ]),
