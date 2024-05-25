@@ -38,60 +38,58 @@ function Payment({ monthEvents, onUpdate, success }: PaymentProps) {
       : setMonth(getNextMonth(month));
   };
 
-  console.log('render');
+  console.log('render Payment');
   return (
     <>
       <CardTitle>
         <h4>Payment</h4>
       </CardTitle>
       <CardWrapper>
-        <div className="h-1/2 mt-1 w-full p-4 bg-white rounded-3xl shadow">
-          <div className="flex justify-center items-center text-md mb-1">
-            <div className="flex w-40">
-              <button
-                className="mr-2"
-                data-prev="prev"
-                onClick={() => handeClick('prev')}
-              >
-                <img src={leftArrow} alt="leftArrow" />
-              </button>
-              <button
-                className="ml-2"
-                data-next="next"
-                onClick={() => handeClick('next')}
-              >
-                <img src={rightArrow} alt="rightArrow" />
-              </button>
-              <div>
-                <div className="w-22 ml-4">{monthNames[month.getMonth()]}</div>
-              </div>
+        <div className="flex justify-center items-center text-md mb-1">
+          <div className="flex w-40">
+            <button
+              className="mr-2"
+              data-prev="prev"
+              onClick={() => handeClick('prev')}
+            >
+              <img src={leftArrow} alt="leftArrow" />
+            </button>
+            <button
+              className="ml-2"
+              data-next="next"
+              onClick={() => handeClick('next')}
+            >
+              <img src={rightArrow} alt="rightArrow" />
+            </button>
+            <div>
+              <div className="w-22 ml-4">{monthNames[month.getMonth()]}</div>
             </div>
           </div>
-          <div className="flex gap-28 px-20">
-            {daysOfWeek.map((day, dayIndex) => (
-              <div key={dayIndex}>{day.slice(0, 3)}</div>
-            ))}
-          </div>
-          <div className="bg-slate-400 grid grid-cols-7 p-2 gap-1 auto-rows-[3.75rem] rounded-md">
-            {daysOfMonth.map((day, dayIndex) => (
-              <div
-                key={dayIndex}
-                className={`${gray} 
+        </div>
+        <div className="flex gap-28 px-20">
+          {daysOfWeek.map((day, dayIndex) => (
+            <div key={dayIndex}>{day.slice(0, 3)}</div>
+          ))}
+        </div>
+        <div className="bg-slate-400 grid grid-cols-7 p-2 gap-1 auto-rows-[5rem] rounded-md">
+          {daysOfMonth.map((day, dayIndex) => (
+            <div
+              key={dayIndex}
+              className={`${gray} 
               ${day && 'flex-col justify-center bg-white text-sm p-1'} `}
-              >
-                {day !== 0 &&
-                  monthEvents.map((event) => (
-                    <PaymentItem
-                      key={event.id}
-                      dayOfMonth={day}
-                      event={event}
-                      success={success}
-                      onUpdate={onUpdate}
-                    />
-                  ))}
-              </div>
-            ))}
-          </div>
+            >
+              {day !== 0 &&
+                monthEvents.map((event) => (
+                  <PaymentItem
+                    key={event.id}
+                    dayOfMonth={day}
+                    event={event}
+                    success={success}
+                    onUpdate={onUpdate}
+                  />
+                ))}
+            </div>
+          ))}
         </div>
       </CardWrapper>
     </>

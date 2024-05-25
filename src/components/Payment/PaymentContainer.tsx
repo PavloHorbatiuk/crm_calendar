@@ -6,7 +6,7 @@ import { type Event } from '@/store/eventStore/types';
 
 import Payment from './Payment';
 
-function CalendarContainer() {
+function PaymentContainer() {
   const { events, success, updateEvent } = useEventStore(
     useShallow((state) => state)
   );
@@ -24,4 +24,4 @@ function CalendarContainer() {
   );
 }
 
-export default CalendarContainer;
+export default PaymentContainer;

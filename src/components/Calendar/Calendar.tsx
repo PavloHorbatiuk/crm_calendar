@@ -11,7 +11,7 @@ import {
 import EventCard from '../Event/EventCard';
 import EventModal from '../Modals/EventModal/AddEventModal';
 import { type Event } from '@/store/eventStore/types';
-import { type ButtonType } from '@/common/const/ButtonType';
+import { type ButtonType } from '@/common/const';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import { useEventStore } from '@/store/eventStore';

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { isSameDay } from 'date-fns';
 import { type Event } from '@/store/eventStore/types';
 
@@ -9,8 +9,7 @@ interface PaymentMonthItemProps {
   onUpdate: (data: Event) => Promise<void>;
 }
 
-// const EventModal = memo(function EventsModal(props: IProps) {
-function PaymentItem({
+const PaymentItem = memo(function PaymentItem({
   event,
   onUpdate,
   success,
@@ -23,6 +22,8 @@ function PaymentItem({
     onUpdate({ ...event, isDone: !isCheck });
     if (success) setIsCheck(!isCheck);
   };
+
+  console.log('render PaymentItem');
 
   if (dayWithEvents) {
     return (
@@ -40,6 +41,6 @@ function PaymentItem({
       </div>
     );
   }
-}
+});
 
 export default PaymentItem;
