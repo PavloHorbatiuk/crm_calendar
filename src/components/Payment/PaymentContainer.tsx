@@ -4,13 +4,14 @@ import { useEventStore } from '@/store/eventStore';
 import { getCurrentMonthEvents } from '@/utils/date';
 import { type Event } from '@/store/eventStore/types';
 
-import Payment from './Payment';
+import Payment, { type DayWithEvents } from './Payment';
 
 const getDayWithEvents = (events: Event[]) => {
-  const dayWithEvents = {};
+  const dayWithEvents: DayWithEvents = {};
 
   events.forEach((event) => {
     const day = new Date(event.date).getDate();
+
     dayWithEvents[day]?.length
       ? dayWithEvents[day].push(event)
       : (dayWithEvents[day] = [event]);
