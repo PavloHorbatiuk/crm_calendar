@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { type ButtonType } from '@/common/const';
 import { type Event } from '@/store/eventStore/types';
 import { getArrayOfDays, getPrevMonth, getNextMonth } from '@/utils/date';
@@ -20,13 +20,17 @@ function getWeekStartingMonday() {
 
 interface PaymentProps {
   success: boolean;
-  monthEvents: Event[];
+  dayWithEvents: any;
   onUpdate: (data: Event) => Promise<void>;
 }
 
 const gray = 'bg-gray';
 
-function Payment({ monthEvents, onUpdate, success }: PaymentProps) {
+const Payment = memo(function Payment({
+  dayWithEvents,
+  onUpdate,
+  success,
+}: PaymentProps) {
   const [month, setMonth] = useState(new Date());
 
   const daysOfMonth = getArrayOfDays(month);
@@ -38,7 +42,7 @@ function Payment({ monthEvents, onUpdate, success }: PaymentProps) {
       : setMonth(getNextMonth(month));
   };
 
-  console.log('render Payment');
+  console.log('Payment');
   return (
     <>
       <CardTitle>
@@ -78,22 +82,19 @@ function Payment({ monthEvents, onUpdate, success }: PaymentProps) {
               className={`${gray} 
               ${day && 'flex-col justify-center bg-white text-sm p-1'} `}
             >
-              {day !== 0 &&
-                monthEvents.map((event) => (
-                  <PaymentItem
-                    key={event.id}
-                    dayOfMonth={day}
-                    event={event}
-                    success={success}
-                    onUpdate={onUpdate}
-                  />
-                ))}
+              {dayWithEvents[dayIndex] && (
+                <PaymentItem
+                  events={dayWithEvents[dayIndex]}
+                  success={success}
+                  onUpdate={onUpdate}
+                />
+              )}
             </div>
           ))}
         </div>
       </CardWrapper>
     </>
   );
-}
+});
 
 export default Payment;

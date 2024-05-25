@@ -6,11 +6,26 @@ import { type Event } from '@/store/eventStore/types';
 
 import Payment from './Payment';
 
+const getDayWithEvents = (events: Event[]) => {
+  const dayWithEvents = {};
+
+  events.forEach((event) => {
+    const day = new Date(event.date).getDate();
+    dayWithEvents[day]?.length
+      ? dayWithEvents[day].push(event)
+      : (dayWithEvents[day] = [event]);
+  });
+
+  return dayWithEvents;
+};
+
 function PaymentContainer() {
   const { events, success, updateEvent } = useEventStore(
     useShallow((state) => state)
   );
+
   const monthEvents = getCurrentMonthEvents(events);
+  const dayWithEvents = getDayWithEvents(monthEvents);
 
   const onUpdate = useCallback(
     async (event: Event) => {
@@ -20,7 +35,11 @@ function PaymentContainer() {
   );
 
   return (
-    <Payment monthEvents={monthEvents} onUpdate={onUpdate} success={success} />
+    <Payment
+      dayWithEvents={dayWithEvents}
+      onUpdate={onUpdate}
+      success={success}
+    />
   );
 }
 
