@@ -18,9 +18,11 @@ function getWeekStartingMonday() {
   return days;
 }
 
+type dayWithEvents = Record<number, Event>;
+
 interface PaymentProps {
   success: boolean;
-  dayWithEvents: any;
+  dayWithEvents: dayWithEvents;
   onUpdate: (data: Event) => Promise<void>;
 }
 
@@ -84,6 +86,8 @@ const Payment = memo(function Payment({
             >
               {dayWithEvents[dayIndex] && (
                 <PaymentItem
+                  //eslint-disable-next-line
+                  //@ts-ignore
                   events={dayWithEvents[dayIndex]}
                   success={success}
                   onUpdate={onUpdate}

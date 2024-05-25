@@ -13,6 +13,7 @@ const PaymentItem = memo(function PaymentItem({
   onUpdate,
   success,
 }: PaymentItemProps) {
+  console.log('PaymentItem');
   return events.map((event) => (
     <PaymentEvent
       key={event.id}
