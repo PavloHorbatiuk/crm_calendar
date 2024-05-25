@@ -5,7 +5,7 @@ import { useAuthStore } from '@/store/authStore';
 import { notify } from '@/utils/notify';
 
 import { type LoginType } from './types';
-import { type InputType } from '@/common/const';
+import { InputType } from '@/common/const';
 import { validationLoginSchema } from './validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
 
