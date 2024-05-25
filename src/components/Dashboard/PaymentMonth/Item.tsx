@@ -9,6 +9,7 @@ interface PaymentMonthItemProps {
   onUpdate: (data: Event) => Promise<void>;
 }
 
+// const EventModal = memo(function EventsModal(props: IProps) {
 function PaymentMonthItem({
   event,
   onUpdate,
@@ -16,7 +17,6 @@ function PaymentMonthItem({
   dayOfMonth,
 }: PaymentMonthItemProps) {
   const [isCheck, setIsCheck] = useState<boolean>(event.isDone);
-
   const dayWithEvents = isSameDay(new Date(event.date), dayOfMonth);
 
   const handleCheck = () => {

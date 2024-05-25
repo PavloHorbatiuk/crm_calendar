@@ -1,8 +1,8 @@
-import { useState, MouseEvent } from 'react';
+import { useState } from 'react';
 import { daysNames, monthNames } from '@/common/const/fullDateNames';
-import { getPrevMonth, getNextMonth } from '@/utils/date';
-import { getArrayOfDays } from '@/utils/getArrayOfDays';
+import { getPrevMonth, getNextMonth, getArrayOfDays } from '@/utils/date';
 import { type Event } from '@/store/eventStore/types';
+import { type ButtonType } from '@/common/const/ButtonType';
 
 import PaymentMonthEvent from './Item';
 import leftArrow from '@/assets/Left.svg';
@@ -22,9 +22,10 @@ function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
   const daysOfMonth = getArrayOfDays(month);
   const daysOfWeek = getWeekStartingMonday();
 
-  const handeClick = (event: MouseEvent<HTMLElement>) => {
-    const prev = event.currentTarget.dataset['prev'];
-    prev ? setMonth(getPrevMonth(month)) : setMonth(getNextMonth(month));
+  const handeClick = (button: ButtonType) => {
+    button === 'prev'
+      ? setMonth(getPrevMonth(month))
+      : setMonth(getNextMonth(month));
   };
 
   console.log('render');
@@ -32,10 +33,18 @@ function PaymentMonth({ monthEvents, onUpdate, success }: PaymentMonthProps) {
     <div className="h-1/2 mt-1 w-full p-4 bg-white rounded-3xl shadow">
       <div className="flex justify-center items-center text-md mb-1">
         <div className="flex w-40">
-          <button className="mr-2" data-prev="prev" onClick={handeClick}>
+          <button
+            className="mr-2"
+            data-prev="prev"
+            onClick={() => handeClick('prev')}
+          >
             <img src={leftArrow} alt="leftArrow" />
           </button>
-          <button className="ml-2" data-next="next" onClick={handeClick}>
+          <button
+            className="ml-2"
+            data-next="next"
+            onClick={() => handeClick('next')}
+          >
             <img src={rightArrow} alt="rightArrow" />
           </button>
           <div>
