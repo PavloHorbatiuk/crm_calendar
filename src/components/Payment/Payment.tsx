@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { type ButtonType } from '@/common/const';
 import { type Event } from '@/store/eventStore/types';
-import { type ButtonType } from '@/common/const/ButtonType';
 import { getArrayOfDays, getPrevMonth, getNextMonth } from '@/utils/date';
 import { daysNames, monthNames } from '@/common/const/fullDateNames';
 

@@ -1,14 +1,14 @@
 import { useRef } from 'react';
-import { LoginType } from './types';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from '@tanstack/react-router';
 import { useAuthStore } from '@/store/authStore';
 import { notify } from '@/utils/notify';
 
+import { type LoginType } from './types';
+import { type InputType } from '@/common/const';
 import { validationLoginSchema } from './validationSchema';
 import { useYupValidationResolver } from '@/common/hooks/useYupValidationResolver';
 
-import { InputType } from '@/common/const';
 import { Alert } from '../ui/Alert/Alert';
 import FormField from '../ui/FormField/FormField';
 
