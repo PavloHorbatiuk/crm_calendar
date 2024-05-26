@@ -73,8 +73,8 @@ function Payment({ events, onUpdate }: PaymentProps) {
               className={`${'bg-gray'} 
               ${day && 'flex-col justify-center bg-white text-sm p-1'} `}
             >
-              {daysWithEvents[dayIndex] &&
-                daysWithEvents[dayIndex].map((event) => (
+              {daysWithEvents[day] &&
+                daysWithEvents[day].map((event) => (
                   <PaymentItem
                     key={event.id}
                     event={event}

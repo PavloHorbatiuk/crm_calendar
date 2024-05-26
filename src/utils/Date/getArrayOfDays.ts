@@ -10,9 +10,7 @@ export function getArrayOfDays(m: Date) {
   const lastMonthDays = new Array(dayOfWeek).fill(0);
   const currentMonthDays = [];
 
-  for (let i = 1; i <= daysInMonth; i++) {
-    currentMonthDays.push(new Date(year, month, i));
-  }
+  for (let i = 1; i <= daysInMonth; i++) currentMonthDays.push(i);
 
   const arrayOfDays = [...lastMonthDays, ...currentMonthDays];
   arrayOfDays.shift();
