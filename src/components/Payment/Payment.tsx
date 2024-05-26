@@ -1,42 +1,34 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
+import { monthNames } from '@/common/const/';
 import { type ButtonType } from '@/common/const';
 import { type Event } from '@/store/eventStore/types';
-import { getArrayOfDays, getPrevMonth, getNextMonth } from '@/utils/date';
-import { daysNames, monthNames } from '@/common/const/fullDateNames';
+import { getDaysWithEvents, getWeekStartingMonday } from './PaymentLogic';
+import {
+  getArrayOfDays,
+  getPrevMonth,
+  getNextMonth,
+  getCurrentMonthEvents,
+} from '@/utils/date';
 
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
-import leftArrow from '@/assets/Left.svg';
-import rightArrow from '@/assets/Arrow--right.svg';
 import PaymentItem from './PaymentItem';
 
-function getWeekStartingMonday() {
-  const days = [...daysNames];
-  days.push(daysNames[0]);
-  days.shift();
-
-  return days;
-}
-
-export type DayWithEvents = Record<number, Event[]>;
+import LeftArrow from '@/assets/Left.svg';
+import RightArrow from '@/assets/Arrow--right.svg';
 
 interface PaymentProps {
-  success: boolean;
-  dayWithEvents: DayWithEvents;
+  events: Event[];
   onUpdate: (data: Event) => Promise<void>;
 }
 
-const gray = 'bg-gray';
-
-const Payment = memo(function Payment({
-  dayWithEvents,
-  onUpdate,
-  success,
-}: PaymentProps) {
+function Payment({ events, onUpdate }: PaymentProps) {
   const [month, setMonth] = useState(new Date());
 
-  const daysOfMonth = getArrayOfDays(month);
   const daysOfWeek = getWeekStartingMonday();
+  const daysOfMonth = getArrayOfDays(month);
+  const monthEvents = getCurrentMonthEvents(events, month);
+  const daysWithEvents = getDaysWithEvents(monthEvents);
 
   const handeClick = (button: ButtonType) => {
     button === 'prev'
@@ -44,7 +36,6 @@ const Payment = memo(function Payment({
       : setMonth(getNextMonth(month));
   };
 
-  console.log('Payment');
   return (
     <>
       <CardTitle>
@@ -58,18 +49,16 @@ const Payment = memo(function Payment({
               data-prev="prev"
               onClick={() => handeClick('prev')}
             >
-              <img src={leftArrow} alt="leftArrow" />
+              <img src={LeftArrow} alt="leftArrow" />
             </button>
+            <div className="w-22 ml-4">{monthNames[month.getMonth()]}</div>
             <button
-              className="ml-2"
+              className="ml-6"
               data-next="next"
               onClick={() => handeClick('next')}
             >
-              <img src={rightArrow} alt="rightArrow" />
+              <img src={RightArrow} alt="rightArrow" />
             </button>
-            <div>
-              <div className="w-22 ml-4">{monthNames[month.getMonth()]}</div>
-            </div>
           </div>
         </div>
         <div className="flex gap-28 px-20">
@@ -81,22 +70,23 @@ const Payment = memo(function Payment({
           {daysOfMonth.map((day, dayIndex) => (
             <div
               key={dayIndex}
-              className={`${gray} 
+              className={`${'bg-gray'} 
               ${day && 'flex-col justify-center bg-white text-sm p-1'} `}
             >
-              {dayWithEvents[dayIndex] && (
-                <PaymentItem
-                  events={dayWithEvents[dayIndex]}
-                  success={success}
-                  onUpdate={onUpdate}
-                />
-              )}
+              {daysWithEvents[dayIndex] &&
+                daysWithEvents[dayIndex].map((event) => (
+                  <PaymentItem
+                    key={event.id}
+                    event={event}
+                    onUpdate={onUpdate}
+                  />
+                ))}
             </div>
           ))}
         </div>
       </CardWrapper>
     </>
   );
-});
+}
 
 export default Payment;

@@ -1,27 +1,36 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { type Event } from '@/store/eventStore/types';
-import PaymentEvent from './PaymentEvent';
 
-interface PaymentItemProps {
-  events: Event[];
-  success: boolean;
+interface PaymentItem {
+  event: Event;
   onUpdate: (data: Event) => Promise<void>;
 }
 
 const PaymentItem = memo(function PaymentItem({
-  events,
+  event,
   onUpdate,
-  success,
-}: PaymentItemProps) {
-  console.log('PaymentItem');
-  return events.map((event) => (
-    <PaymentEvent
+}: PaymentItem) {
+  const [isCheck, setIsCheck] = useState<boolean>(event.isDone);
+
+  const handleCheck = () => {
+    onUpdate({ ...event, isDone: !isCheck });
+    setIsCheck(!isCheck);
+  };
+
+  return (
+    <div
+      className="flex justify-between bg-blueMoon rounded  li leading-6 mb-1 px-2"
       key={event.id}
-      event={event}
-      onUpdate={onUpdate}
-      success={success}
-    />
-  ));
+    >
+      <span>{event.name}</span>
+      <input
+        type="checkbox"
+        checked={isCheck}
+        onChange={handleCheck}
+        className="w-1 h-1 bg-white shadow mr-0"
+      />
+    </div>
+  );
 });
 
 export default PaymentItem;
