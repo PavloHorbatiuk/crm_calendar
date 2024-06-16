@@ -2,19 +2,13 @@ import { useCallback, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useEventStore } from '@/store/eventStore';
 import { type Event } from '@/store/eventStore/types';
-import {
-  Periods,
-  getCurrentMonthEvents,
-  getFullDay,
-  sortByToday,
-} from '@/utils/Date';
+import { type Periods, getFullDay, sortByToday } from '@/utils/date';
 
 import { Alert } from '../ui/Alert/Alert';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import DashboardItem from './DashboardItem';
 import EventChart from '../EventsChart/EventsChart';
 import DashboardSelect from './Chart/Select';
-import Grid from './Grid';
 
 function Dashboard() {
   const {
@@ -28,7 +22,6 @@ function Dashboard() {
 
   const completedEvents = events.filter((event) => event.isDone === true);
   const sortedByToday = sortByToday(events);
-  const monthEvents = getCurrentMonthEvents(events);
   const today = getFullDay(new Date().getDay());
 
   const onUpdate = useCallback(
@@ -66,7 +59,6 @@ function Dashboard() {
             <EventChart events={completedEvents} period={period} />
           </div>
         </div>
-        <Grid monthEvents={monthEvents} />
       </div>
     </>
   );

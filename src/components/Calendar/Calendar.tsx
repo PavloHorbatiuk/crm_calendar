@@ -10,7 +10,8 @@ import {
 } from 'date-fns';
 import EventCard from '../Event/EventCard';
 import EventModal from '../Modals/EventModal/AddEventModal';
-import { Event } from '@/store/eventStore/types';
+import { type Event } from '@/store/eventStore/types';
+import { type ButtonType } from '@/common/const';
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import { useEventStore } from '@/store/eventStore';
@@ -18,8 +19,6 @@ import { useEventStore } from '@/store/eventStore';
 import leftIcon from '@/assets/Left.svg';
 import addIcon from '@/assets/add.svg';
 import rightIcon from '@/assets/Arrow--right.svg';
-
-type ButtonType = 'prev' | 'next';
 
 interface CalendarProps {
   events: Event[];

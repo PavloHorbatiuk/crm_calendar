@@ -1,8 +1,9 @@
-import Logo from '@/assets/white.svg';
-import loginIcon from '@/assets/Illustration.svg';
+import { useAuthStore } from '@/store/authStore';
 import LoginForm from '@/components/AuthForm/LoginForm';
 import RegistrationForm from '@/components/AuthForm/RegistrationForm';
-import { useAuthStore } from '@/store/authStore';
+
+import Logo from '@/assets/white.svg';
+import loginIcon from '@/assets/Illustration.svg';
 
 function LoginPage() {
   const isRegister = useAuthStore((store) => store.isRegister);
