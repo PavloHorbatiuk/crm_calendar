@@ -10,10 +10,10 @@ const PaymentItem = memo(function PaymentItem({
   event,
   onUpdate,
 }: PaymentItem) {
-  const [isCheck, setIsCheck] = useState<boolean>(event.isDone);
+  const [isCheck, setIsCheck] = useState<boolean>(event.isPaid);
 
   const handleCheck = () => {
-    onUpdate({ ...event, isDone: !isCheck });
+    onUpdate({ ...event, isPaid: !isCheck });
     setIsCheck(!isCheck);
   };
 
