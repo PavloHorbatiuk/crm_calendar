@@ -16,9 +16,9 @@ import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
 import { useEventStore } from '@/store/eventStore';
 
-import leftIcon from '@/assets/Left.svg';
 import addIcon from '@/assets/add.svg';
-import rightIcon from '@/assets/Arrow--right.svg';
+import leftArrow from '@/assets/Arrow--left.svg';
+import rightArrow from '@/assets/Arrow--right.svg';
 
 interface CalendarProps {
   events: Event[];
@@ -150,10 +150,10 @@ export const Calendar = memo(function Calendar({ events }: CalendarProps) {
               onClick={() => changeWeekHandle('prev')}
               className="flex items-center"
             >
-              <img className="fill-black" src={leftIcon} />
+              <img className="fill-black" src={leftArrow} />
             </button>
             <button onClick={() => changeWeekHandle('next')}>
-              <img src={rightIcon} />
+              <img src={rightArrow} />
             </button>
           </div>
           {weekDays}
