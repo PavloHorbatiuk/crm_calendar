@@ -3,6 +3,7 @@ export interface Event {
   name: string;
   date: Date;
   isDone: boolean;
+  isPaid: boolean;
   price: number;
 }
 

@@ -37,7 +37,7 @@ function EventForm({ onSuccess }: EventFormProps) {
   const { createEvent, error: responseError } = useEventStore();
 
   const onSubmit = async (data: EventFormTypes) => {
-    await createEvent({ ...data, isDone: false });
+    await createEvent({ ...data, isDone: false, isPaid: false });
     const { success } = useEventStore.getState();
 
     if (success) {
