@@ -27,7 +27,7 @@ const PaymentItem = memo(function PaymentItem({
         type="checkbox"
         checked={isCheck}
         onChange={handleCheck}
-        className="w-1 h-1 bg-white shadow mr-0"
+        className="w-1 h-1 bg-white shadow"
       />
     </div>
   );
