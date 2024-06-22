@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { type ButtonType } from '@/common/const';
 import { type Event } from '@/store/eventStore/types';
@@ -23,11 +23,19 @@ interface PaymentProps {
 
 function Payment({ events, onUpdate }: PaymentProps) {
   const [month, setMonth] = useState(new Date());
+  const [dayHeight, setDayHeight] = useState(6);
 
   const daysOfWeek = getWeekStartingMonday();
   const daysOfMonth = getArrayOfDays(month);
   const monthEvents = getCurrentMonthEvents(events, month);
   const daysWithEvents = getDaysWithEvents(monthEvents);
+
+  console.log('render');
+  // useEffect(() => {
+  //   for (const day in daysWithEvents) {
+  //     if (daysWithEvents[day].length > 2) setDayHeight(9);
+  //   }
+  // }, [dayHeight, daysWithEvents]);
 
   const handeClick = (button: ButtonType) => {
     button === 'prev'
@@ -44,7 +52,7 @@ function Payment({ events, onUpdate }: PaymentProps) {
         <div className="flex w-48">
           <h4 className="left">{format(month, 'MMM yyyy')}</h4>
         </div>
-        <div className="flex bg-blueMoon rounded-lg p-3 mt-4">
+        <div className="flex bg-blueMoon rounded-lg p-3 mt-4 mb-2">
           <div className="min-w-[4.5rem] flex justify-between">
             <button data-prev="prev" onClick={() => handeClick('prev')}>
               <img src={leftArrow} alt="leftArrow" />
@@ -63,7 +71,9 @@ function Payment({ events, onUpdate }: PaymentProps) {
             </div>
           ))}
         </div>
-        <div className=" bg-blueMoon grid grid-cols-7 gap-[0.063rem] auto-rows-[6rem] rounded-md p-1 mt-1">
+        <div
+          className={`bg-blueMoon grid grid-cols-7 gap-[0.063rem] auto-rows-[${dayHeight}rem] rounded-md p-1 mt-1}`}
+        >
           {daysOfMonth.map((day, dayIndex) => (
             <div
               key={dayIndex}

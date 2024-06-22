@@ -19,7 +19,7 @@ const PaymentItem = memo(function PaymentItem({
 
   return (
     <div
-      className="flex justify-between bg-blueMoon rounded  li leading-6 mb-1 px-2"
+      className={`${isCheck ? 'bg-lime-300' : 'bg-red300'} flex justify-between rounded items-center leading-6 mb-1 pl-2`}
       key={event.id}
     >
       <span>{event.name}</span>
