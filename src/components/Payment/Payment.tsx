@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { format } from 'date-fns';
+import { format, isThisMonth } from 'date-fns';
 import { type ButtonType } from '@/common/const';
 import { type Event } from '@/store/eventStore/types';
 import { getDaysWithEvents, getWeekStartingMonday } from './PaymentLogic';
@@ -23,19 +23,16 @@ interface PaymentProps {
 
 function Payment({ events, onUpdate }: PaymentProps) {
   const [month, setMonth] = useState(new Date());
-  const [dayHeight, setDayHeight] = useState(6);
+  const [dayHeight, setDayHeight] = useState(0);
 
   const daysOfWeek = getWeekStartingMonday();
   const daysOfMonth = getArrayOfDays(month);
   const monthEvents = getCurrentMonthEvents(events, month);
   const daysWithEvents = getDaysWithEvents(monthEvents);
 
-  console.log('render');
-  // useEffect(() => {
-  //   for (const day in daysWithEvents) {
-  //     if (daysWithEvents[day].length > 2) setDayHeight(9);
-  //   }
-  // }, [dayHeight, daysWithEvents]);
+  useEffect(() => {
+    !isThisMonth(month) ? setDayHeight(6) : setDayHeight(0);
+  }, [month]);
 
   const handeClick = (button: ButtonType) => {
     button === 'prev'
