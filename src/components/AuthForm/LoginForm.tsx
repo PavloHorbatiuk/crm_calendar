@@ -15,7 +15,7 @@ import FormField from '../ui/FormField/FormField';
 const notifyText = 'Login success';
 
 function LoginForm() {
-  const { setIsRegister, setStatus } = useAuthStore();
+  const { setIsRegister, setStatus, loading } = useAuthStore();
   const resolver = useYupValidationResolver<LoginType>(validationLoginSchema);
   const login = useAuthStore((store) => store.login);
   const navigate = useNavigate();
@@ -83,7 +83,20 @@ function LoginForm() {
         <Alert status={'succeeded'} text={'Login success'} />
       )}
       <div className="text-center w-full mt-10">
-        <button className="w-40 btn-primary">Sign In</button>
+        <button className="w-40 btn-primary">
+          {loading ? (
+            <div
+              className="inline-block h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+              role="status"
+            >
+              <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                Loading...
+              </span>
+            </div>
+          ) : (
+            'Sign In'
+          )}
+        </button>
       </div>
       <div className="mt-10 text-center">
         <a href="#">
