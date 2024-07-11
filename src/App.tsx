@@ -8,6 +8,8 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   const authentication = useAuth();
   const { getAllEvents } = useEventStore();
+  
+  //TODO: change fetch
 
   useEffect(() => {
     getAllEvents();
