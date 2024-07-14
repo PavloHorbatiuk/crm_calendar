@@ -8,7 +8,7 @@ import {
   getPrevMonth,
   getNextMonth,
   getCurrentMonthEvents,
-} from '@/utils/date';
+} from '@/utils/Date';
 
 import { CardTitle } from '../ui/CardTitle/CardTitle';
 import { CardWrapper } from '../ui/CardWrapper/CardWrapper';
